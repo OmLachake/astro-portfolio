@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&family=Yeseva+One&display=swap');
+@font-face {
+    font-family: 'Soria';
+    src: url('/fonts/soria-font-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@import 'tailwindcss';
+html {
+    scroll-behavior: auto !important;
+    transition:
+        background-color 0.2s ease-in-out,
+        color 0.2s ease-in-out; /* Smooth toggle */
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* --- Light Mode (Default) --- */
+    --backgroundColor: rgb(240, 240, 240);
+    --foregroundColor: rgb(32, 29, 29);
+    /* --accentColor: rgb(255, 100, 100); */
+    --accentColor: rgb(123, 100, 255);
+
+    --backgroundDarkColor: rgb(215, 215, 215);
+    --foregroundDarkColor: #3b3b3b;
+    --shadowColor: rgba(177, 177, 177, 0.5);
+    --shadowAccentColor: rgba(177, 177, 177, 0.5);
+    /* Helper for overlays */
+    --overlayColor: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Dark Mode Overrides --- */
+[data-theme='dark'] {
+    --backgroundColor: rgb(32, 29, 29);
+    --foregroundColor: rgb(239, 239, 239);
+    --backgroundDarkColor: #3b3b3b;
+    --foregroundDarkColor: rgb(205, 205, 205);
+    --accentColor: rgb(255, 100, 100);
+    --overlayColor: rgba(255, 255, 255, 0.1);
+
+    --shadowColor: rgba(34, 34, 34, 0.5);
+    --shadowAccentColor: rgba(177, 177, 177, 0.5);
+}
+
+/* Now apply these variables to elements */
+body {
+    background-color: var(--backgroundDarkColor);
+
+    color: var(--foregroundColor);
+    transition: color 0.2s ease-in-out; /* Smooth toggle */
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+a {
+    color: var(--foregroundColor);
+}
+
+.website-content {
+    flex: 1;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0rem 0rem 4rem 0rem;
+    z-index: 10;
+    background-color: var(--backgroundColor);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    position: relative;
+    min-height: 100vh;
+    margin-bottom: 90vh;
+
+    box-shadow: 0 10px 50px var(--shadowColor);
+}
+
+@media (max-width: 800px) {
+    .website-content {
+        padding-top: 0rem;
+        margin-bottom: 0 !important;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+}

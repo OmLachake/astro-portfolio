@@ -1,0 +1,23 @@
+<script is:inline>
+  const theme = (() => {
+    // 1. Check Local Storage
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    // 2. Check System Preference (OS Dark Mode)
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  })();
+
+  // Apply the theme to the root element
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
+  // Store it for window access
+  window.localStorage.setItem('theme', theme);
+</script>

@@ -1,0 +1,295 @@
+---
+// src/components/Navbar.astro
+import '../styles/myglobal.css'; // Make sure this has your CSS variables defined!
+import '../styles/fonts.css';
+---
+
+<header>
+    <nav class="main-nav">
+        <div class="contact">
+            <p><a href="/#contact">Contact Me</a></p>
+        </div>
+
+        <div class="logo">
+            <p><a href="/">Om Lachake</a></p>
+        </div>
+
+        <div class="toggle-btn">
+            <button class="burger" aria-label="Toggle Menu"></button>
+        </div>
+    </nav>
+
+    <div class="dropdown-container">
+        <div class="dropdown-inner">
+            <div class="menu-primary">
+                <div class="menu-item">
+                    <p id="active"><a href="/">HOME</a></p>
+                </div>
+                <div class="menu-item"><p><a href="/blog">BLOG</a></p></div>
+                <div class="menu-item"><p><a href="/about">WORK</a></p></div>
+            </div>
+
+            <div class="menu-secondary">
+                <p><a href="#">LinkedIn</a></p>
+                <p><a href="#">GitHub</a></p>
+                <p><a href="#">Upwork</a></p>
+                <p><a href="#">Fiver</a></p>
+                <div class="contact">
+                    <p><a href="/#contact">Contact Me</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-overlay"></div>
+</header>
+
+<style>
+    /* --- Global Resets for Component --- */
+    a {
+        text-decoration: none;
+        color: var(--foregroundColor);
+        transition: color 0.3s ease;
+    }
+    p {
+        margin: 0;
+    }
+
+    header {
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 1rem;
+        z-index: 10000;
+        pointer-events: none;
+    }
+
+    /* --- Main Nav Bar --- */
+    .main-nav {
+        pointer-events: auto;
+        width: 50%;
+        height: 70px; /* Slightly taller to accommodate elements comfortably */
+        border-radius: 1rem;
+        padding: 0 1.5rem;
+        background: var(--foregroundColor);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 20;
+        position: relative;
+        /* Subtle shadow for depth */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: background 0.3s ease;
+    }
+
+    /* --- Left Group (Contact + Toggle) --- */
+    .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .theme-wrapper {
+        display: fixed;
+    }
+
+    /* --- Burger Icon --- */
+    .burger {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        height: 20px;
+        width: 30px;
+        position: relative;
+    }
+
+    .burger:before,
+    .burger:after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        background: var(--backgroundColor);
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border-radius: 1rem;
+    }
+
+    .burger:hover:before,
+    .burger:hover:after {
+        background: var(--accentColor);
+    }
+    .burger:before {
+        transform: translateY(-4px);
+    }
+    .burger:after {
+        transform: translateY(4px);
+    }
+    .active.burger:before {
+        transform: translateY(0) rotate(45deg);
+    }
+    .active.burger:after {
+        transform: translateY(0) rotate(-45deg);
+    }
+
+    /* --- The Dropdown Container --- */
+    .dropdown-container {
+        pointer-events: auto;
+        position: absolute;
+        /* 1rem(header pad) + 70px(nav height) + 10px(gap) */
+        top: calc(1rem + 70px + 10px);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+
+        clip-path: inset(0 0 100% 0);
+        background: var(--foregroundColor);
+        border-radius: 1rem;
+        overflow: hidden;
+        z-index: 19;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* --- Internal Grid Structure --- */
+    .dropdown-inner {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        padding: 2rem;
+        gap: 1rem;
+    }
+
+    .menu-primary {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .menu-item {
+        overflow: hidden;
+    }
+
+    .menu-item p {
+        font-size: 2.5rem;
+        font-weight: bold;
+        font-family: 'Yeseva One', serif;
+        transform: translateY(100%);
+    }
+    .menu-item p a {
+        color: var(--backgroundColor);
+    }
+    /* Hover effect for menu items */
+    .menu-item p a:hover {
+        color: var(
+            --accentColor,
+            grey
+        ); /* Fallback to grey if accent not defined */
+        transition: color 0.2s;
+    }
+
+    .menu-secondary {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        border-left: 1px solid var(--backgroundColor); /* Softer border */
+        padding-left: 2rem;
+    }
+
+    .menu-secondary p {
+        font-family: 'Urbanist', serif;
+
+        font-size: 1rem;
+        color: var(--foregroundColor);
+        opacity: 0.7;
+        padding: 0.5rem 0;
+        transform: translateY(10px); /* Initial state for animation */
+    }
+
+    .menu-secondary p a {
+        color: var(--backgroundColor);
+    }
+
+    .menu-secondary p a:hover {
+        color: var(
+            --accentColor,
+            grey
+        ); /* Fallback to grey if accent not defined */
+        transition: color 0.2s;
+    }
+
+    /* --- Logo & Contact Styling --- */
+    .logo p {
+        font-family: 'Yeseva One', serif;
+        font-size: 1.5rem;
+        a {
+            color: var(--backgroundColor);
+        }
+    }
+
+    .main-nav .contact a {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: 0.3s;
+        background: var(--foregroundDarkColor);
+    }
+    .main-nav .contact a {
+        color: var(--backgroundColor);
+        font-family: 'Urbanist', sans-serif;
+        font-optical-sizing: auto;
+    }
+    .main-nav .contact a:hover {
+        background: rgba(150, 150, 150, 0.675);
+        cursor: pointer;
+    }
+
+    /* --- Overlay --- */
+    .nav-overlay {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+        opacity: 0;
+        pointer-events: none;
+        transition: display 2.5s;
+        backdrop-filter: blur(2px);
+        display: none;
+    }
+
+    @media (max-width: 800px) {
+        .main-nav,
+        .dropdown-container {
+            width: 95%;
+        }
+        .dropdown-inner {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .menu-secondary {
+            border-left: none;
+            padding-left: 0;
+            border-top: 1px solid rgba(150, 150, 150, 0.2);
+            padding-top: 1rem;
+        }
+
+        .main-nav .contact {
+            display: none;
+        }
+
+        .nav-left {
+            gap: 0;
+        }
+    }
+</style>
+
+<script>
+    //   import '../scripts/menu';
+</script>

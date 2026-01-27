@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+const pageTitle = 'About Me';
+
+const identity = {
+  firstName: 'Sarah',
+  country: 'Canada',
+  occupation: 'Technical Writer',
+  hobbies: ['photography', 'birdwatching', 'baseball'],
+};
+
+const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Astro', 'Writing Docs'];
+const happy = true;
+const finished = false;
+const goal = 3;
+const skillColor = 'crimson';
+const skillFontWeight = 'bold';
+const skillTextCase = 'lowercase';
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <h1>I am on {pageTitle} Page!</h1>
+
+  <p>Here are a few facts about me:</p>
+  <ul>
+    <li>My name is {identity.firstName}.</li>
+    <li>
+      I live in {identity.country} and I work as a {identity.occupation}.
+    </li>
+    {
+      identity.hobbies.length >= 2 && (
+        <li>
+          Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}
+        </li>
+      )
+    }
+  </ul>
+  <p>My skills are:</p>
+  <ul class="skills">
+    {skills.map((skill) => <li class="skill">{skill}</li>)}
+  </ul>
+
+  {happy && <p>I am happy to be learning Astro!</p>}
+
+  {finished && <p>I finished this tutorial!</p>}
+
+  {
+    goal === 3 ? (
+      <p>My goal is to finish in 3 days.</p>
+    ) : (
+      <p>My goal is not 3 days.</p>
+    )
+  }
+</BaseLayout>
+
+<style define:vars={{ skillColor, skillFontWeight, skillTextCase }}>
+  h1 {
+    color: red;
+  }
+  .skills {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid red;
+    width: 50%;
+    z-index: 0;
+  }
+  .skill {
+    color: var(--skillColor);
+    font-weight: var(--skillFontWeight);
+    text-transform: var(--skillTextCase);
+    position: relative;
+    list-style: none;
+    font-family: sans-serif;
+    border: 1px solid rgb(39, 148, 0);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 5px 20px;
+    margin: 5px 0;
+    cursor: pointer;
+    z-index: 0;
+  }
+</style>

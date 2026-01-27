@@ -1,0 +1,33 @@
+---
+import Footer from '../components/Footer.astro';
+import Menu from '../components/Menu.astro';
+import ThemeScript from '../components/Theme/ThemeScript.astro';
+import ThemeToggle from '../components/Theme/ThemeToggle.astro';
+import '../styles/myglobal.css';
+const { pageTitle, description = 'Portfolio of Om Lachake' } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <script type="module" src="/src/scripts/global.js"></script>
+    <title>{pageTitle}</title>
+
+    <ThemeScript />
+  </head>
+
+  <body>
+    <Menu />
+    <main class="website-content">
+      <slot />
+    </main>
+    <ThemeToggle />
+    <Footer />
+  </body>
+</html>
+
+<style></style>

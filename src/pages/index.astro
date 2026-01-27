@@ -1,16 +1,279 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout pageTitle="Om Lachake">
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <h1 class="title left hero-item">SYSTEMS LEVEL</h1>
+            <div class="hero-ui hero-item"></div>
+            <h1 class="title right hero-item">PIXEL PERFECT</h1>
+        </div>
+
+        <div class="hero-sub-title">
+            Rooted in <span>C++</span> expertise and backend systems,<br /> driven
+            by a genuine love for <span>Websites</span>.
+        </div>
+
+        <div class="bg-circle"></div>
+
+        <div class="svg-container">
+            <svg
+                class="main-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                id="visual"
+                viewBox="0 0 960 540"
+                width="960"
+                height="540"
+                version="1.1"
+            >
+                <path
+                    class="wave"
+                    d="M 0 295.702 L 26.7 293.502 C 53.3 291.402 106.7 287.002 160 282.502 C 213.3 278.002 266.7 273.402 320 279.202 C 373.3 285.002 426.7 301.402 480 310.402 C 533.3 319.402 586.7 321.002 640 316.902 C 693.3 312.702 746.7 302.702 800 298.202 C 853.3 293.702 906.7 294.702 933.3 295.202 L 960 295.702 L 960 692.702 L 933.3 692.702 C 906.7 692.702 853.3 692.702 800 692.702 C 746.7 692.702 693.3 692.702 640 692.702 C 586.7 692.702 533.3 692.702 480 692.702 C 426.7 692.702 373.3 692.702 320 692.702 C 266.7 692.702 213.3 692.702 160 692.702 C 106.7 692.702 53.3 692.702 26.7 692.702 L 0 692.702 L 0 295.702 Z"
+                    fill="color-mix(in srgb, var(--accentColor) 100%, var(--backgroundColor))"
+                ></path>
+                <path
+                    class="wave"
+                    d="M -29.645 313.672 L 8.515 321.672 C 46.532 329.672 122.853 345.672 199.03 343.972 C 275.207 342.372 351.528 322.972 427.705 313.372 C 503.882 303.672 580.203 303.672 656.38 305.672 C 732.557 307.672 808.878 311.672 885.055 315.372 C 961.232 318.972 1037.56 322.372 1113.74 329.972 C 1189.91 337.672 1266.23 349.672 1304.25 355.672 L 1342.41 361.672 L 1342.41 671.672 L 1304.25 671.672 C 1266.23 671.672 1189.91 671.672 1113.74 671.672 C 1037.56 671.672 961.232 671.672 885.055 671.672 C 808.878 671.672 732.557 671.672 656.38 671.672 C 580.203 671.672 503.882 671.672 427.705 671.672 C 351.528 671.672 275.207 671.672 199.03 671.672 C 122.853 671.672 46.532 671.672 8.515 671.672 L -29.645 671.672 L -29.645 313.672 Z"
+                    fill="color-mix(in srgb, var(--accentColor) 80%, var(--backgroundColor))"
+                    style=""></path>
+                <path
+                    class="wave"
+                    d="M -30.576 327.952 L 2.117 332.652 C 34.688 337.252 100.075 346.652 165.339 355.152 C 230.603 363.652 295.99 371.252 361.254 372.652 C 426.518 373.952 491.904 368.952 557.169 367.952 C 622.433 366.952 687.819 369.952 753.083 364.152 C 818.347 358.252 883.734 343.652 948.998 342.752 C 1014.26 341.952 1079.65 354.952 1112.22 361.452 L 1144.91 367.952 L 1144.91 628.952 L 1112.22 628.952 C 1079.65 628.952 1014.26 628.952 948.998 628.952 C 883.734 628.952 818.347 628.952 753.083 628.952 C 687.819 628.952 622.433 628.952 557.169 628.952 C 491.904 628.952 426.518 628.952 361.254 628.952 C 295.99 628.952 230.603 628.952 165.339 628.952 C 100.075 628.952 34.688 628.952 2.117 628.952 L -30.576 628.952 L -30.576 327.952 Z"
+                    fill="color-mix(in srgb, var(--accentColor) 60%, var(--backgroundColor))"
+                    style=""></path>
+                <path
+                    class="wave"
+                    d="M -32.132 435.161 L 4.529 426.661 C 41.054 418.161 114.378 401.161 187.564 396.461 C 260.751 391.861 334.074 399.461 407.261 398.361 C 480.447 397.161 553.77 387.161 626.957 384.661 C 700.144 382.161 773.467 387.161 846.652 393.461 C 919.84 399.861 993.162 407.461 1066.35 405.861 C 1139.54 404.161 1212.86 393.161 1249.38 387.661 L 1286.05 382.161 L 1286.05 617.161 L 1249.38 617.161 C 1212.86 617.161 1139.54 617.161 1066.35 617.161 C 993.162 617.161 919.84 617.161 846.652 617.161 C 773.467 617.161 700.144 617.161 626.957 617.161 C 553.77 617.161 480.447 617.161 407.261 617.161 C 334.074 617.161 260.751 617.161 187.564 617.161 C 114.378 617.161 41.054 617.161 4.529 617.161 L -32.132 617.161 L -32.132 435.161 Z"
+                    fill="color-mix(in srgb, var(--accentColor) 40%, var(--backgroundColor))"
+                    style=""></path>
+                <path
+                    class="wave"
+                    d="M -58.349 447.784 L -28.268 443.597 C 1.68 439.41 61.825 431.036 121.857 429.361 C 181.89 427.476 242.035 432.501 302.068 420.987 C 362.1 409.472 422.245 381.419 482.277 379.325 C 542.31 377.232 602.455 401.098 662.487 408.425 C 722.517 415.753 782.664 406.541 842.699 396.492 C 902.741 386.444 962.886 375.138 992.846 369.695 L 1022.91 364.042 L 1022.91 694.823 L 992.846 694.823 C 962.886 694.823 902.741 694.823 842.699 694.823 C 782.664 694.823 722.517 694.823 662.487 694.823 C 602.455 694.823 542.31 694.823 482.277 694.823 C 422.245 694.823 362.1 694.823 302.068 694.823 C 242.035 694.823 181.89 694.823 121.857 694.823 C 61.825 694.823 1.68 694.823 -28.268 694.823 L -58.349 694.823 L -58.349 447.784 Z"
+                    fill="color-mix(in srgb, var(--accentColor) 20%, var(--backgroundColor))"
+                    style=""></path>
+                <path
+                    class="wave"
+                    d="M -335.9 477.745 L -271.36 487.208 C -207.09 496.672 -78.048 515.598 50.775 503.484 C 179.586 491.751 308.639 448.598 437.453 427.779 C 566.269 406.961 695.32 408.475 824.131 430.429 C 952.951 452.383 1082.01 495.536 1210.83 497.428 C 1339.64 499.32 1468.69 459.954 1597.52 458.818 C 1726.34 457.683 1855.38 494.022 1919.69 512.569 L 1984.19 530.738 L 1984.19 776.778 L 1919.69 776.778 C 1855.38 776.778 1726.34 776.778 1597.52 776.778 C 1468.69 776.778 1339.64 776.778 1210.83 776.778 C 1082.01 776.778 952.951 776.778 824.131 776.778 C 695.32 776.778 566.269 776.778 437.453 776.778 C 308.639 776.778 179.586 776.778 50.775 776.778 C -78.048 776.778 -207.09 776.778 -271.36 776.778 L -335.9 776.778 L -335.9 477.745 Z"
+                    fill="color-mix(in srgb, var(--accentColor) 0%, var(--backgroundColor))"
+                    style=""></path>
+            </svg>
+        </div>
+    </section>
+
+    <section class="next-section">
+        <h2>Next Section (Keep Scrolling)</h2>
+    </section>
+</BaseLayout>
+<style lang="scss">
+    .svg-container {
+        width: 100%;
+        position: absolute;
+        height: 90vh;
+        bottom: 0;
+        left: 0;
+        z-index: 0;
+
+        @media (max-height: 500px) {
+            height: 50vh;
+        }
+
+        @media (min-width: 800px) and (max-width: 1100px) {
+            overflow: clip;
+            bottom: 0;
+            left: 0;
+            height: 80vh;
+        }
+
+        @media (max-width: 800px) {
+            height: 50vh;
+            bottom: 0;
+            left: 0;
+            overflow: clip;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .wave {
+        transition: fill 0.2s ease-in-out;
+    }
+
+    .main-svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        z-index: 0;
+        @media (min-width: 800px) and (max-width: 1100px) {
+            height: 75vw;
+            scale: 1;
+        }
+
+        @media (min-height: 1080px) {
+            height: 75vw;
+            scale: 3;
+        }
+        @media (max-width: 800px) {
+            height: 45vw;
+            scale: 3;
+        }
+    }
+
+    .next-section {
+        height: 100vh;
+        background-color: var(--backgroundColor);
+        color: #888;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: calc(14rem);
+        height: 100vh;
+        position: relative;
+        @media (max-height: 1080px) {
+            height: 100vh;
+        }
+
+        @media (min-height: 1080px) and (max-height: 1600px) {
+            height: 100vh;
+        }
+
+        @media (max-width: 800px) {
+            max-height: 95vh;
+            gap: 2rem;
+        }
+    }
+    .hero-container {
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+
+        @media (max-width: 800px) {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+    .hero .title {
+        font-family: 'Soria', serif;
+        font-size: 5.5vw;
+        font-weight: 600;
+        width: max-content;
+        height: fit-content;
+        margin: 0;
+        line-height: 1;
+
+        @media (max-width: 800px) {
+            font-size: 1.8rem;
+            text-align: center;
+            width: 100%;
+        }
+    }
+
+    .hero .left {
+        text-align: right;
+
+        @media (max-width: 800px) {
+            order: 1;
+        }
+    }
+
+    .hero .right {
+        text-align: left;
+
+        @media (max-width: 800px) {
+            order: 2;
+        }
+    }
+    .hero-sub-title {
+        font-family: 'Urbanist', serif;
+        font-size: 2vw;
+        font-weight: 300;
+        width: 50%;
+        text-align: center;
+        line-height: 1.5;
+
+        @media (max-width: 800px) {
+            width: 80%;
+            font-size: 1rem;
+        }
+    }
+
+    .hero-sub-title span {
+        border-radius: 0.4rem;
+        padding: 0.3rem 0.5rem;
+        background-color: var(--backgroundDarkColor);
+    }
+
+    .hero-ui {
+        width: 7rem;
+        height: 7rem;
+        margin: 0;
+        position: relative;
+        border-radius: 50%;
+        border: 2px solid var(--foregroundColor);
+        padding: 3.5rem;
+        animation: rotate 12s linear infinite;
+
+        @media (max-width: 800px) {
+            order: 3;
+            width: 3rem;
+            height: 3rem;
+            padding: 2rem;
+        }
+
+        &:after,
+        &:before {
+            content: '';
+            position: absolute;
+            background: var(--foregroundColor);
+            border-radius: 50%;
+            top: 0%;
+            left: 17.5%;
+            height: 1.2rem;
+            width: 1.2rem;
+
+            @media (max-width: 800px) {
+                left: 12.5%;
+                height: 0.8rem;
+                width: 0.8rem;
+            }
+        }
+
+        &:before {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 3rem;
+            width: 3rem;
+            background: var(--accentColor);
+
+            @media (max-width: 800px) {
+                height: 1.5rem;
+                width: 1.5rem;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<script src="../scripts/hero.js"></script>

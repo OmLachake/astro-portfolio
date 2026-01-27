@@ -1,0 +1,540 @@
+---
+import { z } from 'zod';
+const contactSchema = z.object({
+    name: z.string().min(2, 'Name is too short'),
+    email: z.string().email('Invalid email'),
+    message: z.string().min(10, 'Message is too short'),
+});
+type Errors = {
+    name?: string[];
+    email?: string[];
+    message?: string[];
+};
+let errors: Errors = {};
+let success = false;
+
+if (Astro.request.method === 'POST') {
+    try {
+        const data = await Astro.request.formData();
+        const name = data.get('name');
+        const email = data.get('email');
+        const message = data.get('message');
+
+        // Validate
+        contactSchema.parse({ name, email, message });
+        success = true;
+    } catch (err) {
+        if (err instanceof z.ZodError) {
+            errors = err.flatten().fieldErrors;
+        }
+    }
+}
+---
+
+<footer class="footer" aria-labelledby="footer-heading">
+    <div class="footer-container">
+        <div class="footer-details">
+            <div class="sub-heading"><p>Let's Connect...</p></div>
+            <div class="email">
+                <p><a href="mailto:omlachake@pm.me">omlachake@pm.me</a></p>
+            </div>
+
+            <div class="nav-links">
+                <div class="primary">
+                    <div class="primary-item">
+                        <p id="active"><a href="/">HOME</a></p>
+                    </div>
+                    <div class="primary-item">
+                        <p><a href="/blog">BLOG</a></p>
+                    </div>
+                    <div class="primary-item">
+                        <p><a href="/about">WORK</a></p>
+                    </div>
+                </div>
+
+                <div class="secondary">
+                    <p><a href="#">LinkedIn</a></p>
+                    <p><a href="#">GitHub</a></p>
+                    <p><a href="#">Upwork</a></p>
+                    <p><a href="#">Fiver</a></p>
+                </div>
+            </div>
+
+            <div class="info">
+                <div class="back-to-top"><a href="#">Back to Top</a></div>
+                <div class="copyright">Copyright &copy; 2025</div>
+            </div>
+        </div>
+
+        <div class="footer-contact" id="contact">
+            {
+                success ? (
+                    <div class="success-message">
+                        <h3>Message Sent!</h3>
+                        <p>
+                            Thank you for reaching out. I'll get back to you
+                            shortly.
+                        </p>
+                    </div>
+                ) : (
+                    <form action="" class="contact-form">
+                        <div class="input-group">
+                            <label for="name">Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Your name"
+                                required
+                            />
+                            {errors.name && (
+                                <p class="error-text">{errors.name[0]}</p>
+                            )}
+                        </div>
+
+                        <div class="input-group">
+                            <label for="email">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Your email address"
+                                required
+                            />
+                            {errors.email && (
+                                <p class="error-text">{errors.email[0]}</p>
+                            )}
+                        </div>
+
+                        <div class="input-group">
+                            <label for="message">Message</label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="4"
+                                placeholder="How can I help you?"
+                                required
+                            />
+                            {errors.message && (
+                                <p class="error-text">{errors.message[0]}</p>
+                            )}
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            Send Message
+                        </button>
+                    </form>
+                )
+            }
+        </div>
+    </div>
+</footer>
+
+<style lang="scss">
+    a {
+        text-decoration: none;
+    }
+
+    footer {
+        width: 100%;
+
+        padding: 2rem 2rem 0rem 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        min-height: 90vh;
+        z-index: 0;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        background: var(--backgroundDarkColor);
+        @media (max-width: 800px) {
+            padding: 1rem;
+            padding-top: 2rem;
+
+            position: relative !important;
+            height: auto !important;
+            z-index: 1 !important;
+        }
+        .footer-container {
+            width: 100%;
+            height: 100%;
+            background-color: var(--foregroundColor);
+            border-radius: 1rem;
+
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            overflow-y: auto;
+            gap: 1rem;
+            padding: 2rem;
+            @media (max-width: 800px) {
+                padding: 1rem;
+                grid-template-columns: 1fr;
+            }
+            .footer-details,
+            .footer-contact {
+                @media (max-width: 800px) {
+                    width: 100%;
+                    flex: none;
+                }
+            }
+
+            .footer-details {
+                .sub-heading {
+                    display: flex;
+                    color: var(--backgroundColor);
+                    p {
+                        font-family: 'Urbanist', sans-serif;
+                        font-size: 1.5rem;
+                        padding: 1rem 2rem;
+
+                        @media (max-width: 800px) {
+                            font-size: 1rem;
+                            padding: 1rem 0.5rem;
+                        }
+                    }
+                }
+
+                .email {
+                    p a {
+                        color: var(--accentColor);
+                        font-family: 'Yeseva One', serif;
+                        font-weight: bold;
+                        font-size: 5.95vw;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 1rem 2rem;
+
+                        @media (max-width: 800px) {
+                            font-size: 7dvw;
+                            padding: 0.5rem 0.5rem;
+                        }
+                    }
+                }
+                .nav-links {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    padding: 2rem;
+                    gap: 1rem;
+                    border-bottom: 1px solid var(--backgroundDarkColor);
+
+                    @media (max-width: 800px) {
+                        grid-template-columns: 1fr 1fr;
+                        padding: 0.5rem;
+                    }
+
+                    .primary {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        padding: 1rem 0;
+                        gap: 1rem;
+                        grid-column: 1;
+
+                        @media (max-width: 800px) {
+                            grid-column: auto;
+                        }
+                        &-item {
+                            overflow: hidden;
+                            p {
+                                font-size: 1.5rem;
+                                font-weight: bold;
+                                font-family: 'Urbanist', serif;
+                                @media (max-width: 800px) {
+                                    font-size: 0.8rem;
+                                }
+                                a {
+                                    color: var(--backgroundColor);
+                                    &:hover {
+                                        color: var(--accentColor, grey);
+                                        transition: color 0.4s;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .secondary {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: flex-end;
+                        border-left: 1px solid var(--backgroundColor);
+                        padding: 1rem 0;
+                        padding-left: 2rem;
+                        grid-column: 3;
+                        @media (max-width: 800px) {
+                            grid-column: auto;
+                        }
+                        p {
+                            font-family: 'Urbanist', serif;
+                            font-size: 1rem;
+                            color: var(--foregroundColor);
+                            padding: 0.3rem;
+                            opacity: 0.7;
+                            @media (max-width: 800px) {
+                                font-size: 0.8rem;
+                            }
+                            a {
+                                color: var(--backgroundColor);
+
+                                &:hover {
+                                    color: var(--accentColor, grey);
+                                    transition: color 0.4s;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .info {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 1rem 2rem;
+
+                    color: var(--backgroundDarkColor);
+                    font-size: 1rem;
+                    font-family: 'Urbanist', sans-serif;
+
+                    .back-to-top {
+                        a {
+                            color: var(--backgroundDarkColor);
+                            text-decoration: underline;
+                            &:hover {
+                                color: var(--backgroundColor);
+                            }
+                        }
+                    }
+
+                    @media (max-width: 800px) {
+                        font-size: 0.8rem;
+                        padding: 1rem 0.5rem;
+                    }
+                }
+            }
+
+            /* --- Container --- */
+            .footer-contact {
+                width: 100%;
+                display: flex;
+                justify-content: center; /* Center horizontally */
+                align-items: center;
+                background-color: var(--foregroundDarkColor);
+                padding: 1rem 2rem;
+                border-radius: 1rem;
+                @media (max-width: 800px) {
+                    padding: 1.5rem 1rem;
+                    grid-row: 1;
+                }
+
+                .contact-form {
+                    width: 100%;
+                    max-width: 400px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: stretch;
+                    gap: 1.5rem;
+
+                    /* --- Inputs --- */
+                    .input-group {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.5rem;
+                        position: relative;
+
+                        label {
+                            font-size: 0.85rem;
+                            text-transform: uppercase;
+                            letter-spacing: 0.05em;
+                            font-weight: 600;
+                            color: var(--backgroundColor);
+                            font-family: 'Urbanist', sans-serif;
+                            opacity: 0.7;
+                        }
+
+                        input,
+                        textarea {
+                            width: 100%;
+                            opacity: 0.7;
+                            padding: 1rem;
+                            background: transparent;
+                            border: 1px solid var(--backgroundDarkColor);
+                            border-radius: 0.5rem;
+                            font-family: inherit;
+                            font-size: 1rem;
+                            color: var(--backgroundColor);
+                            outline: none;
+                            transition: all 0.3s ease;
+                            font-family: 'Urbanist', sans-serif;
+
+                            @media (max-width: 800px) {
+                                padding: 0.5rem;
+                            }
+                        }
+
+                        /* Input States */
+                        input:focus,
+                        textarea:focus {
+                            border-color: var(--accentColor);
+                            background: rgba(150, 150, 150, 0.05);
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                        }
+
+                        input::placeholder,
+                        textarea::placeholder {
+                            color: var(--backgroundColor);
+                            opacity: 0.3;
+                        }
+
+                        textarea {
+                            resize: none; /* Prevents user from dragging to resize */
+                            overflow-y: auto; /* Adds scrollbar automatically when text overflows */
+                        }
+
+                        /* --- Feedback --- */
+                        .error-text {
+                            color: #ff6b6b; /* Soft Red */
+                            font-size: 0.8rem;
+                            margin-top: 0.25rem;
+                        }
+
+                        .success-message {
+                            text-align: center;
+                            padding: 2rem;
+                            border: 1px solid var(--foregroundColor);
+                            border-radius: 1rem;
+                        }
+                    }
+
+                    /* --- Button --- */
+                    .submit-btn {
+                        margin-top: 1rem;
+                        padding: 1rem;
+                        background-color: var(--foregroundColor);
+                        color: var(--backgroundColor);
+                        font-weight: bold;
+                        font-family: 'Urbanist', sans-serif;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        border: none;
+                        border-radius: 0.5rem;
+                        cursor: pointer;
+                        transition: all 0.3s ease-in-out;
+
+                        @media (max-width: 800px) {
+                            margin-top: 0rem;
+                        }
+                    }
+
+                    .submit-btn:hover {
+                        background-color: var(--accentColor);
+                    }
+
+                    .submit-btn:active {
+                        transform: translateY(0);
+                    }
+                }
+            }
+
+            /* --- Mobile Responsive --- */
+            @media (max-width: 768px) {
+                .contact-form {
+                    max-width: 100%; /* Full width on mobile */
+                }
+
+                input,
+                textarea {
+                    padding: 0.8rem; /* Slightly smaller padding on mobile */
+                }
+            }
+        }
+    }
+</style>
+<script>
+    import { gsap } from 'gsap';
+
+    let mm = gsap.matchMedia();
+
+    // --- DESKTOP ANIMATION (The "Reveal") ---
+    mm.add('(min-width: 801px)', () => {
+        gsap.fromTo(
+            '.footer-container',
+            {
+                yPercent: -50,
+                scale: 0.8,
+            },
+            {
+                yPercent: 0,
+                scale: 1,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.website-content',
+                    start: 'bottom bottom',
+                    end: '+=90%',
+                    scrub: true,
+                },
+            },
+        );
+
+        const items = gsap.utils.toArray('.footer-details, .footer-contact');
+
+        gsap.fromTo(
+            items,
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                stagger: 0.1,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.website-content',
+                    start: 'bottom bottom',
+                    end: '+=50%', // Finish fading in halfway through the reveal
+                    scrub: true,
+                },
+            },
+        );
+    });
+
+    // --- MOBILE ANIMATION (Standard Scroll) ---
+    mm.add('(max-width: 800px)', () => {
+        // On mobile, the footer is just a normal block at the bottom.
+        // We trigger a simple "Slide Up" when it enters the viewport.
+
+        gsap.from('.footer-container', {
+            y: 150,
+            scale: 0.8,
+            opacity: 0.5,
+            duration: 1,
+            ease: 'expo.out',
+            scrollTrigger: {
+                trigger: '.footer',
+                start: 'top 75%',
+                end: '+=80%',
+                // toggleActions: 'play none none reverse',
+                scrub: true,
+            },
+        });
+
+        const items = gsap.utils.toArray('.footer-details, .footer-contact');
+
+        gsap.fromTo(
+            items,
+            { opacity: 0.5, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                stagger: 0.1,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.website-content',
+                    start: 'bottom bottom',
+                    end: '+=90%',
+                    scrub: true,
+                },
+            },
+        );
+    });
+</script>
