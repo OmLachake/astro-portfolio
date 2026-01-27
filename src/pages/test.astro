@@ -283,11 +283,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 600px; /* Size of the glow */
-                height: 600px;
+                width: 30vw;
+                height: 30vw;
                 background: radial-gradient(
                     circle,
-                    color-mix(in srgb, var(--accentColor) 15%, transparent) 0%,
+                    color-mix(in srgb, var(--accentColor) 25%, transparent) 0%,
                     transparent 70%
                 );
                 border-radius: 50%;
@@ -304,6 +304,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
                 /* The "Idle" Animation */
                 animation: floatPulse 1s ease-in-out infinite;
+
+                @media (max-width: 768px) {
+                    width: 80vw;
+                    height: 80vw;
+                }
             }
         }
 

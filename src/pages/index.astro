@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout pageTitle="Om Lachake">
     <section class="hero" id="home">
+        <div class="hero-bg-effect"></div>
         <div class="hero-container">
             <h1 class="title left hero-item">SYSTEMS LEVEL</h1>
             <div class="hero-ui hero-item"></div>
@@ -264,6 +265,70 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
+        }
+    }
+
+    .hero-bg-effect {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+
+        /* 1. The Technical Grid Pattern */
+        background-size: 40px 40px;
+        background-image:
+            linear-gradient(
+                to right,
+                color-mix(in srgb, var(--foregroundColor) 5%, transparent) 1px,
+                transparent 1px
+            ),
+            linear-gradient(
+                to bottom,
+                color-mix(in srgb, var(--foregroundColor) 5%, transparent) 1px,
+                transparent 1px
+            );
+        mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+
+        /* 2. The Glowing Orb */
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30vw;
+            height: 30vw;
+            background: radial-gradient(
+                circle,
+                color-mix(in srgb, var(--accentColor) 25%, transparent) 0%,
+                transparent 70%
+            );
+            border-radius: 50%;
+
+            transform: translate(-50%, -50%);
+
+            will-change: transform, opacity;
+
+            left: var(--mouse-x, 50%);
+            top: var(--mouse-y, 50%);
+
+            animation: floatPulse 1s ease-in-out infinite;
+
+            @media (max-width: 768px) {
+                width: 80vw;
+                height: 80vw;
+            }
+        }
+    }
+
+    @keyframes floatPulse {
+        0%,
+        100% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.8;
+        }
+        50% {
+            transform: translate(-45%, -55%) scale(1.1);
+            opacity: 0.5;
         }
     }
     @keyframes rotate {
