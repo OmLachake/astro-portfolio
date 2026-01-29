@@ -271,9 +271,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .hero-bg-effect {
         position: absolute;
         inset: 0;
-        z-index: 0;
-        pointer-events: none;
-
+        z-index: 0; /* Behind text (z-index 2), in front of waves (z-index 0) */
+        pointer-events: none; /* Let clicks pass through to buttons/text */
+        overflow: hidden;
         /* 1. The Technical Grid Pattern */
         background-size: 40px 40px;
         background-image:
@@ -287,31 +287,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 color-mix(in srgb, var(--foregroundColor) 5%, transparent) 1px,
                 transparent 1px
             );
-        mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+        mask-image: linear-gradient(
+            to bottom,
+            black 60%,
+            transparent 100%
+        ); /* Fade out grid near waves */
 
         /* 2. The Glowing Orb */
         &::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 30vw;
-            height: 30vw;
+            width: 25vw;
+            height: 25vw;
+            min-width: 250px;
+            min-height: 250px;
+
             background: radial-gradient(
                 circle,
                 color-mix(in srgb, var(--accentColor) 25%, transparent) 0%,
                 transparent 70%
             );
-            border-radius: 50%;
 
-            transform: translate(-50%, -50%);
+            filter: blur(30px);
 
-            will-change: transform, opacity;
-
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             left: var(--mouse-x, 50%);
             top: var(--mouse-y, 50%);
+            transform: translate(-50%, -50%);
+            will-change: transform, border-radius;
 
-            animation: floatPulse 1s ease-in-out infinite;
+            animation: blob-spin 30s linear infinite alternate;
 
             @media (max-width: 768px) {
                 width: 80vw;
@@ -320,15 +325,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
     }
 
-    @keyframes floatPulse {
-        0%,
-        100% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.8;
+    /* The Morphing Animation */
+    @keyframes blob-spin {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg) scale(1);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
         }
-        50% {
-            transform: translate(-45%, -55%) scale(1.1);
-            opacity: 0.5;
+        33% {
+            transform: translate(-50%, -50%) rotate(120deg) scale(1.1);
+            border-radius: 50% 20% 50% 50% / 40% 40% 60% 60%;
+        }
+        66% {
+            transform: translate(-50%, -50%) rotate(240deg) scale(0.9);
+            border-radius: 80% 50% 30% 50% / 50% 80% 20% 40%;
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg) scale(1);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
         }
     }
     @keyframes rotate {
