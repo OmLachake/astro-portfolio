@@ -8,26 +8,28 @@ const { pageTitle, description = 'Portfolio of Om Lachake' } = Astro.props;
 ---
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <script type="module" src="/src/scripts/global.js"></script>
-    <title>{pageTitle}</title>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="description" content={description} />
+        <script>
+            import '../scripts/global.js';
+        </script>
+        <title>{pageTitle}</title>
 
-    <ThemeScript />
-  </head>
+        <ThemeScript />
+    </head>
 
-  <body>
-    <Menu />
-    <main class="website-content">
-      <slot />
-    </main>
-    <ThemeToggle />
-    <Footer />
-  </body>
+    <body>
+        <Menu />
+        <main class="website-content">
+            <slot />
+        </main>
+        <ThemeToggle />
+        <Footer />
+    </body>
 </html>
 
 <style></style>

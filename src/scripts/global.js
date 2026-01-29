@@ -199,3 +199,82 @@ document.addEventListener('click', (e) => {
 });
 
 //////////////////////////////////////// MENU - NAVITATION ANIMATION
+
+let mm = gsap.matchMedia();
+
+// --- DESKTOP ANIMATION (The "Reveal") ---
+mm.add('(min-width: 801px)', () => {
+    gsap.fromTo(
+        '.footer-container',
+        {
+            yPercent: -50,
+            scale: 0.8,
+        },
+        {
+            yPercent: 0,
+            scale: 1,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.website-content',
+                start: 'bottom bottom',
+                end: '+=90%',
+                scrub: true,
+            },
+        },
+    );
+
+    const items = gsap.utils.toArray('.footer-details, .footer-contact');
+
+    gsap.fromTo(
+        items,
+        { opacity: 0, y: 50 },
+        {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.website-content',
+                start: 'bottom bottom',
+                end: '+=50%', // Finish fading in halfway through the reveal
+                scrub: true,
+            },
+        },
+    );
+});
+
+mm.add('(max-width: 800px)', () => {
+    gsap.from('.footer-container', {
+        y: 150,
+        scale: 0.8,
+        opacity: 0.5,
+        duration: 1,
+        ease: 'expo.out',
+        scrollTrigger: {
+            trigger: '.footer',
+            start: 'top 75%',
+            end: '+=80%',
+            // toggleActions: 'play none none reverse',
+            scrub: true,
+        },
+    });
+
+    const items = gsap.utils.toArray('.footer-details, .footer-contact');
+
+    gsap.fromTo(
+        items,
+        { opacity: 0.5, y: 50 },
+        {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.website-content',
+                start: 'bottom bottom',
+                end: '+=90%',
+                scrub: true,
+            },
+        },
+    );
+});
