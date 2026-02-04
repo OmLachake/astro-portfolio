@@ -371,9 +371,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             min-height: 100svh;
             position: relative;
 
-            @media (max-height: 500px) {
-                padding-top: calc(10rem);
+            @media (max-width: 1200px) {
                 padding-bottom: 15rem;
+                gap: 1rem;
+            }
+
+            @media (max-height: 500px) {
+                padding-bottom: 25rem;
             }
 
             @media (max-width: 800px) {
