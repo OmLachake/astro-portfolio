@@ -71,10 +71,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         width: 100%;
         position: absolute;
         height: 90vh;
-        bottom: -2rem;
+        bottom: 0rem;
         left: 0;
         z-index: 0;
-
         @media (max-height: 500px) {
             height: 50vh;
         }
@@ -107,19 +106,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         display: block;
         z-index: 0;
         position: relative;
+        border: 1px solid green;
+        scale: 1;
+
         @media (min-width: 800px) and (max-width: 1200px) {
-            height: 75vw;
-            scale: 1;
             position: absolute;
-            height: max-content;
+            height: auto;
             bottom: 0;
             left: 0;
+            scale: 1;
         }
 
-        @media (min-height: 1080px) {
-            height: 75vw;
-            scale: 1.5;
-        }
         @media (max-width: 800px) {
             height: 45vw;
             scale: 3;
@@ -146,13 +143,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         min-height: 100svh;
         position: relative;
 
-        @media (max-height: 500px) {
-            padding-top: calc(10rem);
+        @media (max-width: 1200px) {
             padding-bottom: 15rem;
+            gap: 1rem;
+        }
+
+        @media (max-height: 500px) {
+            padding-bottom: 25rem;
         }
 
         @media (max-width: 800px) {
-            max-height: 95vh;
             gap: 2rem;
         }
     }

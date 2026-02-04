@@ -206,14 +206,10 @@ let mouseY = 0;
 let currentX = 0;
 let currentY = 0;
 
-// Lower speed = more "weight" and smoother lag (Graceful)
-// Higher speed = snappier/responsive
 const mouseBlobSpeed = 0.04;
 
-// Initial center position
 const updateDimensions = () => {
     const rect = heroSection.getBoundingClientRect();
-    // Default to center if mouse hasn't moved yet
     if (mouseX === 0 && mouseY === 0) {
         mouseX = rect.width / 2;
         mouseY = rect.height / 2;
@@ -224,22 +220,17 @@ const updateDimensions = () => {
 
 heroSection.addEventListener('mousemove', (e) => {
     const rect = heroSection.getBoundingClientRect();
-    // Calculate X/Y relative to the hero section
     mouseX = e.clientX - rect.left;
     mouseY = e.clientY - rect.top;
 });
 
-// Update dimensions on resize to keep coordinate math accurate
 window.addEventListener('resize', updateDimensions);
 
 function animate() {
-    // The "Lerp" formula: Current + (Target - Current) * Speed
     currentX += (mouseX - currentX) * mouseBlobSpeed;
     currentY += (mouseY - currentY) * mouseBlobSpeed;
 
-    // Only update DOM if width is > 800px (Performance check)
     if (window.innerWidth > 800) {
-        // We use translate(-50%, -50%) in CSS, so we just pass the raw coordinates
         bgEffect.style.setProperty('--mouse-x', `${currentX}px`);
         bgEffect.style.setProperty('--mouse-y', `${currentY}px`);
     }
@@ -247,6 +238,5 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Initialize
 updateDimensions();
 animate();
