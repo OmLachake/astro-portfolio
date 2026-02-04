@@ -43,7 +43,7 @@ import '../styles/fonts.css';
     <div class="nav-overlay"></div>
 </header>
 
-<style>
+<style lang="scss">
     /* --- Global Resets for Component --- */
     a {
         text-decoration: none;
@@ -262,7 +262,12 @@ import '../styles/fonts.css';
         backdrop-filter: blur(2px);
         display: none;
     }
-
+    @media (min-width: 800px) and (max-width: 1200px) {
+        .main-nav,
+        .dropdown-container {
+            width: 75%;
+        }
+    }
     @media (max-width: 800px) {
         .main-nav,
         .dropdown-container {

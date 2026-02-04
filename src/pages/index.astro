@@ -71,7 +71,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         width: 100%;
         position: absolute;
         height: 90vh;
-        bottom: 0;
+        bottom: -2rem;
         left: 0;
         z-index: 0;
 
@@ -106,14 +106,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         height: auto;
         display: block;
         z-index: 0;
-        @media (min-width: 800px) and (max-width: 1100px) {
+        position: relative;
+        @media (min-width: 800px) and (max-width: 1200px) {
             height: 75vw;
             scale: 1;
+            position: absolute;
+            height: max-content;
+            bottom: 0;
+            left: 0;
         }
 
         @media (min-height: 1080px) {
             height: 75vw;
-            scale: 3;
+            scale: 1.5;
         }
         @media (max-width: 800px) {
             height: 45vw;
@@ -136,15 +141,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         gap: 4rem;
         align-items: center;
         justify-content: flex-start;
+        padding: 10rem 2rem;
         padding-top: calc(10rem);
         min-height: 100svh;
         position: relative;
-        @media (max-height: 1080px) {
-            height: 100vh;
-        }
 
-        @media (min-height: 1080px) and (max-height: 1600px) {
-            height: 100vh;
+        @media (max-height: 500px) {
+            padding-top: calc(10rem);
+            padding-bottom: 15rem;
         }
 
         @media (max-width: 800px) {
@@ -172,6 +176,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         height: fit-content;
         margin: 0;
         line-height: 1;
+        padding-bottom: 0rem;
+
+        @media (max-width: 1200px) {
+            font-size: 4.5vw;
+        }
 
         @media (max-width: 800px) {
             font-size: 1.8rem;
