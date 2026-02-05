@@ -1,0 +1,35 @@
+---
+const { label, onClick, type } = Astro.props;
+---
+
+<button class="action-button" onclick={onClick}>
+    {label || 'Submit'}
+</button>
+<style lang="scss">
+    .action-button {
+        margin-top: 1rem;
+        padding: 1rem;
+        background-color: var(--foregroundColor);
+        color: var(--backgroundColor);
+        font-weight: bold;
+        font-family: 'Urbanist', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        @media (max-width: 800px) {
+            margin-top: 0rem;
+        }
+    }
+
+    .action-button:hover {
+        background-color: var(--accentColor);
+    }
+
+    .action-button:active {
+        transform: translateY(0);
+    }
+</style>

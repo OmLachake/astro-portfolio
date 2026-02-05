@@ -22,46 +22,6 @@ window.addEventListener('scroll', () => {
     }, 150);
 });
 
-gsap.fromTo(
-    aboutPhoto,
-    {
-        opacity: 0,
-        scale: 0.5,
-    },
-    {
-        opacity: 1,
-        scale: 1,
-        ease: 'expo.in',
-        scrollTrigger: {
-            trigger: nextSection,
-            start: 'top bottom',
-            end: 'top 25%',
-            scrub: 1,
-            markers: true,
-        },
-    },
-);
-
-gsap.fromTo(
-    ['.about-headline', '.about-bio'],
-    {
-        opacity: 0,
-        x: 50,
-    },
-    {
-        opacity: 1,
-        x: 0,
-        ease: 'expo.in',
-        scrollTrigger: {
-            trigger: nextSection,
-            start: 'top bottom',
-            end: 'top 25%',
-            scrub: 1,
-            markers: true,
-        },
-    },
-);
-
 mm.add('(min-width: 1200px)', () => {
     gsap.from(wave, {
         duration: 1,
@@ -121,6 +81,44 @@ mm.add('(min-width: 1200px)', () => {
         ease: 'expo.out',
         delay: 0.15,
     });
+
+    gsap.fromTo(
+        aboutPhoto,
+        {
+            opacity: 0,
+            scale: 0.5,
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            ease: 'expo.in',
+            scrollTrigger: {
+                trigger: nextSection,
+                start: 'top bottom',
+                end: 'top 25%',
+                scrub: 1,
+            },
+        },
+    );
+
+    gsap.fromTo(
+        ['.about-headline', '.about-bio'],
+        {
+            opacity: 0,
+            x: 50,
+        },
+        {
+            opacity: 1,
+            x: 0,
+            ease: 'expo.in',
+            scrollTrigger: {
+                trigger: nextSection,
+                start: 'top bottom',
+                end: 'top 25%',
+                scrub: 1,
+            },
+        },
+    );
 });
 
 mm.add('(min-width: 800px) and (max-width: 1200px)', () => {
@@ -180,6 +178,44 @@ mm.add('(min-width: 800px) and (max-width: 1200px)', () => {
         ease: 'expo.out',
         delay: 0.15,
     });
+
+    gsap.fromTo(
+        aboutPhoto,
+        {
+            opacity: 0,
+            scale: 0.5,
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            ease: 'expo.in',
+            scrollTrigger: {
+                trigger: nextSection,
+                start: 'top bottom',
+                end: 'top 25%',
+                scrub: 1,
+            },
+        },
+    );
+
+    gsap.fromTo(
+        ['.about-headline', '.about-bio'],
+        {
+            opacity: 0,
+            x: 50,
+        },
+        {
+            opacity: 1,
+            x: 0,
+            ease: 'expo.in',
+            scrollTrigger: {
+                trigger: nextSection,
+                start: 'top bottom',
+                end: 'top 25%',
+                scrub: 1,
+            },
+        },
+    );
 });
 
 mm.add('(max-width: 800px)', () => {
@@ -241,6 +277,44 @@ mm.add('(max-width: 800px)', () => {
         ease: 'expo.out',
         delay: 0.15,
     });
+
+    gsap.fromTo(
+        aboutPhoto,
+        {
+            opacity: 0,
+            scale: 0.5,
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            ease: 'power1.in',
+            scrollTrigger: {
+                trigger: nextSection,
+                start: 'top 80%',
+                end: 'top 25%',
+                scrub: 1,
+            },
+        },
+    );
+
+    gsap.fromTo(
+        ['.about-headline', '.about-bio'],
+        {
+            opacity: 0,
+            y: 50,
+        },
+        {
+            opacity: 1,
+            y: 0,
+            ease: 'expo.in',
+            scrollTrigger: {
+                trigger: nextSection,
+                start: 'top 80%',
+                end: 'top 25%',
+                scrub: 1,
+            },
+        },
+    );
 });
 
 // Floating Mouse Blobl Effect
