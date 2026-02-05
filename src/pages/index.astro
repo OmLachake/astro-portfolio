@@ -61,9 +61,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </svg>
         </div>
     </section>
+    <section class="next-section" id="about">
+        <div class="about-container">
+            <div class="about-left">
+                <div class="photo-frame">
+                    <img src="/om.png" alt="Om Lachake" />
+                    <div class="frame-overlay"></div>
+                </div>
+            </div>
 
-    <section class="next-section">
-        <h2>Next Section (Keep Scrolling)</h2>
+            <div class="about-right">
+                <h2 class="about-headline">
+                    Om Lachake <br />
+                    <span class="highlight">Systems Engineer</span>
+                </h2>
+
+                <p class="about-bio">
+                    By trade, I specialize in Backend Infrastructure using C++
+                    focusing on speed, stability, and efficiency.
+                </p>
+
+                <p class="about-bio">
+                    I sometimes spend my time developing websites. :)
+                </p>
+            </div>
+        </div>
     </section>
 </BaseLayout>
 <style lang="scss">
@@ -106,7 +128,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         display: block;
         z-index: 0;
         position: relative;
-        border: 1px solid green;
         scale: 1;
 
         @media (min-width: 800px) and (max-width: 1200px) {
@@ -360,6 +381,143 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         to {
             transform: rotate(360deg);
+        }
+    }
+
+    /* --- About Section Styles --- */
+    .next-section {
+        min-height: 100svh;
+        background-color: var(--backgroundColor);
+        color: #888;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10rem;
+        // position: relative;
+        padding: 6rem 2rem;
+        z-index: 5;
+
+        @media (max-width: 800px) {
+            padding: 4rem 1rem;
+            min-height: 100vh;
+        }
+
+        .about-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+
+            @media (max-width: 900px) {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .about-left {
+                flex: 0 0 45%;
+                display: flex;
+                justify-content: center;
+
+                .photo-frame {
+                    position: relative;
+                    width: 100%;
+                    max-width: 500px;
+                    aspect-ratio: 1/1;
+                    overflow: hidden;
+
+                    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                    animation: blob-morph 8s ease-in-out infinite;
+
+                    border: 5px solid var(--accentColor);
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+
+                    @media (max-width: 900px) {
+                        max-width: 350px;
+                    }
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        filter: grayscale(100%);
+                        transition:
+                            filter 0.5s ease,
+                            transform 0.5s ease;
+                    }
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        background: radial-gradient(
+                            circle at 30% 30%,
+                            rgba(255, 255, 255, 0.15) 0%,
+                            transparent 50%,
+                            rgba(0, 0, 0, 0.2) 100%
+                        );
+                        pointer-events: none;
+                        z-index: 2;
+                    }
+
+                    /* Hover Interaction */
+                    &:hover img {
+                        filter: grayscale(0%);
+                        transform: scale(1.05);
+                    }
+                }
+            }
+
+            /* Right Column (Content) */
+            .about-right {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center; /* Center content vertically against big photo */
+                gap: 2rem;
+
+                .about-headline {
+                    font-family: var(--yesevaFont);
+                    font-weight: bold;
+                    font-size: 4rem;
+                    line-height: 1.1;
+                    color: var(--foregroundColor);
+                    margin: 0;
+
+                    .highlight {
+                        color: var(--accentColor);
+                    }
+
+                    @media (max-width: 800px) {
+                        font-size: 2rem;
+                        text-align: center;
+                    }
+                }
+
+                .about-bio {
+                    font-family: 'Urbanist', sans-serif;
+                    font-size: 1.25rem;
+                    line-height: 1.6;
+                    color: var(--foregroundColor);
+                    opacity: 0.8;
+                    max-width: 600px;
+
+                    @media (max-width: 800px) {
+                        text-align: center;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+    @keyframes blob-morph {
+        0% {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        50% {
+            border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        }
+        100% {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
         }
     }
 </style>

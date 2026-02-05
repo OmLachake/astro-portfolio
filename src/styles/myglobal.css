@@ -32,6 +32,11 @@ html {
     --shadowAccentColor: rgba(177, 177, 177, 0.5);
     /* Helper for overlays */
     --overlayColor: rgba(0, 0, 0, 0.2);
+
+    /* fonts */
+    --urbanistFont: 'Urbanist', serif;
+    --yesevaFont: 'Yeseva One', serif;
+    --soriaFont: 'Soria', serif;
 }
 
 /* --- Dark Mode Overrides --- */

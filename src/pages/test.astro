@@ -65,73 +65,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="about-container">
             <div class="about-left">
                 <div class="photo-frame">
-                    <img src="/your-photo.jpg" alt="Om Lachake" />
+                    <img src="/om.png" alt="Om Lachake" />
                     <div class="frame-overlay"></div>
                 </div>
             </div>
 
             <div class="about-right">
                 <h2 class="about-headline">
-                    Engineering Discipline Meets <br />
-                    <span class="highlight">Creative Expression.</span>
+                    Om Lachake <br />
+                    <span class="highlight">Systems Engineer</span>
                 </h2>
 
                 <p class="about-bio">
-                    Rooted in C++ systems expertise and backend stability,
-                    driven by a genuine love for web creation.
+                    By trade, I specialize in Backend Infrastructure using C++
+                    focusing on speed, stability, and efficiency.
                 </p>
 
-                <div class="specs-grid">
-                    <div class="spec-card">
-                        <div class="card-icon">
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                ><path
-                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.47a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.39a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
-                                ></path><circle cx="12" cy="12" r="3"
-                                ></circle></svg
-                            >
-                        </div>
-                        <h3>CORE</h3>
-                        <ul>
-                            <li>> Systems Arch</li>
-                            <li>> Low Latency</li>
-                            <li>> C++ / Perl</li>
-                        </ul>
-                    </div>
-
-                    <div class="spec-card">
-                        <div class="card-icon">
-                            <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                ><path
-                                    d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                                ></path><circle cx="12" cy="12" r="3"
-                                ></circle></svg
-                            >
-                        </div>
-                        <h3>PASSION</h3>
-                        <ul>
-                            <li>> Interactive</li>
-                            <li>> Fluid UI</li>
-                            <li>> Web Dev</li>
-                        </ul>
-                    </div>
-                </div>
+                <p class="about-bio">
+                    I sometimes spend my time developing websites. :)
+                </p>
             </div>
         </div>
     </section>
@@ -145,20 +97,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid red;
+            border: 2px solid red;
             margin-top: 10rem;
             // position: relative;
             padding: 6rem 2rem;
             z-index: 5; /* Sit on top of waves */
-            .wave-top {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100px; /* adjust height as needed */
 
-                border: 1px solid red;
-            }
             @media (max-width: 800px) {
                 padding: 4rem 1rem;
                 min-height: 100vh;
@@ -177,30 +121,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 }
 
                 .about-left {
-                    flex: 0 0 35%;
+                    flex: 0 0 45%;
                     display: flex;
                     justify-content: center;
 
                     .photo-frame {
                         position: relative;
                         width: 100%;
-                        max-width: 350px;
-                        aspect-ratio: 3/4;
-                        border-radius: 1rem;
+                        max-width: 500px;
+                        aspect-ratio: 1/1;
                         overflow: hidden;
-                        border: 1px solid var(--foregroundColor);
 
+                        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                        animation: blob-morph 8s ease-in-out infinite;
+
+                        border: 5px solid var(--accentColor);
+                        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+
+                        @media (max-width: 900px) {
+                            max-width: 350px;
+                        }
                         img {
                             width: 100%;
                             height: 100%;
                             object-fit: cover;
-                            filter: grayscale(100%); /* Black & White styling */
-                            transition: filter 0.5s ease;
+                            filter: grayscale(100%);
+                            transition:
+                                filter 0.5s ease,
+                                transform 0.5s ease;
                         }
 
-                        /* Hover effect: Subtle color */
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            inset: 0;
+                            background: radial-gradient(
+                                circle at 30% 30%,
+                                rgba(255, 255, 255, 0.15) 0%,
+                                transparent 50%,
+                                rgba(0, 0, 0, 0.2) 100%
+                            );
+                            pointer-events: none;
+                            z-index: 2;
+                        }
+
+                        /* Hover Interaction */
                         &:hover img {
                             filter: grayscale(0%);
+                            transform: scale(1.05);
                         }
                     }
                 }
@@ -210,11 +178,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     flex: 1;
                     display: flex;
                     flex-direction: column;
+                    justify-content: center; /* Center content vertically against big photo */
                     gap: 2rem;
 
                     .about-headline {
-                        font-family: 'Yeseva One', serif;
-                        font-size: 3rem;
+                        font-family: var(--yesevaFont);
+                        font-weight: bold;
+                        font-size: 4rem;
                         line-height: 1.1;
                         color: var(--foregroundColor);
                         margin: 0;
@@ -242,68 +212,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                             font-size: 1rem;
                         }
                     }
-
-                    /* Specs Grid */
-                    .specs-grid {
-                        display: flex;
-                        gap: 1.5rem;
-                        margin-top: 1rem;
-
-                        @media (max-width: 600px) {
-                            flex-direction: column;
-                            width: 100%;
-                        }
-
-                        .spec-card {
-                            flex: 1;
-                            border: 1px solid var(--foregroundColor);
-                            border-radius: 0.5rem;
-                            padding: 1.5rem;
-                            background: transparent;
-                            transition:
-                                transform 0.3s ease,
-                                background 0.3s ease;
-
-                            display: flex;
-                            flex-direction: column;
-                            gap: 0.5rem;
-
-                            &:hover {
-                                transform: translateY(-5px);
-                                background: rgba(150, 150, 150, 0.05);
-                            }
-
-                            .card-icon {
-                                color: var(--accentColor);
-                                margin-bottom: 0.5rem;
-                            }
-
-                            h3 {
-                                font-family: 'Urbanist', sans-serif;
-                                font-weight: 700;
-                                font-size: 0.9rem;
-                                letter-spacing: 0.1em;
-                                margin: 0;
-                            }
-
-                            ul {
-                                list-style: none;
-                                padding: 0;
-                                margin: 0;
-
-                                li {
-                                    font-family: 'Urbanist', sans-serif;
-                                    font-size: 0.9rem;
-                                    opacity: 0.7;
-                                    padding: 0.2rem 0;
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }
-
+        @keyframes blob-morph {
+            0% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+        }
         .svg-container {
             width: 100%;
             position: absolute;
@@ -343,7 +265,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             display: block;
             z-index: 0;
             position: relative;
-            border: 1px solid green;
             scale: 1;
 
             @media (min-width: 800px) and (max-width: 1200px) {
@@ -397,7 +318,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             }
         }
         .hero .title {
-            font-family: 'Soria', serif;
+            font-family: var(--soriaFont);
             font-size: 5.5vw;
             font-weight: 600;
             width: max-content;

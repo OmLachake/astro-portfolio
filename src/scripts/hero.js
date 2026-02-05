@@ -5,10 +5,11 @@ const wave = document.querySelectorAll('.wave');
 const nextSection = document.querySelector('.next-section');
 const heroSection = document.querySelector('.hero');
 const bgEffect = document.querySelector('.hero-bg-effect');
+const aboutPhoto = document.querySelector('.photo-frame');
 
-if (window.lenis) {
-    window.lenis.scrollTo(0);
-}
+// if (window.lenis) {
+//     window.lenis.scrollTo(0);
+// }
 
 let mm = gsap.matchMedia();
 
@@ -20,6 +21,46 @@ window.addEventListener('scroll', () => {
         ScrollTrigger.refresh();
     }, 150);
 });
+
+gsap.fromTo(
+    aboutPhoto,
+    {
+        opacity: 0,
+        scale: 0.5,
+    },
+    {
+        opacity: 1,
+        scale: 1,
+        ease: 'expo.in',
+        scrollTrigger: {
+            trigger: nextSection,
+            start: 'top bottom',
+            end: 'top 25%',
+            scrub: 1,
+            markers: true,
+        },
+    },
+);
+
+gsap.fromTo(
+    ['.about-headline', '.about-bio'],
+    {
+        opacity: 0,
+        x: 50,
+    },
+    {
+        opacity: 1,
+        x: 0,
+        ease: 'expo.in',
+        scrollTrigger: {
+            trigger: nextSection,
+            start: 'top bottom',
+            end: 'top 25%',
+            scrub: 1,
+            markers: true,
+        },
+    },
+);
 
 mm.add('(min-width: 1200px)', () => {
     gsap.from(wave, {
@@ -201,6 +242,8 @@ mm.add('(max-width: 800px)', () => {
         delay: 0.15,
     });
 });
+
+// Floating Mouse Blobl Effect
 let mouseX = 0;
 let mouseY = 0;
 let currentX = 0;
