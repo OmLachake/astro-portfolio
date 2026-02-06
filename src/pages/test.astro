@@ -1,5 +1,6 @@
 ---
 import ActionButton from '../components/ActionButton.astro';
+import LinkButton from '../components/LinkButton.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -86,8 +87,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     I sometimes spend my time developing websites. :)
                 </p>
 
-                <div>
-                    <ActionButton label="Blog" />
+                <div class="about-actions">
+                    <LinkButton href="/blog" label="Check out my blog" />
+                    <ActionButton
+                        label="Resume"
+                        icon="line-md:downloading-loop"
+                        width="20"
+                    />
                 </div>
             </div>
         </div>
@@ -102,7 +108,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid red;
             margin-top: 10rem;
             // position: relative;
             padding: 6rem 2rem;
@@ -115,11 +120,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
             .about-container {
                 width: 100%;
-                max-width: 1200px;
+                max-width: 85vw;
                 display: flex;
+
                 gap: 4rem;
                 align-items: center;
                 overflow: hidden;
+
+                @media (min-width: 2000px) {
+                    max-width: 70vw;
+                }
+
                 @media (max-width: 900px) {
                     flex-direction: column;
                     gap: 3rem;
@@ -141,7 +152,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                         animation: blob-morph 8s ease-in-out infinite;
 
                         border: 5px solid var(--accentColor);
-                        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
 
                         @media (max-width: 900px) {
                             max-width: 350px;
@@ -216,6 +226,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                             text-align: center;
                             font-size: 1rem;
                         }
+                    }
+
+                    .about-actions {
+                        width: 75%;
+                        display: flex;
+                        align-items: center;
+                        gap: 2rem;
                     }
                 }
             }

@@ -1,17 +1,19 @@
 ---
-const { label, onClick, type } = Astro.props;
+import { Icon } from 'astro-icon/components';
+const { label, onClick, type, icon, width = 10 } = Astro.props;
 ---
 
 <button class="action-button" onclick={onClick}>
-    {label || 'Submit'}
+    {icon && <Icon name={icon} size={25} width={width} />}{
+        (<span>{label}</span>)
+    }
 </button>
 <style lang="scss">
     .action-button {
-        margin-top: 1rem;
-        padding: 1rem;
+        padding: 0.7rem 1rem;
         background-color: var(--foregroundColor);
         color: var(--backgroundColor);
-        font-weight: bold;
+        font-weight: light;
         font-family: 'Urbanist', sans-serif;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -20,9 +22,10 @@ const { label, onClick, type } = Astro.props;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
 
-        @media (max-width: 800px) {
-            margin-top: 0rem;
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
     }
 
     .action-button:hover {

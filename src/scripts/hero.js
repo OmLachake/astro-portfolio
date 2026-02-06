@@ -102,7 +102,7 @@ mm.add('(min-width: 1200px)', () => {
     );
 
     gsap.fromTo(
-        ['.about-headline', '.about-bio'],
+        ['.about-headline', '.about-bio', '.about-actions'],
         {
             opacity: 0,
             x: 50,
@@ -199,7 +199,7 @@ mm.add('(min-width: 800px) and (max-width: 1200px)', () => {
     );
 
     gsap.fromTo(
-        ['.about-headline', '.about-bio'],
+        ['.about-headline', '.about-bio', '.about-actions'],
         {
             opacity: 0,
             x: 50,
@@ -298,7 +298,7 @@ mm.add('(max-width: 800px)', () => {
     );
 
     gsap.fromTo(
-        ['.about-headline', '.about-bio'],
+        ['.about-headline', '.about-bio', '.about-actions'],
         {
             opacity: 0,
             y: 50,

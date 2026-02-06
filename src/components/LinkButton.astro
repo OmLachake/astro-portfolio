@@ -1,0 +1,72 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const { label, href } = Astro.props;
+---
+
+<a class="link-button" href={href}>
+    <Icon name="logo" size="30" />
+    <span>{label}</span>
+</a>
+
+<style lang="scss">
+    .link-button {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+
+        svg {
+            transition: transform 0.4s ease-out;
+        }
+
+        span {
+            font-family: var(--urbanistFont);
+            font-weight: 400;
+            text-transform: uppercase;
+
+            display: inline-block;
+            position: relative;
+            border-bottom: 1px solid var(--backgroundDarkColor);
+            padding: 0.1rem 0.1rem;
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                transform: scaleX(0);
+
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: var(--accentColor);
+                transform-origin: bottom right;
+                transition: transform 0.25s ease-out;
+            }
+
+            &:hover::after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+        }
+        &:hover {
+            span::after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+
+            svg {
+                transform: rotateZ(360deg);
+            }
+        }
+    }
+
+    @keyframes rotateSVG {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
