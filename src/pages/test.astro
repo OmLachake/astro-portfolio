@@ -83,9 +83,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     focusing on speed, stability, and efficiency.
                 </p>
 
-                <p class="about-bio">
-                    I sometimes spend my time developing websites. :)
-                </p>
+                <p class="about-bio">I sometimes make websites.</p>
 
                 <div class="about-actions">
                     <LinkButton href="/blog" label="Check out my blog" />
@@ -233,6 +231,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                         display: flex;
                         align-items: center;
                         gap: 2rem;
+                        flex-wrap: wrap;
+
+                        @media (max-width: 800px) {
+                            display: flex;
+                            width: 100%;
+                            flex-direction: column;
+                        }
                     }
                 }
             }
