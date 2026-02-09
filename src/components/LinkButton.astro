@@ -1,7 +1,13 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-const { label, href } = Astro.props;
+const { label, href, reverse } = Astro.props;
+
+let order = -1;
+
+if (reverse) {
+    order = 1;
+}
 ---
 
 <a class="link-button" href={href}>
@@ -9,7 +15,7 @@ const { label, href } = Astro.props;
     <span>{label}</span>
 </a>
 
-<style lang="scss">
+<style lang="scss" define:vars={{ order }}>
     .link-button {
         display: flex;
         align-items: center;
@@ -18,6 +24,7 @@ const { label, href } = Astro.props;
 
         svg {
             transition: transform 0.4s ease-out;
+            order: var(--order);
         }
 
         span {

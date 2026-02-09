@@ -89,6 +89,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <LinkButton href="/blog" label="Check out my blog" />
                     <ActionButton
                         label="Resume"
+                        textTransform="uppercase"
                         icon="line-md:downloading-loop"
                         width="20"
                     />
@@ -151,15 +152,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             height: 45vw;
             scale: 3;
         }
-    }
-
-    .next-section {
-        min-height: 100svh;
-        background-color: var(--backgroundColor);
-        color: #888;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .hero {
@@ -310,10 +302,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .hero-bg-effect {
         position: absolute;
         inset: 0;
-        z-index: 0; /* Behind text (z-index 2), in front of waves (z-index 0) */
-        pointer-events: none; /* Let clicks pass through to buttons/text */
+        z-index: 0;
+        pointer-events: none;
         overflow: hidden;
-        /* 1. The Technical Grid Pattern */
         background-size: 40px 40px;
         background-image:
             linear-gradient(
@@ -326,13 +317,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 color-mix(in srgb, var(--foregroundColor) 5%, transparent) 1px,
                 transparent 1px
             );
-        mask-image: linear-gradient(
-            to bottom,
-            black 60%,
-            transparent 100%
-        ); /* Fade out grid near waves */
+        mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 
-        /* 2. The Glowing Orb */
         &::before {
             content: '';
             position: absolute;
@@ -393,7 +379,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         }
     }
 
-    /* --- About Section Styles --- */
     .next-section {
         min-height: 100svh;
         background-color: var(--backgroundColor);
@@ -402,9 +387,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         align-items: center;
         justify-content: center;
         margin-top: 10rem;
-        // position: relative;
         padding: 6rem 2rem;
-        z-index: 5;
 
         @media (max-width: 800px) {
             padding: 4rem 1rem;
@@ -439,7 +422,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     animation: blob-morph 8s ease-in-out infinite;
 
                     border: 5px solid var(--accentColor);
-                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
 
                     @media (max-width: 900px) {
                         max-width: 350px;
@@ -476,12 +458,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 }
             }
 
-            /* Right Column (Content) */
             .about-right {
                 flex: 1;
                 display: flex;
                 flex-direction: column;
-                justify-content: center; /* Center content vertically against big photo */
+                justify-content: center;
                 gap: 2rem;
 
                 .about-headline {

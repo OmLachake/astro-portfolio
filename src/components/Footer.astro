@@ -121,7 +121,12 @@ if (Astro.request.method === 'POST') {
                             )}
                         </div>
 
-                        <ActionButton type="submit" label="Send Message" />
+                        <ActionButton
+                            type="submit"
+                            label="Send Message"
+                            textTransform="uppercase"
+                            noAnimation
+                        />
                     </form>
                 )
             }

@@ -89,6 +89,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     <LinkButton href="/blog" label="Check out my blog" />
                     <ActionButton
                         label="Resume"
+                        textTransform="uppercase"
                         icon="line-md:downloading-loop"
                         width="20"
                     />
@@ -98,7 +99,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <style lang="scss">
-        /* --- About Section Styles --- */
         .next-section {
             min-height: 100svh;
             background-color: var(--backgroundColor);
@@ -107,9 +107,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             align-items: center;
             justify-content: center;
             margin-top: 10rem;
-            // position: relative;
             padding: 6rem 2rem;
-            z-index: 5; /* Sit on top of waves */
 
             @media (max-width: 800px) {
                 padding: 4rem 1rem;
@@ -178,7 +176,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                             z-index: 2;
                         }
 
-                        /* Hover Interaction */
                         &:hover img {
                             filter: grayscale(0%);
                             transform: scale(1.05);
@@ -186,12 +183,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     }
                 }
 
-                /* Right Column (Content) */
                 .about-right {
                     flex: 1;
                     display: flex;
                     flex-direction: column;
-                    justify-content: center; /* Center content vertically against big photo */
+                    justify-content: center;
                     gap: 2rem;
 
                     .about-headline {
@@ -242,17 +238,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 }
             }
         }
-        @keyframes blob-morph {
-            0% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
-            50% {
-                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-            }
-            100% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
-        }
+
         .svg-container {
             width: 100%;
             position: absolute;
@@ -456,10 +442,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         .hero-bg-effect {
             position: absolute;
             inset: 0;
-            z-index: 0; /* Behind text (z-index 2), in front of waves (z-index 0) */
-            pointer-events: none; /* Let clicks pass through to buttons/text */
+            z-index: 0;
+            pointer-events: none;
             overflow: hidden;
-            /* 1. The Technical Grid Pattern */
+
             background-size: 40px 40px;
             background-image:
                 linear-gradient(
@@ -474,13 +460,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                         1px,
                     transparent 1px
                 );
-            mask-image: linear-gradient(
-                to bottom,
-                black 60%,
-                transparent 100%
-            ); /* Fade out grid near waves */
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 
-            /* 2. The Glowing Orb */
+            /* the Glowing Orb */
             &::before {
                 content: '';
                 position: absolute;
@@ -512,23 +494,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             }
         }
 
-        /* The Morphing Animation */
-        @keyframes blob-spin {
+        @keyframes blob-morph {
             0% {
-                transform: translate(-50%, -50%) rotate(0deg) scale(1);
-                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             }
-            33% {
-                transform: translate(-50%, -50%) rotate(120deg) scale(1.1);
-                border-radius: 50% 20% 50% 50% / 40% 40% 60% 60%;
-            }
-            66% {
-                transform: translate(-50%, -50%) rotate(240deg) scale(0.9);
-                border-radius: 80% 50% 30% 50% / 50% 80% 20% 40%;
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
             }
             100% {
-                transform: translate(-50%, -50%) rotate(360deg) scale(1);
-                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             }
         }
         @keyframes rotate {
