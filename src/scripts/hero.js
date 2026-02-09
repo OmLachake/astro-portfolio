@@ -409,7 +409,11 @@ function buildSmoothPath(points) {
 if (aboutPhoto) {
     gsap.ticker.add((time) => {
         const rect = aboutPhoto.getBoundingClientRect();
-        const size = Math.min(rect.width, rect.height) || 500;
+
+        // Prevent initialization issues on mobile if element is not yet sized
+        if (rect.width === 0 || rect.height === 0) return;
+
+        const size = Math.min(rect.width, rect.height);
         const center = size / 2;
         const radius = size * CONFIG.radiusFactor;
         const variance = size * CONFIG.variance;
