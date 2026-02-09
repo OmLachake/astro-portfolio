@@ -91,7 +91,7 @@ mm.add('(min-width: 1200px)', () => {
         {
             opacity: 1,
             scale: 1,
-            ease: 'expo.in',
+            ease: 'power1.in',
             scrollTrigger: {
                 trigger: nextSection,
                 start: 'top bottom',
@@ -188,7 +188,7 @@ mm.add('(min-width: 800px) and (max-width: 1200px)', () => {
         {
             opacity: 1,
             scale: 1,
-            ease: 'expo.in',
+            ease: 'power1.in',
             scrollTrigger: {
                 trigger: nextSection,
                 start: 'top bottom',
@@ -357,3 +357,75 @@ function animate() {
 
 updateDimensions();
 animate();
+
+// Photo Blob Animation Logic
+const CONFIG = {
+    points: 5,
+    minSpeed: 1.5,
+    maxSpeed: 1.5,
+    variance: 0.015,
+    radiusFactor: 0.45,
+    tension: 0.3,
+    rotationSpeed: 0.331,
+};
+const points = [];
+for (let i = 0; i < CONFIG.points; i++) {
+    points.push({
+        baseAngle: ((Math.PI * 2) / CONFIG.points) * i,
+        speed:
+            CONFIG.minSpeed +
+            Math.random() * (CONFIG.maxSpeed - CONFIG.minSpeed),
+        offset: Math.random() * Math.PI * 2,
+    });
+}
+function buildSmoothPath(points) {
+    let d = '';
+    const len = points.length;
+    const getPt = (i) => points[(i + len) % len];
+
+    for (let i = 0; i < len; i++) {
+        const p0 = getPt(i - 1);
+        const p1 = getPt(i);
+        const p2 = getPt(i + 1);
+        const p3 = getPt(i + 2);
+
+        if (i === 0) d += `M ${p1.x.toFixed(1)} ${p1.y.toFixed(1)} `;
+
+        const tension = CONFIG.tension;
+        const cp1 = {
+            x: p1.x + (p2.x - p0.x) * tension,
+            y: p1.y + (p2.y - p0.y) * tension,
+        };
+        const cp2 = {
+            x: p2.x - (p3.x - p1.x) * tension,
+            y: p2.y - (p3.y - p1.y) * tension,
+        };
+
+        d += `C ${cp1.x.toFixed(1)} ${cp1.y.toFixed(1)}, ${cp2.x.toFixed(1)} ${cp2.y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)} `;
+    }
+    return d + 'Z';
+}
+
+if (aboutPhoto) {
+    gsap.ticker.add((time) => {
+        const rect = aboutPhoto.getBoundingClientRect();
+        const size = Math.min(rect.width, rect.height) || 500;
+        const center = size / 2;
+        const radius = size * CONFIG.radiusFactor;
+        const variance = size * CONFIG.variance;
+
+        const globalRotation = time * CONFIG.rotationSpeed;
+
+        const currentCoords = points.map((pt) => {
+            const r = radius + Math.sin(time * pt.speed + pt.offset) * variance;
+            const a = pt.baseAngle + globalRotation;
+            return {
+                x: center + Math.cos(a) * r,
+                y: center + Math.sin(a) * r,
+            };
+        });
+
+        const pathData = buildSmoothPath(currentCoords);
+        aboutPhoto.style.setProperty('--blob-path', `path('${pathData}')`);
+    });
+}

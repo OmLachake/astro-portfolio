@@ -67,8 +67,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="about-container">
             <div class="about-left">
                 <div class="photo-frame">
-                    <img src="/om.png" alt="Om Lachake" />
-                    <div class="frame-overlay"></div>
+                    <div class="blob-border"></div>
+
+                    <img src="/om.png" alt="Om Lachake" class="blob-content" />
+                    <div class="frame-overlay blob-content"></div>
                 </div>
             </div>
 
@@ -142,43 +144,65 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                         width: 100%;
                         max-width: 500px;
                         aspect-ratio: 1/1;
-                        overflow: hidden;
-
-                        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-                        animation: blob-morph 8s ease-in-out infinite;
-
-                        border: 5px solid var(--accentColor);
-
+                        overflow: visible;
+                        border: none;
+                        border-radius: 0;
+                        animation: none;
+                        --blob-path: circle(50%);
                         @media (max-width: 900px) {
                             max-width: 350px;
                         }
-                        img {
+                        pointer-events: none;
+                        .blob-border {
+                            position: absolute;
+                            inset: 0;
+                            background: var(--accentColor);
+                            clip-path: var(--blob-path, circle(50%));
+                            z-index: 1;
+                            pointer-events: auto;
+                        }
+
+                        .blob-content {
+                            position: absolute;
+                            inset: 0;
                             width: 100%;
                             height: 100%;
                             object-fit: cover;
-                            filter: grayscale(100%);
+
+                            clip-path: var(--blob-path, circle(50%));
+                            z-index: 2;
+
+                            transform: scale(0.96);
+                            transform-origin: center center;
                             transition:
-                                filter 0.5s ease,
-                                transform 0.5s ease;
+                                transform 0.3s ease,
+                                filter 0.5s ease;
+
+                            pointer-events: auto;
                         }
 
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            inset: 0;
+                        img.blob-content {
+                            filter: grayscale(100%);
+
+                            pointer-events: auto;
+                        }
+
+                        .frame-overlay {
+                            pointer-events: none;
                             background: radial-gradient(
                                 circle at 30% 30%,
                                 rgba(255, 255, 255, 0.15) 0%,
                                 transparent 50%,
                                 rgba(0, 0, 0, 0.2) 100%
                             );
-                            pointer-events: none;
-                            z-index: 2;
+                            z-index: 3;
+
+                            pointer-events: auto;
                         }
 
-                        &:hover img {
+                        &:hover img.blob-content {
                             filter: grayscale(0%);
-                            transform: scale(1.05);
+                            transform: scale(0.94);
                         }
                     }
                 }
@@ -493,16 +517,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 }
             }
         }
-
-        @keyframes blob-morph {
+        @keyframes blob-spin {
             0% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                transform: translate(-50%, -50%) rotate(0deg) scale(1);
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             }
-            50% {
-                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            33% {
+                transform: translate(-50%, -50%) rotate(120deg) scale(1.1);
+                border-radius: 50% 20% 50% 50% / 40% 40% 60% 60%;
+            }
+            66% {
+                transform: translate(-50%, -50%) rotate(240deg) scale(0.9);
+                border-radius: 80% 50% 30% 50% / 50% 80% 20% 40%;
             }
             100% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                transform: translate(-50%, -50%) rotate(360deg) scale(1);
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             }
         }
         @keyframes rotate {

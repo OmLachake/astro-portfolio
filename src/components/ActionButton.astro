@@ -8,8 +8,15 @@ const {
     fontWeight = 300,
     textTransform = 'none',
     noAnimation,
+    compact,
+    secondary,
     ...rest
 } = Astro.props;
+
+let padding = '0.7rem 1rem';
+let gap = '0.8rem';
+if (compact) {
+}
 ---
 
 <button class=`action-button ${noAnimation ? 'no-animation' : ''}` {...rest}>
