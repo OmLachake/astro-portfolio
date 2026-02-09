@@ -4,37 +4,45 @@ import { Icon } from 'astro-icon/components';
 const {
     label = 'Label',
     icon,
-    width = 20,
-    fontWeight = 300,
-    textTransform = 'none',
     noAnimation,
     compact,
-    secondary,
+    width = 20,
+    fontWeight = 300,
+    element = 'button',
+    textTransform = 'none',
+
     ...rest
 } = Astro.props;
 
-let padding = '0.7rem 1rem';
-let gap = '0.8rem';
-if (compact) {
-}
+const Tag = element;
+
+console.log(label + ' ' + textTransform);
+
+const cssVars = {
+    '--fontWeight': fontWeight,
+    '--textTransform': textTransform,
+};
 ---
 
-<button class=`action-button ${noAnimation ? 'no-animation' : ''}` {...rest}>
+<Tag
+    class=`action-button ${noAnimation ? 'no-animation' : ''} ${compact ? 'compact' : ''}`
+    style={cssVars}
+    {...rest}
+>
     {icon && <Icon name={icon} size={25} width={width} />}
 
     <div class="label-container">
         <span class="static-text">{label}</span>
     </div>
-</button>
+</Tag>
 
-<style define:vars={{ fontWeight, textTransform }}>
-    /* 1. Base Button Styles */
+<style define:vars={{ textTransform: textTransform, fontWeight: fontWeight }}>
     .action-button {
         position: relative;
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        gap: 0.8rem;
+        /* gap: 0.8rem; */
         padding: 0.7rem 1rem;
 
         background-color: var(--foregroundColor, #ffffff);
@@ -45,7 +53,7 @@ if (compact) {
         text-transform: var(--textTransform);
 
         letter-spacing: 0.05em;
-        line-height: 1;
+        line-height: 1.3;
 
         border: none;
         border-radius: 0.5rem;
@@ -70,7 +78,7 @@ if (compact) {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0 0.2rem;
+        padding: 0 0.5rem;
     }
 
     .static-text {
@@ -102,6 +110,21 @@ if (compact) {
         display: inline-block;
         position: relative;
         will-change: transform;
+    }
+
+    .compact {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background: var(--foregroundDarkColor);
+        color: var(--backgroundColor);
+        font-family: 'Urbanist', sans-serif;
+        font-optical-sizing: auto;
+        text-transform: var(--textTransform);
+    }
+
+    .compact:hover {
+        background: rgba(150, 150, 150, 0.675);
+        cursor: pointer;
     }
 </style>
 

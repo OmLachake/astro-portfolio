@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-const { label, href, reverse } = Astro.props;
+const { label, href, reverse, icon = true } = Astro.props;
 
 let order = -1;
 
@@ -11,7 +11,7 @@ if (reverse) {
 ---
 
 <a class="link-button" href={href}>
-    <Icon name="logo" size="30" />
+    {icon && <Icon name="logo" size="30" />}
     <span>{label}</span>
 </a>
 
