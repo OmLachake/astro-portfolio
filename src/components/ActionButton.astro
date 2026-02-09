@@ -6,7 +6,8 @@ const {
     icon,
     noAnimation,
     compact,
-    width = 20,
+    iconSize = 25,
+    strokeWidth = 2,
     fontWeight = 300,
     element = 'button',
     textTransform = 'none',
@@ -29,7 +30,7 @@ const cssVars = {
     style={cssVars}
     {...rest}
 >
-    {icon && <Icon name={icon} size={25} width={width} />}
+    {icon && <Icon name={icon} stroke-width={strokeWidth} size={iconSize} />}
 
     <div class="label-container">
         <span class="static-text">{label}</span>

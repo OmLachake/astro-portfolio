@@ -100,7 +100,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
     </section>
 
+    <section class="skills-section" id="skills">
+        <div class="skills-container">
+            <div class="title">
+                <h2>My Skills</h2>
+            </div>
+        </div>
+    </section>
+
     <style lang="scss">
+        .skills-section {
+            border: 1px solid red;
+            min-height: 100svh;
+            background-color: var(--backgroundColor);
+
+            padding: 5rem 0;
+            .skills-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 3px solid green;
+            }
+
+            .title h2 {
+                font-family: var(--yesevaFont);
+                font-weight: bold;
+                font-size: clamp(5rem, 5vw, 10rem);
+                text-transform: uppercase;
+                width: auto;
+                border: 1px solid red;
+                line-height: 1;
+            }
+        }
         .next-section {
             min-height: 100svh;
             background-color: var(--backgroundColor);

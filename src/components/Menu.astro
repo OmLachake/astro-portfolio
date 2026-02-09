@@ -6,15 +6,12 @@ import ActionButton from './ActionButton.astro';
 
 <header>
     <nav class="main-nav">
-        <!-- <div class="contact">
-            <p><a href="/#contact">Contact Me</a></p>
-        </div> -->
         <ActionButton
             label="contact"
             textTransform="uppercase"
             element="a"
             compact
-            width="15"
+            strokeWidth={0.5}
             icon="line-md:chat-round-dots"
             href="/#contact"
         />
