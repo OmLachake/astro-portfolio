@@ -1,0 +1,256 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    post: {
+        frontmatter: {
+            title: string;
+            description: string;
+            pubDate: string;
+            tags?: string[];
+            image?: { url: string; alt: string };
+        };
+        url: string;
+    };
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, tags } = post.frontmatter;
+
+const dateObj = new Date(pubDate);
+const formattedDate = dateObj.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+});
+
+let strokeWidth = 0.2;
+
+const cssVars = {
+    '--arrowIconStrokeWidth': strokeWidth,
+};
+---
+
+<article class="blog-card" id="blog-card">
+    <a href={post.url} class="card-link">
+        <div class="card-content">
+            <div class="tags">
+                {tags && tags.map((tag) => <span class="tag">{tag}</span>)}
+            </div>
+            <h3 class="title">{title}</h3>
+            <p class="description">{description}</p>
+        </div>
+
+        <div class="card-footer">
+            <div class="meta-wrapper">
+                <span class="label">PUBLISHED</span>
+                <time datetime={dateObj.toISOString()} class="date"
+                    >{formattedDate}</time
+                >
+            </div>
+
+            <div class="action-box" style={cssVars}>
+                <div class="icon-frame layer-1">
+                    <Icon
+                        name="line-md:arrow-right-circle"
+                        size={30}
+                        stroke-width={0.2}
+                    />
+                </div>
+
+                <div class="icon-frame layer-2">
+                    <Icon
+                        name="line-md:arrow-right-circle"
+                        size={30}
+                        stroke-width={0.2}
+                    />
+                </div>
+            </div>
+        </div>
+    </a>
+</article>
+
+<style lang="scss">
+    .blog-card {
+        background: var(--backgroundColor);
+        border: 2px solid var(--backgroundDarkColor);
+        border-radius: 1rem;
+        overflow: hidden;
+
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        transition:
+            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
+        position: relative;
+
+        &:hover {
+            transform: translateY(-5px);
+            border-color: var(--accentColor);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+
+            .action-box {
+                background-color: var(--accentColor);
+                border-left-color: var(--accentColor);
+            }
+
+            .icon-frame {
+                color: var(--backgroundColor);
+            }
+
+            .card-footer {
+                border-color: var(--accentColor);
+            }
+        }
+    }
+
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .card-content {
+        padding: 2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+
+        .tag {
+            color: var(--accentColor);
+            background-color: var(--backgroundDarkColor);
+            border-radius: 0.5rem;
+            opacity: 0.8;
+            padding: 0.25rem 0.5rem;
+
+            font-family: var(--urbanistFont);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+    }
+
+    .title {
+        font-family: 'Yeseva One', serif;
+        font-size: 1.75rem;
+        line-height: 1.1;
+        margin: 0;
+        color: var(--foregroundColor);
+    }
+
+    .description {
+        font-family: 'Urbanist', sans-serif;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: var(--foregroundColor);
+        opacity: 0.7;
+        margin: 0;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .card-footer {
+        display: flex;
+        align-items: stretch;
+        border-top: 1px solid var(--backgroundDarkColor, rgba(0, 0, 0, 0.1));
+        min-height: 70px;
+    }
+
+    .meta-wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 2rem;
+
+        .label {
+            font-family: 'Urbanist', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.5;
+            margin-bottom: 0.2rem;
+        }
+
+        .date {
+            font-family: 'Urbanist', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--foregroundColor);
+        }
+    }
+
+    .action-box {
+        width: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        border-left: 1px solid var(--backgroundDarkColor);
+        transition:
+            background-color 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    .icon-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: var(--foregroundColor);
+        transition: color 0.3s ease;
+        opacity: 1;
+    }
+</style>
+<script>
+    import gsap from 'gsap';
+
+    const cards = document.querySelectorAll('.blog-card');
+
+    cards.forEach((card) => {
+        const icon1 = card.querySelector('.layer-1');
+        const icon2 = card.querySelector('.layer-2');
+
+        gsap.set(icon2, { xPercent: -100 });
+
+        const tl = gsap.timeline({ paused: true });
+
+        tl.to(icon1, {
+            xPercent: 100,
+            duration: 0.4,
+            ease: 'power2.inOut',
+        }).to(
+            icon2,
+            {
+                xPercent: 0,
+                duration: 0.4,
+                ease: 'power2.inOut',
+            },
+            0,
+        );
+
+        card.addEventListener('mouseenter', () => tl.play());
+        card.addEventListener('mouseleave', () => tl.reverse());
+    });
+</script>

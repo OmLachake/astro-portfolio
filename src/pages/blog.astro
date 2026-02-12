@@ -1,19 +1,111 @@
 ---
-import '../styles/global.css'
-import BaseLayout from '../layouts/BaseLayout.astro'
-import BlogPost from '../components/BlogPost.astro'
+import { getCollection } from 'astro:content';
+import BlogCard from '../components/Blog/BlogCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
 
+// Fetch all blog posts and sort by date
 const allPosts = Object.values(
-    import.meta.glob('./blogs/*.md', { eager: true })
-)
+    import.meta.glob('./blogs/*.md', { eager: true }),
+);
+
+allPosts.sort((a: any, b: any) => {
+    return (
+        new Date(b.frontmatter.pubDate).valueOf() -
+        new Date(a.frontmatter.pubDate).valueOf()
+    );
+});
+const latestBlog: any = allPosts[0];
+
+const posts = allPosts.filter((post) => {
+    return post !== latestBlog;
+});
+
+console.log(posts);
 ---
 
-<BaseLayout pageTitle="This is the blogs page buddy">
-    <p>This is where I will post about my journey learning Astro.</p>
+<BaseLayout pageTitle="Blogroom">
+    <div class="blogs-page-container">
+        <section class="heading">
+            <h2 class="page-title">Blogroom</h2>
+            <p class="page-subtitle">
+                Insights, updates, and engineering logs.
+            </p>
+        </section>
 
-    {
-        allPosts.map((post: any) => (
-            <BlogPost url={post.url} title={post.frontmatter.title} />
-        ))
-    }
+        <section class="latest-blog">
+            <BlogCard post={latestBlog} />
+        </section>
+        <section class="blog-grid">
+            {posts.map((post: any) => <BlogCard post={post} />)}
+        </section>
+    </div>
 </BaseLayout>
+
+<style lang="scss">
+    .blogs-page-container {
+        width: 100%;
+        max-width: 1400px; /* Big screen width */
+        margin: 0 auto;
+        margin-top: 8rem;
+        padding: 0rem 2rem;
+        background-color: var(--backgroundColor);
+        @media (max-width: 800px) {
+            padding: 0rem 1rem 2rem 1rem; /* More top padding for mobile navbar */
+        }
+    }
+
+    /* --- Typography --- */
+    .heading {
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--backgroundDarkColor, rgba(0, 0, 0, 0.1));
+        padding-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+
+        .page-title {
+            font-family: var(--urbanistFont);
+            font-weight: bold;
+            font-size: clamp(5rem, 7vw, 10rem);
+            color: var(--foregroundColor);
+            line-height: 1;
+
+            @media (max-width: 800px) {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .page-subtitle {
+            font-family: var(--urbanistFont);
+            font-weight: 200;
+            font-size: clamp(1.3rem, 1.5vw, 5rem);
+            color: var(--foregroundDarkColor);
+            opacity: 1;
+            margin-top: 2rem;
+
+            @media (max-width: 800px) {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+
+    /* --- The Flexbox Grid --- */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
+        width: 100%;
+        gap: 2rem;
+    }
+
+    .latest-blog {
+        margin-bottom: 2rem;
+    }
+</style>
+
+<script>
+    import '../scripts/blog';
+</script>
