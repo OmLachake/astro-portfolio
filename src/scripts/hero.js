@@ -49,38 +49,67 @@ mm.add('(min-width: 1200px)', () => {
         );
     });
 
-    gsap.from('.hero-sub-title', {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.25,
-    });
+    gsap.fromTo(
+        '.hero-sub-title',
+        {
+            y: 50,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.25,
+        },
+    );
 
-    gsap.from(bgEffect, {
-        y: 50,
-        scale: 1.15,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.0,
-    });
+    gsap.fromTo(
+        bgEffect,
+        {
+            y: 50,
+            scale: 1.15,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.15,
+        },
+    );
 
-    gsap.from('.title.left', {
-        x: -50,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.15,
-    });
+    gsap.fromTo(
+        '.title.left',
+        {
+            x: -50,
+            opacity: 0,
+        },
+        {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.15,
+        },
+    );
 
-    gsap.from('.title.right', {
-        x: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.15,
-    });
+    gsap.fromTo(
+        '.title.right',
+        {
+            x: 50,
+            opacity: 0,
+        },
+        {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.15,
+        },
+    );
 
     gsap.fromTo(
         aboutPhoto,
@@ -146,38 +175,67 @@ mm.add('(min-width: 800px) and (max-width: 1200px)', () => {
         });
     });
 
-    gsap.from('.hero-sub-title', {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.25,
-    });
+    gsap.fromTo(
+        '.hero-sub-title',
+        {
+            y: 50,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.25,
+        },
+    );
 
-    gsap.from(bgEffect, {
-        y: 50,
-        scale: 1.15,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.0,
-    });
+    gsap.fromTo(
+        bgEffect,
+        {
+            y: 50,
+            scale: 1.15,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.0,
+        },
+    );
 
-    gsap.from('.title.left', {
-        x: -50,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.15,
-    });
+    gsap.fromTo(
+        '.title.left',
+        {
+            x: -50,
+            opacity: 0,
+        },
+        {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.15,
+        },
+    );
 
-    gsap.from('.title.right', {
-        x: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.15,
-    });
+    gsap.fromTo(
+        '.title.right',
+        {
+            x: 50,
+            opacity: 0,
+        },
+        {
+            x: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.15,
+        },
+    );
 
     gsap.fromTo(
         aboutPhoto,
@@ -245,38 +303,67 @@ mm.add('(max-width: 800px)', () => {
         );
     });
 
-    gsap.from('.hero-sub-title', {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.25,
-    });
+    gsap.fromTo(
+        '.hero-sub-title',
+        {
+            y: 50,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.25,
+        },
+    );
 
-    gsap.from(bgEffect, {
-        y: 50,
-        scale: 1.15,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0,
-    });
+    gsap.fromTo(
+        bgEffect,
+        {
+            y: 50,
+            scale: 1.15,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0,
+        },
+    );
 
-    gsap.from('.title.left', {
-        y: -50,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.15,
-    });
+    gsap.fromTo(
+        '.title.left',
+        {
+            y: -50,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            delay: 0.15,
+            ease: 'expo.out',
+        },
+    );
 
-    gsap.from('.title.right', {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        ease: 'expo.out',
-        delay: 0.15,
-    });
+    gsap.fromTo(
+        '.title.right',
+        {
+            y: 50,
+            opacity: 0,
+        },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'expo.out',
+            delay: 0.15,
+        },
+    );
 
     gsap.fromTo(
         aboutPhoto,

@@ -1,10 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
 import BlogCard from '../components/Blog/BlogCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
 
-// Fetch all blog posts and sort by date
 const allPosts = Object.values(
     import.meta.glob('./blogs/*.md', { eager: true }),
 );
@@ -20,8 +18,6 @@ const latestBlog: any = allPosts[0];
 const posts = allPosts.filter((post) => {
     return post !== latestBlog;
 });
-
-console.log(posts);
 ---
 
 <BaseLayout pageTitle="Blogroom">
@@ -71,7 +67,7 @@ console.log(posts);
             font-size: clamp(5rem, 7vw, 10rem);
             color: var(--foregroundColor);
             line-height: 1;
-
+            opacity: 0;
             @media (max-width: 800px) {
                 width: 100%;
                 text-align: center;
@@ -83,7 +79,7 @@ console.log(posts);
             font-weight: 200;
             font-size: clamp(1.3rem, 1.5vw, 5rem);
             color: var(--foregroundDarkColor);
-            opacity: 1;
+            opacity: 0;
             margin-top: 2rem;
 
             @media (max-width: 800px) {

@@ -48,13 +48,20 @@ const toggleMenuFunction = () => {
 
 // Handle Navigation Bar and Hamburger Menu
 if (NAV) {
-    gsap.from(NAV, {
-        yPercent: -50,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power4.out',
-        delay: 0.2,
-    });
+    gsap.fromTo(
+        NAV,
+        {
+            yPercent: -50,
+            opacity: 0,
+        },
+        {
+            yPercent: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: 'power4.out',
+            delay: 0.2,
+        },
+    );
 }
 
 if (HamburgerMenuButton) {

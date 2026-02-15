@@ -215,6 +215,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .hero .left {
         text-align: right;
+        opacity: 0;
 
         @media (max-width: 800px) {
             order: 1;
@@ -223,6 +224,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .hero .right {
         text-align: left;
+        opacity: 0;
 
         @media (max-width: 800px) {
             order: 2;
@@ -235,6 +237,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         width: 50%;
         text-align: center;
         line-height: 1.5;
+        opacity: 0;
 
         @media (max-width: 800px) {
             width: 80%;
@@ -308,6 +311,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         pointer-events: none;
         overflow: hidden;
         background-size: 40px 40px;
+        opacity: 0;
         background-image:
             linear-gradient(
                 to right,

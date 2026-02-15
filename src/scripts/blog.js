@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 
-const latestBlog = document.querySelector('.latest-blog');
+const latestBlog = document.querySelector('.latest-blog .blog-card');
 const blogCards = document.querySelectorAll('.blog-grid .blog-card');
 
 const timeline = gsap.timeline({
@@ -10,31 +10,45 @@ const timeline = gsap.timeline({
         toggleActions: 'play none none reverse',
     },
 });
-gsap.set(latestBlog, {
-    opacity: 0,
-    yPercent: 50,
+
+gsap.to('.blogs-page-container .heading .page-title', {
+    opacity: 1,
+    duration: 1,
+    ease: 'expo.inOut',
 });
 
-gsap.set(blogCards, {
-    opacity: 0,
-    yPercent: 50,
+gsap.to('.blogs-page-container .heading .page-subtitle', {
+    opacity: 1,
+    duration: 1,
+    ease: 'expo.inOut',
+    delay: 0.15,
 });
-
 timeline
-    .to(latestBlog, {
-        opacity: 1,
-        yPercent: 0,
-        duration: 1.5,
-        ease: 'expo.out',
-    })
-    .to(
+    .fromTo(
+        latestBlog,
+        {
+            yPercent: 50,
+            opacity: 0,
+        },
+        {
+            yPercent: 0,
+            opacity: 1,
+            duration: 1.5,
+            ease: 'expo.inOut',
+        },
+    )
+    .fromTo(
         blogCards,
         {
-            opacity: 1,
+            yPercent: 50,
+            opacity: 0,
+        },
+        {
             yPercent: 0,
+            opacity: 1,
             duration: 1,
             stagger: 0.1,
             ease: 'expo.out',
         },
-        '-=1.0',
+        '-=.7',
     );
