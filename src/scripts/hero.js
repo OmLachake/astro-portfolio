@@ -353,7 +353,7 @@ mm.add('(max-width: 800px)', () => {
         {
             y: 0,
             opacity: 1,
-            letterSpacing: '0rem',
+            letterSpacing: '0.1rem',
             duration: 1,
             delay: 0.15,
             ease: 'expo.out',
@@ -370,7 +370,7 @@ mm.add('(max-width: 800px)', () => {
         {
             y: 0,
             opacity: 1,
-            letterSpacing: '0rem',
+            letterSpacing: '0.1rem',
             duration: 1,
             ease: 'expo.out',
             delay: 0.15,
