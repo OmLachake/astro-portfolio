@@ -15,6 +15,7 @@ gsap.to('.blogs-page-container .heading .page-title', {
     opacity: 1,
     duration: 1,
     ease: 'expo.inOut',
+    letterSpacing: '0rem',
 });
 
 gsap.to('.blogs-page-container .heading .page-subtitle', {
@@ -23,6 +24,7 @@ gsap.to('.blogs-page-container .heading .page-subtitle', {
     ease: 'expo.inOut',
     delay: 0.15,
 });
+
 timeline
     .fromTo(
         latestBlog,

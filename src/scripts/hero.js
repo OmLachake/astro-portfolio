@@ -86,10 +86,12 @@ mm.add('(min-width: 1200px)', () => {
         {
             x: -50,
             opacity: 0,
+            letterSpacing: '1rem',
         },
         {
             x: 0,
             opacity: 1,
+            letterSpacing: 0,
             duration: 1,
             ease: 'expo.out',
             delay: 0.15,
@@ -101,8 +103,10 @@ mm.add('(min-width: 1200px)', () => {
         {
             x: 50,
             opacity: 0,
+            letterSpacing: '1rem',
         },
         {
+            letterSpacing: 0,
             x: 0,
             opacity: 1,
             duration: 1,
@@ -212,10 +216,12 @@ mm.add('(min-width: 800px) and (max-width: 1200px)', () => {
         {
             x: -50,
             opacity: 0,
+            letterSpacing: '1rem',
         },
         {
             x: 0,
             opacity: 1,
+            letterSpacing: '0rem',
             duration: 1,
             ease: 'expo.out',
             delay: 0.15,
@@ -227,9 +233,11 @@ mm.add('(min-width: 800px) and (max-width: 1200px)', () => {
         {
             x: 50,
             opacity: 0,
+            letterSpacing: '1rem',
         },
         {
             x: 0,
+            letterSpacing: '0rem',
             opacity: 1,
             duration: 1,
             ease: 'expo.out',
@@ -340,10 +348,12 @@ mm.add('(max-width: 800px)', () => {
         {
             y: -50,
             opacity: 0,
+            letterSpacing: '1rem',
         },
         {
             y: 0,
             opacity: 1,
+            letterSpacing: '0rem',
             duration: 1,
             delay: 0.15,
             ease: 'expo.out',
@@ -355,10 +365,12 @@ mm.add('(max-width: 800px)', () => {
         {
             y: 50,
             opacity: 0,
+            letterSpacing: '1rem',
         },
         {
             y: 0,
             opacity: 1,
+            letterSpacing: '0rem',
             duration: 1,
             ease: 'expo.out',
             delay: 0.15,
