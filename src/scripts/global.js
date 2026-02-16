@@ -121,12 +121,49 @@ document.addEventListener('click', (e) => {
     const href = anchor.getAttribute('href');
     if (!href) return;
 
+    const origin = window.location.origin;
+    const currentUrl = new URL(window.location.href);
+    const targetUrl = new URL(href, origin);
+
+    const currentPath = currentUrl.pathname.replace(/\/$/, '') || '/';
+    const targetPath = targetUrl.pathname.replace(/\/$/, '') || '/';
+
     if (href === '#') {
         e.preventDefault();
         if (isHamburgerMenuOpen) {
             toggleMenuFunction();
         }
         lenis.scrollTo(0, { duration: 1.5 });
+        return;
+    }
+
+    if (targetPath === currentPath && !href.includes('#')) {
+        e.preventDefault();
+
+        if (targetPath === '/') {
+            lenis.scrollTo(0, {
+                duration: 1.5,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+        }
+
+        if (isHamburgerMenuOpen) {
+            toggleMenuFunction();
+        }
+        return;
+    }
+
+    if (
+        targetUrl.origin === origin &&
+        isHamburgerMenuOpen &&
+        !href.includes('#')
+    ) {
+        e.preventDefault();
+        toggleMenuFunction();
+
+        setTimeout(() => {
+            window.location.href = href;
+        }, 900);
         return;
     }
 
