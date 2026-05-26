@@ -199,7 +199,7 @@ document.addEventListener('click', (e) => {
                         toggleMenuFunction();
                     }
 
-                    const footer = document.querySelector('footer');
+                    const footer = document.querySelector('footer.footer');
                     const isFooterLink =
                         footer &&
                         (footer === targetElement ||
@@ -210,7 +210,7 @@ document.addEventListener('click', (e) => {
                         const isFixedFooter = footerStyle.position === 'fixed';
 
                         if (isFixedFooter) {
-                            lenis.scrollTo(document.body.scrollHeight, {
+                            lenis.scrollTo(document.documentElement.scrollHeight - window.innerHeight, {
                                 duration: 1.5,
                                 immediate: false,
                             });
@@ -220,7 +220,6 @@ document.addEventListener('click', (e) => {
 
                             let offset = -(windowHeight - elementHeight) / 2;
 
-                            console.log(offset);
                             lenis.scrollTo(targetElement, {
                                 offset: offset,
                                 duration: 1.5,

@@ -1,0 +1,17 @@
+---
+const { href, title } = Astro.props;
+
+const isExternal =
+    href?.startsWith('http') ||
+    href?.startsWith('//') ||
+    href?.startsWith('mailto:');
+---
+
+<a
+    href={href}
+    title={title}
+    target={isExternal ? '_blank' : undefined}
+    rel={isExternal ? 'noopener noreferrer' : undefined}
+>
+    <slot />
+</a>
