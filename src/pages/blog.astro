@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
 
 const allPosts = Object.values(
-    import.meta.glob('./blogs/*.md', { eager: true }),
+    import.meta.glob('./blogs/*.mdx', { eager: true }),
 );
 
 allPosts.sort((a: any, b: any) => {
