@@ -1,0 +1,185 @@
+---
+layout: ../../layouts/BlogLayout.astro
+title: 'Mastering Modern CSS: Every Layout Trick You Need'
+pubDate: 2026-01-15
+description: 'A deep dive into modern CSS layout techniques — Grid, Flexbox, container queries, and more. Packed with examples and code snippets.'
+author: 'Om Lachake'
+image:
+    url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop'
+    alt: 'Abstract colorful digital art representing CSS styling'
+tags: ['css', 'web design', 'frontend', 'tutorial']
+---
+
+import MdxLink from '../../components/Blog/MdxLink.astro';
+export const components = { a: MdxLink };
+
+
+# Mastering Modern CSS: Every Layout Trick You Need
+
+Modern CSS has evolved dramatically. What once required JavaScript hacks or float-based tricks can now be done in a few lines of CSS. This post covers every key concept you need.
+
+---
+
+## Table of Contents
+
+1. [Flexbox Fundamentals](#flexbox)
+2. [CSS Grid Deep Dive](#grid)
+3. [Container Queries](#container-queries)
+4. [Custom Properties](#custom-properties)
+5. [Logical Properties](#logical-properties)
+
+---
+
+## Flexbox Fundamentals
+
+Flexbox is the go-to for **one-dimensional layouts** — rows or columns, but not both at once.
+
+### Key properties
+
+- `display: flex` — activates flexbox on the parent
+- `flex-direction` — `row` (default) or `column`
+- `justify-content` — aligns items along the **main axis**
+- `align-items` — aligns items along the **cross axis**
+- `gap` — spacing between items (no more margin hacks)
+
+### A centering trick that actually works
+
+```css
+.center-everything {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+```
+
+> **Pro tip:** `gap` works in both Flexbox and Grid. Prefer it over margins on children — it doesn't bleed outside the container.
+
+---
+
+## CSS Grid Deep Dive
+
+Grid handles **two-dimensional layouts**. Think of it as a spreadsheet for your UI.
+
+### Template syntax
+
+```css
+.layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+```
+
+The `auto-fit` + `minmax` pattern is the closest CSS has to a "responsive grid without media queries."
+
+### Named grid areas
+
+```css
+.page {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.footer  { grid-area: footer; }
+```
+
+---
+
+## Container Queries
+
+Media queries respond to the **viewport**. Container queries respond to the **parent element**. This is a game-changer for component-based design.
+
+```css
+.card-wrapper {
+  container-type: inline-size;
+}
+
+@container (min-width: 400px) {
+  .card {
+    display: flex;
+    flex-direction: row;
+  }
+}
+```
+
+### When to use which
+
+| Feature | Use when |
+|---|---|
+| Media query | Responding to screen/device size |
+| Container query | Responsive components regardless of context |
+| `clamp()` | Fluid typography / spacing |
+| `aspect-ratio` | Keeping proportions without JS |
+
+---
+
+## Custom Properties
+
+CSS variables (custom properties) unlock runtime theming and dramatically reduce repetition.
+
+```css
+:root {
+  --color-primary: hsl(260, 80%, 60%);
+  --spacing-base: 1rem;
+  --radius: 0.5rem;
+}
+
+.button {
+  background: var(--color-primary);
+  padding: calc(var(--spacing-base) * 0.75) calc(var(--spacing-base) * 1.5);
+  border-radius: var(--radius);
+}
+```
+
+You can also **override variables locally** inside a component:
+
+```css
+.button--danger {
+  --color-primary: hsl(0, 80%, 60%);
+}
+```
+
+---
+
+## Logical Properties
+
+Instead of `margin-left` / `padding-right`, logical properties adapt to writing direction automatically.
+
+```css
+/* Old way */
+.text { margin-left: 1rem; padding-right: 2rem; }
+
+/* Logical way — works in RTL too */
+.text { margin-inline-start: 1rem; padding-inline-end: 2rem; }
+```
+
+### Quick reference
+
+| Physical | Logical |
+|---|---|
+| `width` | `inline-size` |
+| `height` | `block-size` |
+| `margin-top` | `margin-block-start` |
+| `padding-left` | `padding-inline-start` |
+| `border-right` | `border-inline-end` |
+
+---
+
+## Further Reading
+
+- [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [CSS Tricks Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
+- [Every Layout](https://every-layout.dev/)
+
+---
+
+_That's a wrap on modern CSS layout. Have a technique I missed? Drop it in the comments._

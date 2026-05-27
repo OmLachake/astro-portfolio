@@ -1,0 +1,665 @@
+---
+layout: ../../layouts/BlogLayout.astro
+title: 'The Complete HTML & Markdown Kitchen Sink'
+pubDate: 2026-03-20
+description: 'Every possible Markdown element and HTML component you can embed in a blog post — headings, tables, callouts, accordions, progress bars, media, and more.'
+author: 'Om Lachake'
+image:
+    url: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&auto=format&fit=crop'
+    alt: 'Code editor with colorful syntax highlighting'
+tags: ['reference', 'markdown', 'html', 'components']
+---
+
+import MdxLink from '../../components/Blog/MdxLink.astro';
+export const components = { a: MdxLink };
+
+# The Complete HTML & Markdown Kitchen Sink
+
+This post is a living reference for every Markdown element and smart HTML component you can use in blog posts. Use it as a copy-paste cheatsheet.
+
+---
+
+## 1. Typography — Markdown Native
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+
+Regular paragraph text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.
+
+**Bold text** is wrapped in double asterisks.
+_Italic text_ uses single asterisks.
+**_Bold and italic_** uses triple asterisks.
+~~Strikethrough~~ uses double tildes.
+`Inline code` uses backticks.
+
+---
+
+## 2. Links & Images
+
+[External link](https://astro.build) — opens in the same tab by default.
+
+[Link with title](https://astro.build "Astro's Homepage") — hover to see the title.
+
+![Sample image from Unsplash](https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop 'Colorful code')
+
+---
+
+## 3. Lists
+
+### Unordered
+
+- First item
+- Second item
+    - Nested item
+    - Another nested item
+        - Deeply nested
+- Third item
+
+### Ordered
+
+1. Step one
+2. Step two
+    1. Sub-step a
+    2. Sub-step b
+3. Step three
+
+### Task List
+
+- [x] Write the kitchen sink post
+- [x] Add all markdown elements
+- [ ] Add all HTML elements
+- [ ] Publish to blog
+
+---
+
+## 4. Blockquotes
+
+> A simple blockquote looks like this.
+
+> Blockquotes can span multiple lines.
+> This is still the same quote.
+
+> **Nested blockquote:**
+>
+> > This is a quote inside a quote.
+> > Deep thoughts only.
+>
+> Back to the outer quote.
+
+---
+
+## 5. Code Blocks
+
+### JavaScript
+
+```js
+async function greet(name) {
+    const response = await fetch(`/api/greet?name=${encodeURIComponent(name)}`);
+    const { message } = await response.json();
+    return message;
+}
+```
+
+### CSS
+
+```css
+.card {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+```
+
+### Bash
+
+```bash
+# Install dependencies and start dev server
+bun install
+bun run dev
+```
+
+### JSON
+
+```json
+{
+    "name": "my-portfolio",
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build"
+    }
+}
+```
+
+---
+
+## 6. Tables
+
+### Simple table
+
+| Name       | Type             | Default     | Description          |
+| ---------- | ---------------- | ----------- | -------------------- |
+| `color`    | `string`         | `"primary"` | Button color variant |
+| `size`     | `sm \| md \| lg` | `"md"`      | Button size          |
+| `disabled` | `boolean`        | `false`     | Disables interaction |
+
+### Left / center / right alignment
+
+| Left-aligned | Center-aligned | Right-aligned |
+| :----------- | :------------: | ------------: |
+| Apple        |      Red       |         $1.20 |
+| Banana       |     Yellow     |         $0.50 |
+| Blueberry    |      Blue      |         $3.80 |
+
+---
+
+## 7. Horizontal Rules
+
+Three ways to write them, same result:
+
+---
+
+---
+
+---
+
+---
+
+## 8. Smart HTML — Inline Semantics
+
+Inside markdown you can drop raw HTML tags anywhere.
+
+<mark>Highlighted text</mark> with the `<mark>` element.
+
+H<sub>2</sub>O — subscript with `<sub>`.
+
+E = mc<sup>2</sup> — superscript with `<sup>`.
+
+<del>Deleted text</del> and <ins>inserted text</ins> (editorial changes).
+
+Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> to open the command palette.
+
+<abbr title="Cascading Style Sheets">CSS</abbr> and
+<abbr title="HyperText Markup Language">HTML</abbr> are the building blocks of
+the web.
+
+<cite>The Art of Web Design</cite> — a fictional but great book.
+
+---
+
+## 9. Details / Summary — Native Accordion
+
+<details>
+<summary>Click to expand this section</summary>
+
+Hidden content lives in here. You can put **markdown** inside, including:
+
+- Lists
+- Code blocks
+- More accordions
+
+```js
+// Even code blocks work inside details
+console.log('Hello from inside a details element!');
+```
+
+</details>
+
+<details>
+<summary>Another collapsible section — CSS tips</summary>
+
+- Use `gap` instead of margins between flex/grid children
+- Prefer `clamp()` for fluid typography
+- Use logical properties (`margin-inline`, `padding-block`) for RTL support
+
+</details>
+
+<details open>
+<summary>This one starts open (the <code>open</code> attribute)</summary>
+
+Some accordions should be open by default. Add the `open` attribute to `<details>` for that behavior.
+
+</details>
+
+---
+
+## 10. Figure & Figcaption
+
+<figure>
+    <img
+        src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=700&auto=format&fit=crop"
+        alt="Code on a monitor"
+        style="width:100%;border-radius:0.5rem;"
+    />
+    <figcaption style="text-align:center;font-size:0.875rem;opacity:0.7;margin-top:0.5rem;">
+        Photo: A developer's workstation — source: Unsplash
+    </figcaption>
+</figure>
+
+---
+
+## 11. Progress & Meter
+
+### Progress bar (task completion)
+
+<label for="task-progress">Project completion:</label>
+<br />
+<progress
+    id="task-progress"
+    value="72"
+    max="100"
+    style="width:100%;height:1.25rem;"
+></progress>
+<small>72 / 100 tasks done</small>
+
+### Meter (gauge — e.g. disk usage)
+
+<label for="disk">Disk usage:</label>
+<br />
+<meter
+    id="disk"
+    value="6.8"
+    min="0"
+    max="10"
+    low="3"
+    high="8"
+    optimum="2"
+    style="width:100%;height:1.25rem;"
+></meter>
+<small>6.8 GB of 10 GB used</small>
+
+---
+
+## 12. Description List
+
+<dl>
+  <dt><strong>Astro</strong></dt>
+  <dd>A modern static site builder with component islands architecture.</dd>
+
+<dt>
+    <strong>Tailwind CSS</strong>
+</dt>
+<dd>A utility-first CSS framework for rapid UI development.</dd>
+
+  <dt><strong>GSAP</strong></dt>
+  <dd>GreenSock Animation Platform — the industry standard for web animations.</dd>
+</dl>
+
+---
+
+## 13. Callout Boxes (Styled Divs)
+
+<div style="background:rgba(123,100,255,0.12);border-left:4px solid rgb(123,100,255);border-radius:0.375rem;padding:1rem 1.25rem;margin:1.5rem 0;">
+    <strong>💡 Tip</strong>
+    <br />
+    Use <code>clamp()</code> for fluid font sizes that scale smoothly between
+    your min and max breakpoints without any media queries.
+</div>
+
+<div style="background:rgba(255,200,50,0.12);border-left:4px solid rgb(220,160,0);border-radius:0.375rem;padding:1rem 1.25rem;margin:1.5rem 0;">
+    <strong>⚠️ Warning</strong>
+    <br />
+    Never remove <code>:focus</code> styles without providing an accessible
+    alternative. Keyboard users depend on visible focus indicators.
+</div>
+
+<div style="background:rgba(255,80,80,0.12);border-left:4px solid rgb(200,50,50);border-radius:0.375rem;padding:1rem 1.25rem;margin:1.5rem 0;">
+    <strong>🚫 Danger</strong>
+    <br />
+    Do not store sensitive data (API keys, tokens) in <code>localStorage</code>.
+    It's accessible to any script on the page.
+</div>
+
+<div style="background:rgba(50,200,100,0.12);border-left:4px solid rgb(30,150,70);border-radius:0.375rem;padding:1rem 1.25rem;margin:1.5rem 0;">
+    <strong>✅ Success</strong>
+    <br />
+    Your build passed all checks! Deploy to production with{' '}
+    <code>bun run build && bun run preview</code>.
+</div>
+
+---
+
+## 14. Two-Column Layout
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0;">
+    <div style="background:var(--backgroundDarkColor,#e5e5e5);border-radius:0.5rem;padding:1.25rem;">
+        <strong>Column A</strong>
+        <br />
+        This is the left column. You can put any content here — paragraphs,
+        lists, code, images.
+    </div>
+    <div style="background:var(--backgroundDarkColor,#e5e5e5);border-radius:0.5rem;padding:1.25rem;">
+        <strong>Column B</strong>
+        <br />
+        This is the right column. Both columns are equal width thanks to{' '}
+        <code>1fr 1fr</code>.
+    </div>
+</div>
+
+---
+
+## 15. Keyboard Shortcut Table
+
+<table style="width:100%;border-collapse:collapse;">
+    <thead>
+        <tr style="border-bottom:2px solid var(--foregroundColor,#333);">
+            <th style="text-align:left;padding:0.5rem 1rem;">Action</th>
+            <th style="text-align:left;padding:0.5rem 1rem;">
+                Windows / Linux
+            </th>
+            <th style="text-align:left;padding:0.5rem 1rem;">macOS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="border-bottom:1px solid var(--shadowColor,#ccc);">
+            <td style="padding:0.5rem 1rem;">Save file</td>
+            <td style="padding:0.5rem 1rem;">
+                <kbd>Ctrl</kbd> + <kbd>S</kbd>
+            </td>
+            <td style="padding:0.5rem 1rem;">
+                <kbd>⌘</kbd> + <kbd>S</kbd>
+            </td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--shadowColor,#ccc);">
+            <td style="padding:0.5rem 1rem;">Command palette</td>
+            <td style="padding:0.5rem 1rem;">
+                <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>
+            </td>
+            <td style="padding:0.5rem 1rem;">
+                <kbd>⌘</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>
+            </td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--shadowColor,#ccc);">
+            <td style="padding:0.5rem 1rem;">Find & Replace</td>
+            <td style="padding:0.5rem 1rem;">
+                <kbd>Ctrl</kbd> + <kbd>H</kbd>
+            </td>
+            <td style="padding:0.5rem 1rem;">
+                <kbd>⌘</kbd> + <kbd>H</kbd>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:0.5rem 1rem;">Toggle terminal</td>
+            <td style="padding:0.5rem 1rem;">
+                <kbd>Ctrl</kbd> + <kbd>`</kbd>
+            </td>
+            <td style="padding:0.5rem 1rem;">
+                <kbd>⌘</kbd> + <kbd>`</kbd>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+---
+
+## 16. Embedded Video (YouTube)
+
+<figure style="margin:1.5rem 0;">
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:0.5rem;">
+        <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="Sample YouTube embed"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;"
+        ></iframe>
+    </div>
+    <figcaption style="text-align:center;font-size:0.875rem;opacity:0.7;margin-top:0.5rem;">
+        A responsive 16:9 YouTube embed using the padding-bottom trick.
+    </figcaption>
+</figure>
+
+---
+
+## 17. HTML Audio Player
+
+<audio controls style="width:100%;margin:1rem 0;">
+    <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg" />
+    <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+</audio>
+
+---
+
+## 18. Fieldset & Legend (Form Group)
+
+<fieldset style="border:1px solid var(--shadowColor,#ccc);border-radius:0.5rem;padding:1rem 1.25rem;margin:1.5rem 0;">
+    <legend style="padding:0 0.5rem;font-weight:600;">
+        Newsletter Preferences
+    </legend>
+    <label style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
+        <input type="checkbox" defaultChecked /> Weekly digest
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
+        <input type="checkbox" /> Product updates
+    </label>
+    <label style="display:flex;align-items:center;gap:0.5rem;">
+        <input type="checkbox" /> Promotional offers
+    </label>
+</fieldset>
+
+---
+
+## 19. Color Swatches
+
+<div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin:1.5rem 0;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+        <div style="width:64px;height:64px;border-radius:50%;background:hsl(260,80%,60%);"></div>
+        <small>Purple</small>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+        <div style="width:64px;height:64px;border-radius:50%;background:hsl(0,80%,60%);"></div>
+        <small>Red</small>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+        <div style="width:64px;height:64px;border-radius:50%;background:hsl(200,80%,50%);"></div>
+        <small>Blue</small>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+        <div style="width:64px;height:64px;border-radius:50%;background:hsl(140,60%,45%);"></div>
+        <small>Green</small>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0.25rem;">
+        <div style="width:64px;height:64px;border-radius:50%;background:hsl(45,90%,55%);"></div>
+        <small>Yellow</small>
+    </div>
+</div>
+
+---
+
+## 20. Badge / Tag Pills
+
+<div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:1rem 0;">
+    <span style="background:rgba(123,100,255,0.15);color:rgb(123,100,255);padding:0.2rem 0.7rem;border-radius:9999px;font-size:0.8rem;font-weight:600;">
+        Astro
+    </span>
+    <span style="background:rgba(255,100,80,0.15);color:rgb(200,60,40);padding:0.2rem 0.7rem;border-radius:9999px;font-size:0.8rem;font-weight:600;">
+        CSS
+    </span>
+    <span style="background:rgba(50,180,100,0.15);color:rgb(30,130,70);padding:0.2rem 0.7rem;border-radius:9999px;font-size:0.8rem;font-weight:600;">
+        JavaScript
+    </span>
+    <span style="background:rgba(50,150,255,0.15);color:rgb(20,100,200);padding:0.2rem 0.7rem;border-radius:9999px;font-size:0.8rem;font-weight:600;">
+        TypeScript
+    </span>
+    <span style="background:rgba(220,160,0,0.15);color:rgb(160,110,0);padding:0.2rem 0.7rem;border-radius:9999px;font-size:0.8rem;font-weight:600;">
+        HTML
+    </span>
+</div>
+
+---
+
+## 21. Stat Cards
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;margin:1.5rem 0;">
+    <div style="background:var(--backgroundDarkColor,#e5e5e5);border-radius:0.75rem;padding:1.25rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:800;">98</div>
+        <div style="font-size:0.8rem;opacity:0.7;">Lighthouse Score</div>
+    </div>
+    <div style="background:var(--backgroundDarkColor,#e5e5e5);border-radius:0.75rem;padding:1.25rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:800;">12</div>
+        <div style="font-size:0.8rem;opacity:0.7;">Projects Shipped</div>
+    </div>
+    <div style="background:var(--backgroundDarkColor,#e5e5e5);border-radius:0.75rem;padding:1.25rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:800;">4+</div>
+        <div style="font-size:0.8rem;opacity:0.7;">Years Experience</div>
+    </div>
+    <div style="background:var(--backgroundDarkColor,#e5e5e5);border-radius:0.75rem;padding:1.25rem;text-align:center;">
+        <div style="font-size:2rem;font-weight:800;">∞</div>
+        <div style="font-size:0.8rem;opacity:0.7;">Cups of Coffee</div>
+    </div>
+</div>
+
+---
+
+## 22. Timeline
+
+<div style="position:relative;padding-left:2rem;margin:1.5rem 0;">
+<div style="position:absolute;left:0.5rem;top:0;bottom:0;width:2px;background:var(--shadowColor,#ccc);"></div>
+
+<div style="position:relative;margin-bottom:1.5rem;">
+    <div style="position:absolute;left:-1.65rem;top:0.25rem;width:0.75rem;height:0.75rem;border-radius:50%;background:rgb(123,100,255);"></div>
+    <strong>2026 — Present</strong>
+    <br />
+    <span style="opacity:0.8;">
+        Senior Frontend Developer — Building design systems and component
+        libraries.
+    </span>
+</div>
+
+<div style="position:relative;margin-bottom:1.5rem;">
+    <div style="position:absolute;left:-1.65rem;top:0.25rem;width:0.75rem;height:0.75rem;border-radius:50%;background:rgb(123,100,255);"></div>
+    <strong>2024 — 2026</strong>
+    <br />
+    <span style="opacity:0.8;">
+        Frontend Developer — Delivered 8 production web apps using React and
+        Astro.
+    </span>
+</div>
+
+<div style="position:relative;margin-bottom:1.5rem;">
+    <div style="position:absolute;left:-1.65rem;top:0.25rem;width:0.75rem;height:0.75rem;border-radius:50%;background:rgb(123,100,255);"></div>
+    <strong>2022 — 2024</strong>
+    <br />
+    <span style="opacity:0.8;">
+        Junior Developer — Learned the ropes with HTML, CSS, JavaScript, and
+        React.
+    </span>
+</div>
+
+<div style="position:relative;">
+<div style="position:absolute;left:-1.65rem;top:0.25rem;width:0.75rem;height:0.75rem;border-radius:50%;background:var(--shadowColor,#ccc);border:2px solid rgb(123,100,255);"></div>
+<strong>2022 — Graduation</strong><br />
+<span style="opacity:0.8;">Completed Computer Science degree. First commit ever: a "Hello World" in C.</span>
+</div>
+</div>
+
+---
+
+## 23. Blockquote with Attribution
+
+<blockquote style="border-left:4px solid var(--accentColor,rgb(123,100,255));padding:1rem 1.25rem;margin:1.5rem 0;font-style:italic;font-size:1.1rem;">
+    "Make it work, make it right, make it fast."
+    <footer style="margin-top:0.5rem;font-style:normal;font-size:0.875rem;opacity:0.7;">
+        — Kent Beck
+    </footer>
+</blockquote>
+
+<blockquote style="border-left:4px solid var(--accentColor,rgb(123,100,255));padding:1rem 1.25rem;margin:1.5rem 0;font-style:italic;font-size:1.1rem;">
+    "Any application that can be written in JavaScript, will eventually be
+    written in JavaScript."
+    <footer style="margin-top:0.5rem;font-style:normal;font-size:0.875rem;opacity:0.7;">
+        — Jeff Atwood
+    </footer>
+</blockquote>
+
+---
+
+## 24. Comparison Table (Styled)
+
+<table style="width:100%;border-collapse:collapse;margin:1.5rem 0;">
+    <thead>
+        <tr style="background:var(--backgroundDarkColor,#e5e5e5);">
+            <th style="padding:0.75rem 1rem;text-align:left;border-bottom:2px solid var(--accentColor,rgb(123,100,255));">
+                Feature
+            </th>
+            <th style="padding:0.75rem 1rem;text-align:center;border-bottom:2px solid var(--accentColor,rgb(123,100,255));">
+                Free
+            </th>
+            <th style="padding:0.75rem 1rem;text-align:center;border-bottom:2px solid var(--accentColor,rgb(123,100,255));">
+                Pro
+            </th>
+            <th style="padding:0.75rem 1rem;text-align:center;border-bottom:2px solid var(--accentColor,rgb(123,100,255));">
+                Enterprise
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="border-bottom:1px solid var(--shadowColor,#ccc);">
+            <td style="padding:0.75rem 1rem;">Projects</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">3</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">Unlimited</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">Unlimited</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--shadowColor,#ccc);">
+            <td style="padding:0.75rem 1rem;">Custom domain</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">❌</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">✅</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">✅</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--shadowColor,#ccc);">
+            <td style="padding:0.75rem 1rem;">Team members</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">1</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">5</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">Unlimited</td>
+        </tr>
+        <tr>
+            <td style="padding:0.75rem 1rem;">SLA</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">—</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">99.9%</td>
+            <td style="padding:0.75rem 1rem;text-align:center;">99.99%</td>
+        </tr>
+    </tbody>
+</table>
+
+---
+
+## 25. Inline HTML Map (Summary Reference)
+
+Here is a quick reference of every HTML element used in this post:
+
+| Element                        | Purpose                               |
+| ------------------------------ | ------------------------------------- |
+| `<mark>`                       | Highlight / emphasis                  |
+| `<sub>` / `<sup>`              | Subscript / superscript               |
+| `<del>` / `<ins>`              | Deleted / inserted text               |
+| `<kbd>`                        | Keyboard key labels                   |
+| `<abbr>`                       | Abbreviation with full title on hover |
+| `<cite>`                       | Citation / reference                  |
+| `<details>` / `<summary>`      | Native accordion                      |
+| `<figure>` / `<figcaption>`    | Image with caption                    |
+| `<progress>`                   | Progress bar                          |
+| `<meter>`                      | Gauge / scalar value                  |
+| `<dl>` / `<dt>` / `<dd>`       | Description list                      |
+| `<fieldset>` / `<legend>`      | Form grouping                         |
+| `<audio>`                      | Audio player                          |
+| `<iframe>`                     | Embedded content (video)              |
+| `<blockquote>` with `<footer>` | Pull quote with attribution           |
+| `<div>` (styled)               | Callout boxes, grid layouts, cards    |
+| `<table>` (styled)             | Custom-styled data tables             |
+
+---
+
+_This post is intentionally comprehensive. Bookmark it and use it as a reference whenever you need to remember what's possible in a Markdown blog post._

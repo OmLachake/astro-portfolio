@@ -2,6 +2,51 @@
 import ActionButton from '../components/ActionButton.astro';
 import LinkButton from '../components/LinkButton.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectShowcase from '../components/ProjectShowcase.astro';
+
+const projects = [
+    {
+        title: 'Low Latency Order Router',
+        description: 'A high-performance C++ order routing engine built for sub-microsecond execution in live trading environments.',
+        image: '/showcase-img-1.jpg',
+        tags: ['C++', 'Systems', 'Finance'],
+        year: '2024',
+        repoUrl: '#',
+    },
+    {
+        title: 'Astro Portfolio',
+        description: 'This very site — a personal portfolio built with Astro 5, GSAP, and Lenis for buttery-smooth interactions.',
+        image: '/showcase-img-2.jpg',
+        tags: ['Astro', 'GSAP', 'TypeScript'],
+        year: '2025',
+        liveUrl: '#',
+        repoUrl: '#',
+    },
+    {
+        title: 'Realtime Analytics Dashboard',
+        description: 'A full-stack dashboard processing millions of events per second with WebSocket streams and React.',
+        image: '/showcase-img-3.jpg',
+        tags: ['React', 'WebSockets', 'Rust'],
+        year: '2024',
+        liveUrl: '#',
+    },
+    {
+        title: 'Distributed Task Queue',
+        description: 'A fault-tolerant distributed job queue with priority scheduling and at-least-once delivery guarantees.',
+        image: '/showcase-img-4.jpg',
+        tags: ['Distributed Systems', 'Go', 'Redis'],
+        year: '2023',
+        repoUrl: '#',
+    },
+    {
+        title: 'Creative Dev Playground',
+        description: 'Experiments in WebGL, canvas, and generative art — a sandbox for creative coding and visual exploration.',
+        image: '/showcase-img-5.jpg',
+        tags: ['WebGL', 'Canvas', 'GLSL'],
+        year: '2025',
+        liveUrl: '#',
+    },
+];
 ---
 
 <BaseLayout pageTitle="Om Lachake">
@@ -108,7 +153,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
     </section>
 
+    <section class="projects-section" id="projects">
+        <div class="projects-header">
+            <h2 class="projects-title">
+                <span class="title-line">A Few Things</span><br />
+                <span class="title-accent">I've Built</span>
+            </h2>
+        </div>
+        <div class="showcase-container">
+            <ProjectShowcase projects={projects} />
+        </div>
+    </section>
+
     <style lang="scss">
+        .projects-section {
+            padding-bottom: 6rem;
+        }
+
+        .projects-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2.5rem 3rem;
+            text-align: center;
+        }
+
+        .projects-title {
+            font-family: var(--yesevaFont);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--foregroundColor);
+            line-height: 1.2;
+            margin: 0;
+
+            .title-accent {
+                color: var(--accentColor);
+            }
+        }
+
+        .showcase-container {
+            margin: 0 1.5rem;
+            border-radius: 1.5rem;
+            overflow: clip;
+
+            @media (max-width: 800px) {
+                margin: 0 0.75rem;
+                border-radius: 1rem;
+            }
+
+            @media (min-width: 1200px) {
+                margin: 0 3rem;
+            }
+
+            @media (min-width: 1600px) {
+                margin: 0 6rem;
+            }
+        }
+
         .skills-section {
             border: 1px solid red;
             min-height: 100svh;
@@ -586,5 +687,54 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <script>
         import '../scripts/hero.js';
+    </script>
+
+    <script>
+        import gsap from 'gsap';
+        import ScrollTrigger from 'gsap/ScrollTrigger';
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Single timeline: enter (0–30%), hold (30–65%), exit (65–100%)
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: '.projects-header',
+                start: 'top 85%',
+                end: 'bottom -5%',
+                scrub: 0.8,
+            },
+        })
+        .fromTo('.title-line',
+            { opacity: 0, y: 60 },
+            { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
+            0
+        )
+        .fromTo('.title-accent',
+            { opacity: 0, y: 60 },
+            { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
+            0.08
+        )
+        .to('.title-line',
+            { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
+            0.65
+        )
+        .to('.title-accent',
+            { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
+            0.72
+        );
+
+        // Showcase: scrub fade-in
+        gsap.fromTo('.showcase-container',
+            { opacity: 0 },
+            {
+                opacity: 1,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.showcase-container',
+                    start: 'top 90%',
+                    end: 'top 50%',
+                    scrub: 0.6,
+                },
+            }
+        );
     </script>
 </BaseLayout>

@@ -1,0 +1,176 @@
+---
+layout: ../../layouts/BlogLayout.astro
+title: 'Building a Design System from Scratch'
+pubDate: 2026-02-28
+description: 'How to create a consistent, scalable design system for your web projects — tokens, components, documentation, and everything in between.'
+author: 'Om Lachake'
+image:
+    url: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&auto=format&fit=crop'
+    alt: 'Colorful swatches and design components on a flat surface'
+tags: ['design system', 'ui', 'css', 'design', 'frontend']
+---
+
+import MdxLink from '../../components/Blog/MdxLink.astro';
+export const components = { a: MdxLink };
+
+
+# Building a Design System from Scratch
+
+A design system is more than a component library. It's a **shared language** between designers and developers — a single source of truth that keeps products consistent as teams and codebases grow.
+
+---
+
+## Why Bother?
+
+Without a design system:
+
+- Every developer picks their own shade of blue
+- Button styles diverge across pages
+- Spacing feels inconsistent everywhere
+- Onboarding new team members is slow
+
+With one:
+
+- ✅ UI decisions are made once, applied everywhere
+- ✅ Changes propagate globally from one place
+- ✅ Accessibility is baked into components, not bolted on
+- ✅ Design and dev speak the same language
+
+---
+
+## Layer 1: Design Tokens
+
+Tokens are named values for the raw decisions in your design — colors, spacing, type scales, shadows.
+
+```css
+:root {
+  /* Color palette */
+  --color-purple-100: hsl(260, 80%, 95%);
+  --color-purple-500: hsl(260, 80%, 60%);
+  --color-purple-900: hsl(260, 80%, 20%);
+
+  /* Semantic tokens — what the value *means*, not what it *is* */
+  --color-text-primary: var(--color-purple-900);
+  --color-background: var(--color-purple-100);
+  --color-interactive: var(--color-purple-500);
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-4: 1rem;
+  --space-8: 2rem;
+  --space-16: 4rem;
+
+  /* Type scale */
+  --text-sm: clamp(0.8rem, 1.5vw, 0.875rem);
+  --text-base: clamp(1rem, 2vw, 1.125rem);
+  --text-lg: clamp(1.25rem, 3vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 4vw, 2rem);
+  --text-2xl: clamp(2rem, 5vw, 3rem);
+}
+```
+
+The separation of **palette tokens** and **semantic tokens** is critical. Dark mode just swaps the semantic tokens — it doesn't touch the palette.
+
+---
+
+## Layer 2: Typography Scale
+
+Pick 4–6 type sizes and stick to them. More than that creates visual noise.
+
+| Token | Size | Use |
+|---|---|---|
+| `--text-xs` | 12px | Captions, labels |
+| `--text-sm` | 14px | Body secondary |
+| `--text-base` | 16px | Body primary |
+| `--text-lg` | 20px | Lead paragraphs |
+| `--text-xl` | 24px | Section headings |
+| `--text-2xl` | 32px+ | Page headings |
+
+Use `clamp()` for fluid type that scales between viewport sizes without breakpoints.
+
+---
+
+## Layer 3: Component Anatomy
+
+Every component in a solid design system has:
+
+1. **Default state** — how it looks at rest
+2. **Interactive states** — `:hover`, `:focus`, `:active`, `:visited`
+3. **Disabled state** — visually distinct, not just greyed out
+4. **Error / validation state** — for form elements
+5. **Loading state** — for async actions
+
+```css
+.button {
+  /* Base */
+  background: var(--color-interactive);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  font: 600 var(--text-base) var(--font-sans);
+  cursor: pointer;
+  transition: background 150ms ease, transform 100ms ease;
+
+  /* Hover */
+  &:hover { background: var(--color-interactive-hover); }
+
+  /* Focus — never remove this */
+  &:focus-visible {
+    outline: 2px solid var(--color-interactive);
+    outline-offset: 3px;
+  }
+
+  /* Disabled */
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+```
+
+> **Accessibility note:** Never style `:focus` away without providing an alternative. Keyboard users depend on visible focus rings. Use `:focus-visible` to show them only for keyboard navigation.
+
+---
+
+## Layer 4: Documentation
+
+A design system without documentation is a design system nobody uses. Document:
+
+- **When to use** this component vs. an alternative
+- **Props / variants** with live examples
+- **Do / Don't** examples
+- **Accessibility** requirements (ARIA roles, keyboard nav)
+
+Popular tools:
+- **Storybook** — component sandbox + docs, framework-agnostic
+- **Astro** — excellent for static design system docs sites
+- **Figma** — design-side tokens and component library
+
+---
+
+## Common Pitfalls
+
+1. **Building too early** — Extract components *after* you see patterns, not speculatively
+2. **Over-abstracting** — Not every UI element needs to be a component
+3. **Ignoring tokens** — Hardcoded values defeat the purpose
+4. **Skipping accessibility** — It's cheaper to bake in than bolt on
+5. **No versioning** — Treat your system like a package with semver
+
+---
+
+## Quick Checklist
+
+- [ ] Design tokens defined (colors, spacing, type, radii, shadows)
+- [ ] Semantic color layer for dark/light mode
+- [ ] Base components: Button, Input, Badge, Card, Modal, Toast
+- [ ] All interactive states documented
+- [ ] Accessibility audited (axe, Lighthouse)
+- [ ] Docs site live
+- [ ] Version published to package registry
+
+---
+
+_The best design system is the one your team actually uses. Start small, be consistent, iterate._

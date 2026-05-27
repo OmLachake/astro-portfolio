@@ -10,4 +10,8 @@ pubDate: 2022-08-08
 tags: ['astro', 'successes', 'blogging']
 ---
 
+import MdxLink from '../../components/Blog/MdxLink.astro';
+export const components = { a: MdxLink };
+
+
 This post should show up with my other blog posts, because `import.meta.glob()` is returning a list of all my posts in order to create my list.

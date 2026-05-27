@@ -1,0 +1,191 @@
+---
+layout: ../../layouts/BlogLayout.astro
+title: 'JavaScript Async Patterns: Callbacks to Async/Await'
+pubDate: 2026-02-03
+description: 'Walk through the evolution of async JavaScript — from callback hell to Promises to modern async/await — with real-world examples.'
+author: 'Om Lachake'
+image:
+    url: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&auto=format&fit=crop'
+    alt: 'JavaScript code on a dark screen'
+tags: ['javascript', 'async', 'programming', 'web development']
+---
+
+import MdxLink from '../../components/Blog/MdxLink.astro';
+export const components = { a: MdxLink };
+
+
+# JavaScript Async Patterns: Callbacks to Async/Await
+
+JavaScript is single-threaded — but it handles I/O, timers, and network requests through an event loop. Understanding async patterns is non-negotiable for modern web development.
+
+---
+
+## The Problem: Async Code is Confusing
+
+When you fetch data, read a file, or wait for a timer, the code doesn't pause. The rest of your program keeps running. That's the root of every async headache.
+
+```js
+console.log('1');
+setTimeout(() => console.log('2'), 0);
+console.log('3');
+// Output: 1, 3, 2
+```
+
+That `0ms` timeout still runs *after* synchronous code. The event loop only picks it up once the call stack is empty.
+
+---
+
+## Era 1: Callbacks
+
+Early JavaScript handled async with callbacks — functions passed as arguments to be called later.
+
+```js
+function fetchUser(id, callback) {
+  setTimeout(() => {
+    callback(null, { id, name: 'Om' });
+  }, 1000);
+}
+
+fetchUser(1, (err, user) => {
+  if (err) return console.error(err);
+  console.log(user.name);
+});
+```
+
+### The pyramid of doom
+
+Nested callbacks create deeply indented, hard-to-read code:
+
+```js
+getUser(id, (err, user) => {
+  getPosts(user.id, (err, posts) => {
+    getComments(posts[0].id, (err, comments) => {
+      // Help, I'm trapped in here
+    });
+  });
+});
+```
+
+> **Rule of thumb:** If your code looks like a staircase going right, you need Promises.
+
+---
+
+## Era 2: Promises
+
+A `Promise` represents a value that will be available *eventually*. It can be:
+
+- **Pending** — not yet settled
+- **Fulfilled** — resolved with a value
+- **Rejected** — failed with an error
+
+```js
+function fetchUser(id) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (id > 0) resolve({ id, name: 'Om' });
+      else reject(new Error('Invalid ID'));
+    }, 1000);
+  });
+}
+
+fetchUser(1)
+  .then(user => console.log(user.name))
+  .catch(err => console.error(err));
+```
+
+### Promise chaining
+
+```js
+fetchUser(1)
+  .then(user => fetchPosts(user.id))
+  .then(posts => fetchComments(posts[0].id))
+  .then(comments => render(comments))
+  .catch(handleError);
+```
+
+Flat! Readable! Great.
+
+### Promise combinators
+
+| Method | Behavior |
+|---|---|
+| `Promise.all([...])` | Waits for **all** — fails fast on any rejection |
+| `Promise.allSettled([...])` | Waits for **all** — never rejects, gives status of each |
+| `Promise.race([...])` | Settles with the **first** to settle |
+| `Promise.any([...])` | Resolves with the **first** to fulfill |
+
+```js
+const [user, settings] = await Promise.all([
+  fetchUser(1),
+  fetchSettings(1)
+]);
+```
+
+---
+
+## Era 3: Async / Await
+
+`async/await` is syntactic sugar over Promises. It lets you write async code that *looks* synchronous.
+
+```js
+async function loadDashboard(userId) {
+  try {
+    const user = await fetchUser(userId);
+    const posts = await fetchPosts(user.id);
+    const comments = await fetchComments(posts[0].id);
+    return { user, posts, comments };
+  } catch (error) {
+    console.error('Dashboard load failed:', error);
+    throw error;
+  }
+}
+```
+
+### Common gotchas
+
+1. **`await` only works inside `async` functions** (or top-level in modules)
+2. **Sequential vs parallel** — two `await`s in sequence are slower than `Promise.all`:
+
+```js
+// ❌ Slow — waits for each one before starting the next
+const user = await fetchUser(id);
+const posts = await fetchPosts(id);
+
+// ✅ Fast — both requests fire at the same time
+const [user, posts] = await Promise.all([fetchUser(id), fetchPosts(id)]);
+```
+
+---
+
+## Practical: Fetch with Timeout
+
+```js
+async function fetchWithTimeout(url, ms = 5000) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), ms);
+
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+```
+
+---
+
+## Summary
+
+| Pattern | Readable | Error handling | Parallel |
+|---|---|---|---|
+| Callbacks | Poor | Manual, easy to miss | Messy |
+| Promises | Good | `.catch()` chain | `Promise.all` |
+| Async/Await | Excellent | `try/catch` | `Promise.all` + `await` |
+
+Use `async/await` for new code. Know Promises under the hood. Understand callbacks for legacy codebases.
+
+---
+
+_Next up: Streams, generators, and observable patterns — subscribe to stay updated._

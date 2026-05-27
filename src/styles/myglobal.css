@@ -26,6 +26,7 @@ html {
     --foregroundColor: rgb(32, 29, 29);
     /* --accentColor: rgb(255, 100, 100); */
     --accentColor: rgb(123, 100, 255);
+    --accentColorAlt: rgb(255, 100, 100);
 
     --backgroundDarkColor: rgb(215, 215, 215);
     --foregroundDarkColor: #3b3b3b;
@@ -48,6 +49,7 @@ html {
     --backgroundDarkColor: #3b3b3b;
     --foregroundDarkColor: rgb(205, 205, 205);
     --accentColor: rgb(255, 100, 100);
+    --accentColorAlt: rgb(123, 100, 255);
     --overlayColor: rgba(255, 255, 255, 0.1);
 
     --shadowColor: rgba(34, 34, 34, 0.5);
