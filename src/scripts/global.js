@@ -119,9 +119,14 @@ document.addEventListener('click', (e) => {
     if (!anchor) return;
 
     const href = anchor.getAttribute('href');
-    if (!href) return;
+    if (!href || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
     const origin = window.location.origin;
+
+    // Let the browser handle external links and _blank targets natively
+    if (anchor.target === '_blank') return;
+    if (!href.startsWith('/') && !href.startsWith('#') && new URL(href, origin).origin !== origin) return;
+
     const currentUrl = new URL(window.location.href);
     const targetUrl = new URL(href, origin);
 

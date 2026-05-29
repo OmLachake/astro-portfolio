@@ -2,6 +2,7 @@
 import '../styles/myglobal.css';
 import '../styles/fonts.css';
 import ActionButton from './ActionButton.astro';
+import nav from '../data/nav.ts';
 ---
 
 <header>
@@ -28,20 +29,17 @@ import ActionButton from './ActionButton.astro';
     <div class="dropdown-container">
         <div class="dropdown-inner">
             <div class="menu-primary">
-                <div class="menu-item">
-                    <p id="active"><a href="/">HOME</a></p>
-                </div>
-                <div class="menu-item"><p><a href="/blog">BLOG</a></p></div>
-                <div class="menu-item"><p><a href="/about">WORK</a></p></div>
-                <div class="menu-item"><p><a href="/test">TEST</a></p></div>
-                <div class="menu-item"><p><a href="/test2">TEST2</a></p></div>
+                {nav.main.map((item) => (
+                    <div class="menu-item">
+                        <p><a href={item.href}>{item.label.toUpperCase()}</a></p>
+                    </div>
+                ))}
             </div>
 
             <div class="menu-secondary">
-                <p><a href="#">LinkedIn</a></p>
-                <p><a href="#">GitHub</a></p>
-                <p><a href="#">Upwork</a></p>
-                <p><a href="#">Fiver</a></p>
+                {nav.social.map((item) => (
+                    <p><a href={item.href}>{item.label}</a></p>
+                ))}
                 <div class="contact">
                     <p><a href="/#contact">Contact Me</a></p>
                 </div>

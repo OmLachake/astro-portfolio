@@ -1,13 +1,6 @@
 ---
-export interface Project {
-    title: string;
-    description: string;
-    image: string;
-    tags: string[];
-    year?: string;
-    liveUrl?: string;
-    repoUrl?: string;
-}
+import LinkButton from './LinkButton.astro';
+import type { Project } from '../types';
 
 interface Props {
     projects: Project[];
@@ -18,34 +11,55 @@ const { projects } = Astro.props;
 
 <div class="showcase-wrapper">
     <section class="project-showcase">
-        {projects.map((project, i) => (
-            <div class="showcase-slide" data-index={i}>
-                <img src={project.image} alt={project.title} loading="eager" />
-                <div class="slide-info">
-                    <div class="slide-number">
-                        {String(i + 1).padStart(2, '0')}
-                        <span class="slide-total">/ {String(projects.length).padStart(2, '0')}</span>
-                    </div>
-                    <div class="slide-tags">
-                        {project.tags.map(tag => (
-                            <span class="tag">{tag}</span>
-                        ))}
-                    </div>
-                    <h2 class="slide-title">{project.title}</h2>
-                    <p class="slide-desc">{project.description}</p>
-                    {(project.liveUrl || project.repoUrl) && (
-                        <div class="slide-links">
-                            {project.liveUrl && (
-                                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="slide-link">Live</a>
-                            )}
-                            {project.repoUrl && (
-                                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="slide-link">Code</a>
-                            )}
+        {
+            projects.map((project, i) => (
+                <div class="showcase-slide" data-index={i}>
+                    <img
+                        src={project.image}
+                        alt={project.title}
+                        loading="eager"
+                    />
+                    <div class="slide-info">
+                        <div class="slide-number">
+                            {String(i + 1).padStart(2, '0')}
+                            <span class="slide-total">
+                                / {String(projects.length).padStart(2, '0')}
+                            </span>
                         </div>
-                    )}
+                        <div class="slide-tags">
+                            {project.tags.map((tag) => (
+                                <span class="tag">{tag}</span>
+                            ))}
+                        </div>
+                        <h2 class="slide-title">{project.title}</h2>
+                        <p class="slide-desc">{project.description}</p>
+                        {(project.liveUrl || project.repoUrl) && (
+                            <div class="slide-links">
+                                {project.liveUrl && (
+                                    <LinkButton
+                                        href={project.liveUrl}
+                                        label="Live"
+                                        invert
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    />
+                                )}
+                                {project.repoUrl && (
+                                    <a
+                                        href={project.repoUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="code-link"
+                                    >
+                                        Code
+                                    </a>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
-        ))}
+            ))
+        }
         <div class="dissolve-grid"></div>
     </section>
 </div>
@@ -125,7 +139,11 @@ const { projects } = Astro.props;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: var(--accentColor);
-            background: color-mix(in srgb, var(--accentColor) 12%, var(--backgroundColor));
+            background: color-mix(
+                in srgb,
+                var(--accentColor) 12%,
+                var(--backgroundColor)
+            );
             padding: 0.2rem 0.55rem;
             border-radius: 0.35rem;
         }
@@ -151,13 +169,13 @@ const { projects } = Astro.props;
 
     .slide-links {
         display: flex;
+        align-items: center;
         gap: 1rem;
         margin-top: 0.1rem;
 
-        .slide-link {
+        .code-link {
             font-family: var(--urbanistFont);
-            font-size: 0.78rem;
-            font-weight: 600;
+            font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--backgroundColor);
@@ -239,15 +257,21 @@ const { projects } = Astro.props;
 
             for (let row = 0; row < rows; row++) {
                 for (let col = 0; col < columns; col++) {
-                    const sizeVariance = 1.0 + hashFromPos(row, col, 53.7) * 0.4;
+                    const sizeVariance =
+                        1.0 + hashFromPos(row, col, 53.7) * 0.4;
                     const size = CELL_SIZE * sizeVariance;
                     const offset = (CELL_SIZE - size) / 2;
-                    const shapeIndex = Math.floor(hashFromPos(row, col, 31.4) * blobShapes.length);
+                    const shapeIndex = Math.floor(
+                        hashFromPos(row, col, 31.4) * blobShapes.length,
+                    );
 
                     const el = document.createElement('div');
-                    const zIndex = Math.floor(hashFromPos(row, col, 89.3) * 8) + 1;
+                    const zIndex =
+                        Math.floor(hashFromPos(row, col, 89.3) * 8) + 1;
                     const isAlt = hashFromPos(row, col, 173.9) < 0.2;
-                    const bgColor = isAlt ? 'var(--accentColorAlt)' : 'var(--accentColor)';
+                    const bgColor = isAlt
+                        ? 'var(--accentColorAlt)'
+                        : 'var(--accentColor)';
 
                     el.style.cssText = `
                         position:absolute;
@@ -272,9 +296,10 @@ const { projects } = Astro.props;
                 }
             }
 
-            cellVisRandom = cells.map(c => hashFromPos(c.row, c.col, 127.1));
-            cellScatter = cells.map(c =>
-                (hashFromPos(c.row, c.col, 269.3) - 0.5) * scatterIntensity
+            cellVisRandom = cells.map((c) => hashFromPos(c.row, c.col, 127.1));
+            cellScatter = cells.map(
+                (c) =>
+                    (hashFromPos(c.row, c.col, 269.3) - 0.5) * scatterIntensity,
             );
         }
 
@@ -306,10 +331,14 @@ const { projects } = Astro.props;
             for (let i = 0; i < cells.length; i++) {
                 const rawDist = Math.abs(cells[i].normalizedY - bandCenterY);
                 const scatterStrength = gsap.utils.clamp(
-                    minScatterAtCenter, 1, rawDist / solidCoreRadius
+                    minScatterAtCenter,
+                    1,
+                    rawDist / solidCoreRadius,
                 );
                 const scattered =
-                    cells[i].normalizedY - bandCenterY + cellScatter[i] * scatterStrength;
+                    cells[i].normalizedY -
+                    bandCenterY +
+                    cellScatter[i] * scatterStrength;
                 const normDist =
                     scattered >= 0
                         ? scattered / spreadBelow
@@ -323,10 +352,13 @@ const { projects } = Astro.props;
                 const centeredX = (cells[i].normalizedX - 0.5) * 2;
                 const horizontalBell = Math.exp(-2.5 * centeredX * centeredX);
                 const lineCoverage = Math.exp(-18 * normDist * normDist);
-                const bellBulge = Math.exp(-2.5 * normDist * normDist) * horizontalBell;
+                const bellBulge =
+                    Math.exp(-2.5 * normDist * normDist) * horizontalBell;
                 const density = Math.max(lineCoverage, bellBulge);
                 cellEls[i].style.visibility =
-                    density > cellVisRandom[i] * visibilityThreshold ? 'visible' : 'hidden';
+                    density > cellVisRandom[i] * visibilityThreshold
+                        ? 'visible'
+                        : 'hidden';
             }
         }
 
@@ -341,16 +373,28 @@ const { projects } = Astro.props;
             const scrollableHeight = wrapper.offsetHeight - window.innerHeight;
             if (scrollableHeight <= 0) return;
 
-            const progress = gsap.utils.clamp(0, 1, -rect.top / scrollableHeight);
+            const progress = gsap.utils.clamp(
+                0,
+                1,
+                -rect.top / scrollableHeight,
+            );
             const raw = progress * totalTransitions;
-            const currentTransition = Math.min(Math.floor(raw), totalTransitions - 1);
-            const transitionProgress = gsap.utils.clamp(0, 1, raw - currentTransition);
+            const currentTransition = Math.min(
+                Math.floor(raw),
+                totalTransitions - 1,
+            );
+            const transitionProgress = gsap.utils.clamp(
+                0,
+                1,
+                raw - currentTransition,
+            );
 
             if (currentTransition !== activeTransition) {
                 activeTransition = currentTransition;
             }
 
-            const bandCenterY = -spreadAbove + transitionProgress * totalTravelRange;
+            const bandCenterY =
+                -spreadAbove + transitionProgress * totalTravelRange;
 
             if (transitionProgress <= 0 || transitionProgress >= 1) {
                 hideAll();

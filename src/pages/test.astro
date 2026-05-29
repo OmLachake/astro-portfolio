@@ -3,50 +3,11 @@ import ActionButton from '../components/ActionButton.astro';
 import LinkButton from '../components/LinkButton.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectShowcase from '../components/ProjectShowcase.astro';
+import projects from '../data/projects.ts';
 
-const projects = [
-    {
-        title: 'Low Latency Order Router',
-        description: 'A high-performance C++ order routing engine built for sub-microsecond execution in live trading environments.',
-        image: '/showcase-img-1.jpg',
-        tags: ['C++', 'Systems', 'Finance'],
-        year: '2024',
-        repoUrl: '#',
-    },
-    {
-        title: 'Astro Portfolio',
-        description: 'This very site — a personal portfolio built with Astro 5, GSAP, and Lenis for buttery-smooth interactions.',
-        image: '/showcase-img-2.jpg',
-        tags: ['Astro', 'GSAP', 'TypeScript'],
-        year: '2025',
-        liveUrl: '#',
-        repoUrl: '#',
-    },
-    {
-        title: 'Realtime Analytics Dashboard',
-        description: 'A full-stack dashboard processing millions of events per second with WebSocket streams and React.',
-        image: '/showcase-img-3.jpg',
-        tags: ['React', 'WebSockets', 'Rust'],
-        year: '2024',
-        liveUrl: '#',
-    },
-    {
-        title: 'Distributed Task Queue',
-        description: 'A fault-tolerant distributed job queue with priority scheduling and at-least-once delivery guarantees.',
-        image: '/showcase-img-4.jpg',
-        tags: ['Distributed Systems', 'Go', 'Redis'],
-        year: '2023',
-        repoUrl: '#',
-    },
-    {
-        title: 'Creative Dev Playground',
-        description: 'Experiments in WebGL, canvas, and generative art — a sandbox for creative coding and visual exploration.',
-        image: '/showcase-img-5.jpg',
-        tags: ['WebGL', 'Canvas', 'GLSL'],
-        year: '2025',
-        liveUrl: '#',
-    },
-];
+if (import.meta.env.PROD) {
+    return new Response(null, { status: 404 });
+}
 ---
 
 <BaseLayout pageTitle="Om Lachake">

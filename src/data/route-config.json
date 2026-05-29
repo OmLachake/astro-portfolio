@@ -1,0 +1,4 @@
+{
+    "devOnly": ["/test", "/test2"],
+    "production": ["/", "/blog", "/tags"]
+}

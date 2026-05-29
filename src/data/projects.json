@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Shared Watchlist",
+        "description": "A personal and collaborative watchlist built for couples and friends. Track what you've seen, build lists together, and remember every movie you shared.",
+        "image": "/shared-watchlist.png",
+        "tags": [
+            "React",
+            "Systems",
+            "Finance"
+        ],
+        "year": "2026",
+        "repoUrl": "https://github.com/OmLachake/watchlist",
+        "liveUrl": "https://shared-watchlist.netlify.app"
+    },
+    {
+        "title": "Garage Management System",
+        "description": "A fully functioning realtime Garage Management System aimed at small / new garages to get everything in order.",
+        "image": "/gms.png",
+        "tags": [
+            "React",
+            "CMS",
+            "Finance"
+        ],
+        "year": "2026",
+        "liveUrl": "https://gms-demo.up.railway.app"
+    }
+]

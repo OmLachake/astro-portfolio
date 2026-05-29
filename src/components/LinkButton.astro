@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 
-const { label, href, reverse, icon = true, ...attrs } = Astro.props;
+const { label, href, reverse, invert, icon = true, ...attrs } = Astro.props;
 
 let order = -1;
 
@@ -10,7 +10,7 @@ if (reverse) {
 }
 ---
 
-<a class="link-button" href={href} {...attrs}>
+<a class:list={['link-button', { 'link-button--invert': invert }]} href={href} {...attrs}>
     {icon && <Icon name="logo" size="30" />}
     <span><slot>{label}</slot></span>
 </a>
@@ -65,6 +65,22 @@ if (reverse) {
             svg {
                 transform: rotateZ(360deg);
             }
+        }
+    }
+
+    .link-button--invert {
+        color: var(--backgroundColor);
+
+        span {
+            border-bottom-color: var(--foregroundDarkColor);
+
+            &::after {
+                background-color: var(--accentColor);
+            }
+        }
+
+        svg {
+            color: var(--backgroundColor);
         }
     }
 

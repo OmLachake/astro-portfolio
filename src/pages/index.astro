@@ -2,6 +2,8 @@
 import ActionButton from '../components/ActionButton.astro';
 import LinkButton from '../components/LinkButton.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectShowcase from '../components/ProjectShowcase.astro';
+import projects from '../data/projects.ts';
 ---
 
 <BaseLayout pageTitle="Om Lachake">
@@ -97,6 +99,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     />
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="projects-section" id="projects">
+        <div class="projects-header">
+            <h2 class="projects-title">
+                <span class="title-line">A Few Things</span><br />
+                <span class="title-accent">I've Built</span>
+            </h2>
+        </div>
+        <div class="showcase-container">
+            <ProjectShowcase projects={projects} />
         </div>
     </section>
 </BaseLayout>
@@ -563,7 +577,98 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
         }
     }
+
+    .projects-section {
+        padding-bottom: 6rem;
+    }
+
+    .projects-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 6rem 2.5rem 3rem;
+        text-align: center;
+    }
+
+    .projects-title {
+        font-family: var(--yesevaFont);
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        color: var(--foregroundColor);
+        line-height: 1.2;
+        margin: 0;
+
+        .title-accent {
+            color: var(--accentColor);
+        }
+    }
+
+    .showcase-container {
+        margin: 0 1.5rem;
+        border-radius: 1.5rem;
+        overflow: clip;
+
+        @media (max-width: 800px) {
+            margin: 0 0.75rem;
+            border-radius: 1rem;
+        }
+
+        @media (min-width: 1200px) {
+            margin: 0 3rem;
+        }
+
+        @media (min-width: 1600px) {
+            margin: 0 6rem;
+        }
+    }
 </style>
 <script>
     import '../scripts/hero.js';
+</script>
+
+<script>
+    import gsap from 'gsap';
+    import ScrollTrigger from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: '.projects-header',
+            start: 'top 85%',
+            end: 'bottom -5%',
+            scrub: 0.8,
+        },
+    })
+    .fromTo('.title-line',
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
+        0
+    )
+    .fromTo('.title-accent',
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
+        0.08
+    )
+    .to('.title-line',
+        { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
+        0.65
+    )
+    .to('.title-accent',
+        { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
+        0.72
+    );
+
+    gsap.fromTo('.showcase-container',
+        { opacity: 0 },
+        {
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.showcase-container',
+                start: 'top 90%',
+                end: 'top 50%',
+                scrub: 0.6,
+            },
+        }
+    );
 </script>

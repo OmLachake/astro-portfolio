@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout pageTitle="Work — Om Lachake">
+    <div class="wip-wrapper">
+        <div class="wip-content">
+            <span class="wip-label">Coming Soon</span>
+            <h1 class="wip-title">Work in Progress</h1>
+            <p class="wip-desc">
+                This page is being put together. Check back soon — projects,
+                case&nbsp;studies, and more are on the way.
+            </p>
+            <a href="/" class="wip-back">Back to Home</a>
+        </div>
+    </div>
+</BaseLayout>
+
+<style lang="scss">
+    .wip-wrapper {
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .wip-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.25rem;
+        max-width: 480px;
+    }
+
+    .wip-label {
+        font-family: var(--urbanistFont);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accentColor);
+    }
+
+    .wip-title {
+        font-family: var(--yesevaFont);
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        color: var(--foregroundColor);
+        line-height: 1.05;
+        margin: 0;
+    }
+
+    .wip-desc {
+        font-family: var(--urbanistFont);
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.7;
+        color: var(--foregroundColor);
+        opacity: 0.6;
+        margin: 0;
+    }
+
+    .wip-back {
+        margin-top: 0.5rem;
+        font-family: var(--urbanistFont);
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--foregroundColor);
+        text-decoration: none;
+        border-bottom: 1px solid var(--accentColor);
+        padding-bottom: 0.15rem;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--accentColor);
+        }
+    }
+</style>

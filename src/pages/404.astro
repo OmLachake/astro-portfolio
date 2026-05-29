@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LinkButton from '../components/LinkButton.astro';
+---
+
+<BaseLayout pageTitle="404 - Page Not Found">
+    <div class="not-found">
+        <div class="content">
+            <h1 class="error-code">404</h1>
+            <p class="error-message">Page Not Found</p>
+            <p class="error-desc">
+                Looks like this page wandered off somewhere.<br />Let's get you
+                back.
+            </p>
+            <LinkButton href="/" label="Back to Home" />
+        </div>
+    </div>
+</BaseLayout>
+
+<style lang="scss">
+    .not-found {
+        position: relative;
+        width: 100%;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+        padding-bottom: 18vh;
+    }
+
+    .error-code {
+        font-family: 'Newsflash BB', sans-serif;
+        font-size: clamp(7rem, 20vw, 16rem);
+        line-height: 0.9;
+        color: var(--foregroundColor);
+        margin: 0;
+    }
+
+    .error-message {
+        font-family: var(--soriaFont);
+        font-size: clamp(1.4rem, 3vw, 2.2rem);
+        color: var(--foregroundColor);
+        margin: 0;
+    }
+
+    .error-desc {
+        font-family: var(--urbanistFont);
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.7;
+        color: var(--foregroundColor);
+        opacity: 0.55;
+        margin: 0;
+    }
+</style>
+
+<script></script>
