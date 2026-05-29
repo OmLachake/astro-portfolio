@@ -1,11 +1,26 @@
 {
     "main": [
-        { "label": "Home", "href": "/" },
-        { "label": "Blog", "href": "/blog" },
-        { "label": "Work", "href": "/work" }
+        {
+            "label": "Home",
+            "href": "/"
+        },
+        {
+            "label": "Blog",
+            "href": "/blog"
+        },
+        {
+            "label": "Work",
+            "href": "/work"
+        }
     ],
     "social": [
-        { "label": "LinkedIn", "href": "#" },
-        { "label": "GitHub", "href": "#" }
+        {
+            "label": "LinkedIn",
+            "href": "https://www.linkedin.com/in/om-lachake"
+        },
+        {
+            "label": "GitHub",
+            "href": "https://www.github.com/OmLachake"
+        }
     ]
 }
