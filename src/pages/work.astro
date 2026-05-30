@@ -1,17 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LinkButton from '../components/LinkButton.astro';
 ---
 
 <BaseLayout pageTitle="Work — Om Lachake">
     <div class="wip-wrapper">
         <div class="wip-content">
-            <span class="wip-label">Coming Soon</span>
             <h1 class="wip-title">Work in Progress</h1>
             <p class="wip-desc">
                 This page is being put together. Check back soon — projects,
                 case&nbsp;studies, and more are on the way.
             </p>
-            <a href="/" class="wip-back">Back to Home</a>
+
+            <LinkButton href="/blog" label="Back to Home" />
         </div>
     </div>
 </BaseLayout>
@@ -34,17 +35,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         max-width: 480px;
     }
 
-    .wip-label {
-        font-family: var(--urbanistFont);
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--accentColor);
-    }
-
     .wip-title {
-        font-family: var(--yesevaFont);
+        font-family: var(--newsflashFont);
         font-size: clamp(2.4rem, 6vw, 4rem);
         color: var(--foregroundColor);
         line-height: 1.05;

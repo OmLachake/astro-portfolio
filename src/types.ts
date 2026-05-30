@@ -5,6 +5,7 @@ export interface NavItem {
 
 export interface NavData {
     main: NavItem[];
+    devOnly: NavItem[];
     social: NavItem[];
 }
 

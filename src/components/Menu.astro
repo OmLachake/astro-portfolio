@@ -29,17 +29,49 @@ import nav from '../data/nav.ts';
     <div class="dropdown-container">
         <div class="dropdown-inner">
             <div class="menu-primary">
-                {nav.main.map((item) => (
-                    <div class="menu-item">
-                        <p><a href={item.href}>{item.label.toUpperCase()}</a></p>
-                    </div>
-                ))}
+                {
+                    nav.main.map((item) => (
+                        <div class="menu-item">
+                            <p>
+                                <a href={item.href}>
+                                    {item.label.toUpperCase()}
+                                </a>
+                            </p>
+                        </div>
+                    ))
+                }
+                {
+                    import.meta.env.DEV &&
+                        nav.devOnly.map((item) => (
+                            <div class="menu-item menu-item--dev">
+                                <p>
+                                    <a
+                                        href={item.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {item.label.toUpperCase()}
+                                    </a>
+                                </p>
+                            </div>
+                        ))
+                }
             </div>
 
             <div class="menu-secondary">
-                {nav.social.map((item) => (
-                    <p><a href={item.href}>{item.label}</a></p>
-                ))}
+                {
+                    nav.social.map((item) => (
+                        <p>
+                            <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href={item.href}
+                            >
+                                {item.label}
+                            </a>
+                        </p>
+                    ))
+                }
                 <div class="contact">
                     <p><a href="/#contact">Contact Me</a></p>
                 </div>
