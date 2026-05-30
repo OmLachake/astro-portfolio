@@ -1,23 +1,30 @@
 ---
 import BlogCard from '../components/Blog/BlogCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LinkButton from '../components/LinkButton.astro';
 import '../styles/global.css';
+
+const isDev = import.meta.env.DEV;
 
 const allPosts = Object.values(
     import.meta.glob('./blogs/*.mdx', { eager: true }),
-);
+) as any[];
 
-allPosts.sort((a: any, b: any) => {
+allPosts.sort((a, b) => {
     return (
         new Date(b.frontmatter.pubDate).valueOf() -
         new Date(a.frontmatter.pubDate).valueOf()
     );
 });
-const latestBlog: any = allPosts[0];
 
-const posts = allPosts.filter((post) => {
-    return post !== latestBlog;
-});
+// In dev: show all posts.
+// In production: only show posts with `published: true` in frontmatter.
+const visiblePosts = isDev
+    ? allPosts
+    : allPosts.filter((p) => p.frontmatter.published === true);
+
+const latestBlog = visiblePosts[0];
+const posts = visiblePosts.slice(1);
 ---
 
 <BaseLayout pageTitle="Blogroom">
@@ -29,12 +36,28 @@ const posts = allPosts.filter((post) => {
             </p>
         </section>
 
-        <section class="latest-blog">
-            <BlogCard post={latestBlog} />
-        </section>
-        <section class="blog-grid">
-            {posts.map((post: any) => <BlogCard post={post} />)}
-        </section>
+        {
+            visiblePosts.length === 0 ? (
+                <section class="empty-state">
+                    <p class="empty-title">Blogs coming soon!</p>
+                    <p class="empty-sub">Nothing here yet — check back soon.</p>
+                    <LinkButton href="/" label="Back to Home" />
+                </section>
+            ) : (
+                <>
+                    <section class="latest-blog">
+                        <BlogCard post={latestBlog} />
+                    </section>
+                    {posts.length > 0 && (
+                        <section class="blog-grid">
+                            {posts.map((post: any) => (
+                                <BlogCard post={post} />
+                            ))}
+                        </section>
+                    )}
+                </>
+            )
+        }
     </div>
 </BaseLayout>
 
@@ -97,6 +120,35 @@ const posts = allPosts.filter((post) => {
         grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
         width: 100%;
         gap: 1.5rem;
+    }
+
+    .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 6rem 2rem;
+        gap: 0.75rem;
+        text-align: center;
+
+        .empty-title {
+            font-family: var(--newsflashFont);
+            font-size: clamp(2rem, 3vw, 5rem);
+            text-transform: uppercase;
+            color: var(--foregroundColor);
+            line-height: 1;
+            opacity: 0;
+            margin: 0;
+        }
+
+        .empty-sub {
+            font-family: var(--urbanistFont);
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--foregroundColor);
+            opacity: 0;
+            margin: 0;
+        }
     }
 
     .latest-blog {
