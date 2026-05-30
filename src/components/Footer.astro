@@ -1,36 +1,7 @@
 ---
-import { z } from 'zod';
 import ActionButton from './ActionButton.astro';
+import BlobIcon from './BlobIcon.astro';
 import nav from '../data/nav.ts';
-const contactSchema = z.object({
-    name: z.string().min(2, 'Name is too short'),
-    email: z.string().email('Invalid email'),
-    message: z.string().min(10, 'Message is too short'),
-});
-type Errors = {
-    name?: string[];
-    email?: string[];
-    message?: string[];
-};
-let errors: Errors = {};
-let success = false;
-
-if (Astro.request.method === 'POST') {
-    try {
-        const data = await Astro.request.formData();
-        const name = data.get('name');
-        const email = data.get('email');
-        const message = data.get('message');
-
-        // Validate
-        contactSchema.parse({ name, email, message });
-        success = true;
-    } catch (err) {
-        if (err instanceof z.ZodError) {
-            errors = err.flatten().fieldErrors;
-        }
-    }
-}
 ---
 
 <footer id="contact" class="footer" aria-labelledby="footer-heading">
@@ -43,89 +14,126 @@ if (Astro.request.method === 'POST') {
 
             <div class="nav-links">
                 <div class="primary">
-                    {nav.main.map((item) => (
-                        <div class="primary-item">
-                            <p><a href={item.href}>{item.label.toUpperCase()}</a></p>
-                        </div>
-                    ))}
+                    {
+                        nav.main.map((item) => (
+                            <div class="primary-item">
+                                <p>
+                                    <a href={item.href}>
+                                        {item.label.toUpperCase()}
+                                    </a>
+                                </p>
+                            </div>
+                        ))
+                    }
                 </div>
 
                 <div class="secondary">
-                    {nav.social.map((item) => (
-                        <p><a href={item.href}>{item.label}</a></p>
-                    ))}
+                    {
+                        nav.social.map((item) => (
+                            <p>
+                                <a href={item.href}>{item.label}</a>
+                            </p>
+                        ))
+                    }
                 </div>
             </div>
 
             <div class="info">
                 <div class="back-to-top"><a href="#">Back to Top</a></div>
-                <div class="copyright">Copyright &copy; {new Date().getFullYear()}</div>
+                <div class="copyright">
+                    Copyright &copy; {new Date().getFullYear()}
+                </div>
             </div>
         </div>
 
         <div class="footer-contact" id="contact">
-            {
-                success ? (
-                    <div class="success-message">
-                        <h3>Message Sent!</h3>
-                        <p>
-                            Thank you for reaching out. I'll get back to you
-                            shortly.
-                        </p>
-                    </div>
-                ) : (
-                    <form action="" class="contact-form">
-                        <div class="input-group">
-                            <label for="name">Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Your name"
-                                required
-                            />
-                            {errors.name && (
-                                <p class="error-text">{errors.name[0]}</p>
-                            )}
-                        </div>
+            <div class="success-message" id="form-success">
+                <BlobIcon size={140}>
+                    <svg
+                        class="tick-svg"
+                        viewBox="0 0 52 52"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            class="tick-path"
+                            d="M 14 27 L 22 35 L 38 19"
+                            stroke="var(--accentColor)"
+                            stroke-width="4.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </svg>
+                </BlobIcon>
+                <h3>Message Sent!</h3>
+                <p>Thank you for reaching out. I'll get back to you shortly.</p>
+            </div>
 
-                        <div class="input-group">
-                            <label for="email">Email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="Your email address"
-                                required
-                            />
-                            {errors.email && (
-                                <p class="error-text">{errors.email[0]}</p>
-                            )}
-                        </div>
+            <form
+                id="contact-form"
+                action="https://api.web3forms.com/submit"
+                method="POST"
+                class="contact-form"
+            >
+                <input
+                    type="hidden"
+                    name="subject"
+                    value="New message from portfolio"
+                />
+                <input type="checkbox" name="botcheck" style="display:none" />
 
-                        <div class="input-group">
-                            <label for="message">Message</label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                rows="4"
-                                placeholder="How can I help you?"
-                                required
-                            />
-                            {errors.message && (
-                                <p class="error-text">{errors.message[0]}</p>
-                            )}
-                        </div>
+                <div class="input-group">
+                    <label for="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Your name"
+                        required
+                    />
+                    <p class="error-text" id="error-name"></p>
+                </div>
 
-                        <ActionButton
-                            type="submit"
-                            label="Send Message"
-                            textTransform="uppercase"
-                            noAnimation
-                        />
-                    </form>
-                )
-            }
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Your email address"
+                        required
+                    />
+                    <p class="error-text" id="error-email"></p>
+                </div>
+
+                <div class="input-group">
+                    <label for="message">Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="4"
+                        placeholder="How can I help you?"
+                        required></textarea>
+                    <p class="error-text" id="error-message"></p>
+                </div>
+
+                <ActionButton
+                    type="submit"
+                    label="Send Message"
+                    textTransform="uppercase"
+                    noAnimation
+                />
+                {
+                    import.meta.env.DEV && (
+                        <button
+                            type="button"
+                            id="test-success"
+                            class="test-btn"
+                        >
+                            Simulate Success
+                        </button>
+                    )
+                }
+            </form>
         </div>
     </div>
 </footer>
@@ -322,15 +330,53 @@ if (Astro.request.method === 'POST') {
             }
 
             /* --- Container --- */
+            .success-message {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                gap: 0.75rem;
+                padding: 2rem;
+
+                h3 {
+                    font-family: var(--urbanistFont);
+                    font-size: clamp(1.4rem, 2.5vw, 2rem);
+                    color: var(--backgroundColor);
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    margin: 0;
+                }
+
+                p {
+                    font-family: var(--urbanistFont);
+                    font-size: 0.95rem;
+                    font-weight: 300;
+                    line-height: 1.65;
+                    color: var(--backgroundColor);
+                    opacity: 0.65;
+                    margin: 0;
+                }
+
+                .tick-svg {
+                    width: 52px;
+                    height: 52px;
+                }
+            }
+
             .footer-contact {
                 width: 100%;
                 min-width: 0;
-                display: flex;
-                justify-content: center; /* Center horizontally */
+                display: grid;
                 align-items: stretch;
                 background-color: var(--foregroundDarkColor);
                 padding: 1rem 2rem;
                 border-radius: 1rem;
+
+                .success-message,
+                .contact-form {
+                    grid-area: 1 / 1;
+                }
                 @media (max-width: 800px) {
                     padding: 1.5rem 1rem;
                     grid-row: 1;
@@ -373,7 +419,9 @@ if (Astro.request.method === 'POST') {
                             font-size: 1rem;
                             color: var(--backgroundColor);
                             outline: none;
-                            transition: all 0.3s ease;
+                            transition:
+                                border-color 0.3s ease,
+                                box-shadow 0.3s ease;
                             font-family: 'Urbanist', sans-serif;
 
                             @media (max-width: 800px) {
@@ -406,42 +454,26 @@ if (Astro.request.method === 'POST') {
                             font-size: 0.8rem;
                             margin-top: 0.25rem;
                         }
-
-                        .success-message {
-                            text-align: center;
-                            padding: 2rem;
-                            border: 1px solid var(--foregroundColor);
-                            border-radius: 1rem;
-                        }
                     }
 
-                    /* --- Button --- */
-                    .submit-btn {
-                        margin-top: 1rem;
-                        padding: 1rem;
-                        background-color: var(--foregroundColor);
-                        color: var(--backgroundColor);
-                        font-weight: bold;
-                        font-family: 'Urbanist', sans-serif;
-                        text-transform: uppercase;
-                        letter-spacing: 0.05em;
-                        border: none;
-                        border-radius: 0.5rem;
-                        cursor: pointer;
-                        transition: all 0.3s ease-in-out;
+                }
+            }
 
-                        @media (max-width: 800px) {
-                            margin-top: 0rem;
-                        }
-                    }
-
-                    .submit-btn:hover {
-                        background-color: var(--accentColor);
-                    }
-
-                    .submit-btn:active {
-                        transform: translateY(0);
-                    }
+            .test-btn {
+                background: transparent;
+                border: 1px dashed var(--accentColor);
+                color: var(--accentColor);
+                font-family: var(--urbanistFont);
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+                cursor: pointer;
+                opacity: 0.6;
+                transition: opacity 0.2s ease;
+                &:hover {
+                    opacity: 1;
                 }
             }
 
@@ -459,3 +491,110 @@ if (Astro.request.method === 'POST') {
         }
     }
 </style>
+
+<script>
+    import gsap from 'gsap';
+
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const successEl = document.getElementById('form-success') as HTMLElement;
+    const testBtn = document.getElementById('test-success');
+
+    // Set initial states
+    gsap.set(successEl, { autoAlpha: 0, y: 20 });
+    gsap.set(form, { autoAlpha: 1, y: 0 });
+
+    function showSuccess() {
+        form.reset();
+        gsap.to(form, {
+            autoAlpha: 0,
+            y: -24,
+            duration: 0.35,
+            ease: 'power2.in',
+            onComplete: () => {
+                const blobIcon =
+                    successEl.querySelector<HTMLElement>('[data-blob-icon]');
+                const tickPath =
+                    successEl.querySelector<SVGPathElement>('.tick-path');
+
+                gsap.fromTo(
+                    successEl,
+                    { autoAlpha: 0, y: 24 },
+                    { autoAlpha: 1, y: 0, duration: 0.45, ease: 'expo.out' },
+                );
+
+                // Blob icon spring pop + border draw-on
+                if (blobIcon) {
+                    gsap.fromTo(
+                        blobIcon,
+                        { scale: 0, rotation: -20 },
+                        {
+                            scale: 1,
+                            rotation: 0,
+                            duration: 0.7,
+                            ease: 'back.out(2.5)',
+                            delay: 0.2,
+                        },
+                    );
+                }
+
+                // Tick draw-on
+                if (tickPath) {
+                    const len = tickPath.getTotalLength();
+                    gsap.fromTo(
+                        tickPath,
+                        { strokeDasharray: len, strokeDashoffset: len },
+                        {
+                            strokeDashoffset: 0,
+                            duration: 0.45,
+                            ease: 'power2.out',
+                            delay: 0.55,
+                        },
+                    );
+                }
+            },
+        });
+
+        setTimeout(() => {
+            gsap.to(successEl, {
+                autoAlpha: 0,
+                y: -24,
+                duration: 0.35,
+                ease: 'power2.in',
+                onComplete: () => {
+                    gsap.fromTo(
+                        form,
+                        { autoAlpha: 0, y: 24 },
+                        {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: 0.45,
+                            ease: 'expo.out',
+                        },
+                    );
+                },
+            });
+        }, 5000);
+    }
+
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const data = new FormData(form);
+        data.set('access_key', '13ce1df0-629c-4c22-9386-406123aa2b3c');
+        const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: data,
+        });
+        const json = await res.json();
+
+        if (json.success) {
+            showSuccess();
+        } else {
+            const msg = document.getElementById('error-message') as HTMLElement;
+            if (msg)
+                msg.textContent = 'Something went wrong. Please try again.';
+        }
+    });
+
+    testBtn?.addEventListener('click', () => showSuccess());
+</script>
