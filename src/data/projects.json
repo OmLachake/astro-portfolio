@@ -2,7 +2,7 @@
     {
         "title": "Shared Watchlist",
         "description": "A personal and collaborative watchlist built for couples and friends. Track what you've seen, build lists together, and remember every movie you shared.",
-        "image": "/shared-watchlist.png",
+        "image": "/shared-watchlist.webp",
         "tags": [
             "React",
             "Systems",
@@ -15,7 +15,7 @@
     {
         "title": "Garage Management System",
         "description": "A fully functioning realtime Garage Management System aimed at small / new garages to get everything in order.",
-        "image": "/gms.png",
+        "image": "/gms.webp",
         "tags": [
             "React",
             "CMS",

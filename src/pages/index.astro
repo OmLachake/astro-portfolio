@@ -82,7 +82,7 @@ const personSchema = {
                 <div class="photo-frame">
                     <div class="blob-border"></div>
 
-                    <img src="/om.png" alt="Om Lachake" class="blob-content" />
+                    <img src="/om.webp" alt="Om Lachake" class="blob-content" />
                     <div class="frame-overlay blob-content"></div>
                 </div>
             </div>
@@ -650,26 +650,31 @@ const personSchema = {
             scrub: 0.8,
         },
     })
-    .fromTo('.title-line',
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
-        0
-    )
-    .fromTo('.title-accent',
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
-        0.08
-    )
-    .to('.title-line',
-        { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
-        0.65
-    )
-    .to('.title-accent',
-        { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
-        0.72
-    );
+        .fromTo(
+            '.title-line',
+            { opacity: 0, y: 60 },
+            { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
+            0,
+        )
+        .fromTo(
+            '.title-accent',
+            { opacity: 0, y: 60 },
+            { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
+            0.08,
+        )
+        .to(
+            '.title-line',
+            { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
+            0.65,
+        )
+        .to(
+            '.title-accent',
+            { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
+            0.72,
+        );
 
-    gsap.fromTo('.showcase-container',
+    gsap.fromTo(
+        '.showcase-container',
         { opacity: 0 },
         {
             opacity: 1,
@@ -680,6 +685,6 @@ const personSchema = {
                 end: 'top 50%',
                 scrub: 0.6,
             },
-        }
+        },
     );
 </script>
