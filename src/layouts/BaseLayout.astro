@@ -4,7 +4,19 @@ import Menu from '../components/Menu.astro';
 import ThemeScript from '../components/Theme/ThemeScript.astro';
 import ThemeToggle from '../components/Theme/ThemeToggle.astro';
 import '../styles/myglobal.css';
-const { pageTitle, description = 'Portfolio of Om Lachake' } = Astro.props;
+import site from '../data/site';
+
+const {
+    pageTitle,
+    description = site.description,
+    ogImage = '/om.png',
+    type = 'website',
+    jsonLd,
+} = Astro.props;
+
+const canonicalURL = Astro.url.href;
+const ogImageURL = new URL(ogImage, Astro.site).href;
+const fullTitle = pageTitle === site.name ? site.title : `${pageTitle} — ${site.name}`;
 ---
 
 <html lang="en">
@@ -12,12 +24,40 @@ const { pageTitle, description = 'Portfolio of Om Lachake' } = Astro.props;
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
+
+        <!-- Font preconnects -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
         <meta name="generator" content={Astro.generator} />
+        <title>{fullTitle}</title>
         <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content={type} />
+        <meta property="og:site_name" content={site.name} />
+        <meta property="og:title" content={fullTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:image" content={ogImageURL} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <!-- RSS Feed -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title={`${site.name} — Blog`}
+            href="/rss.xml"
+        />
+
+        <!-- JSON-LD structured data -->
+        {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
         <script>
             import '../scripts/global.js';
         </script>
-        <title>{pageTitle}</title>
 
         <ThemeScript />
     </head>

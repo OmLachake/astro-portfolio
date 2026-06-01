@@ -4,9 +4,20 @@ import LinkButton from '../components/LinkButton.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectShowcase from '../components/ProjectShowcase.astro';
 import projects from '../data/projects.ts';
+import site from '../data/site';
+import nav from '../data/nav';
+
+const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: site.name,
+    url: Astro.site?.toString(),
+    email: site.email,
+    sameAs: nav.social.map((s) => s.href),
+};
 ---
 
-<BaseLayout pageTitle="Om Lachake">
+<BaseLayout pageTitle="Om Lachake" jsonLd={personSchema}>
     <section class="hero" id="home">
         <div class="hero-bg-effect"></div>
         <div class="hero-container">

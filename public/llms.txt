@@ -1,0 +1,30 @@
+# Om Lachake
+
+> Personal portfolio and blog of Om Lachake, a  developer focused on creative web experiences, animations, and clean interfaces.
+> Career wise, the focus is on low level code, backend infrastructures and databases.
+
+## Site
+
+- [Home](/): Portfolio homepage — hero section, project showcase, about, and contact form
+- [Blog](/blog): Engineering blog with insights, project logs, and learning notes
+- [Tags](/tags): Browse blog posts by topic
+- [RSS Feed](/rss.xml): Subscribe to published blog posts
+
+## Projects
+
+Projects are showcased on the homepage. Each project includes a title, description, tech stack tags, live URL, and repository link.
+
+## Contact
+
+Contact form available at the bottom of the homepage (/#contact). Email: omlachake@pm.me
+
+## Blog
+
+Blog posts cover frontend development, animation (GSAP, Lenis), Astro, UI/UX, and engineering topics.
+Only posts marked as published are publicly visible.
+Full post list and metadata available via RSS at /rss.xml.
+
+## Tech Stack
+
+Built with Astro 5, React, GSAP, Lenis, Tailwind CSS v4, and SCSS.
+Deployed on Netlify.

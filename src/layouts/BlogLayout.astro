@@ -1,9 +1,25 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import site from '../data/site';
 
 const { frontmatter } = Astro.props;
 
 const dateObj = new Date(frontmatter.pubDate);
+
+const blogPostingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    datePublished: dateObj.toISOString(),
+    url: Astro.url.href,
+    image: frontmatter.image?.url,
+    author: {
+        '@type': 'Person',
+        name: site.author,
+        url: Astro.site?.toString(),
+    },
+};
 const formattedDate = dateObj.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -11,7 +27,13 @@ const formattedDate = dateObj.toLocaleDateString('en-US', {
 });
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<BaseLayout
+    pageTitle={frontmatter.title}
+    description={frontmatter.description}
+    ogImage={frontmatter.image?.url}
+    type="article"
+    jsonLd={blogPostingSchema}
+>
     <!-- ──────────────── HERO ──────────────── -->
     <section class="post-hero">
         <div class="post-hero-inner">
@@ -21,7 +43,7 @@ const formattedDate = dateObj.toLocaleDateString('en-US', {
                 frontmatter.tags && frontmatter.tags.length > 0 && (
                     <div class="post-tags">
                         {frontmatter.tags.map((tag: string) => (
-                            <span class="post-tag">{tag}</span>
+                            <a href={`/tags/${tag}`} class="post-tag">{tag}</a>
                         ))}
                     </div>
                 )
@@ -117,6 +139,12 @@ const formattedDate = dateObj.toLocaleDateString('en-US', {
             background: var(--backgroundDarkColor);
             padding: 0.25rem 0.65rem;
             border-radius: 0.4rem;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+
+            &:hover {
+                opacity: 0.7;
+            }
         }
     }
 
