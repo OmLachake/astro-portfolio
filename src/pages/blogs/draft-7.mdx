@@ -13,7 +13,6 @@ tags: ['design system', 'ui', 'css', 'design', 'frontend']
 import MdxLink from '../../components/Blog/MdxLink.astro';
 export const components = { a: MdxLink };
 
-
 # Building a Design System from Scratch
 
 A design system is more than a component library. It's a **shared language** between designers and developers — a single source of truth that keeps products consistent as teams and codebases grow.
@@ -44,29 +43,29 @@ Tokens are named values for the raw decisions in your design — colors, spacing
 
 ```css
 :root {
-  /* Color palette */
-  --color-purple-100: hsl(260, 80%, 95%);
-  --color-purple-500: hsl(260, 80%, 60%);
-  --color-purple-900: hsl(260, 80%, 20%);
+    /* Color palette */
+    --color-purple-100: hsl(260, 80%, 95%);
+    --color-purple-500: hsl(260, 80%, 60%);
+    --color-purple-900: hsl(260, 80%, 20%);
 
-  /* Semantic tokens — what the value *means*, not what it *is* */
-  --color-text-primary: var(--color-purple-900);
-  --color-background: var(--color-purple-100);
-  --color-interactive: var(--color-purple-500);
+    /* Semantic tokens — what the value *means*, not what it *is* */
+    --color-text-primary: var(--color-purple-900);
+    --color-background: var(--color-purple-100);
+    --color-interactive: var(--color-purple-500);
 
-  /* Spacing scale (4px base) */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-4: 1rem;
-  --space-8: 2rem;
-  --space-16: 4rem;
+    /* Spacing scale (4px base) */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-4: 1rem;
+    --space-8: 2rem;
+    --space-16: 4rem;
 
-  /* Type scale */
-  --text-sm: clamp(0.8rem, 1.5vw, 0.875rem);
-  --text-base: clamp(1rem, 2vw, 1.125rem);
-  --text-lg: clamp(1.25rem, 3vw, 1.5rem);
-  --text-xl: clamp(1.5rem, 4vw, 2rem);
-  --text-2xl: clamp(2rem, 5vw, 3rem);
+    /* Type scale */
+    --text-sm: clamp(0.8rem, 1.5vw, 0.875rem);
+    --text-base: clamp(1rem, 2vw, 1.125rem);
+    --text-lg: clamp(1.25rem, 3vw, 1.5rem);
+    --text-xl: clamp(1.5rem, 4vw, 2rem);
+    --text-2xl: clamp(2rem, 5vw, 3rem);
 }
 ```
 
@@ -78,14 +77,14 @@ The separation of **palette tokens** and **semantic tokens** is critical. Dark m
 
 Pick 4–6 type sizes and stick to them. More than that creates visual noise.
 
-| Token | Size | Use |
-|---|---|---|
-| `--text-xs` | 12px | Captions, labels |
-| `--text-sm` | 14px | Body secondary |
-| `--text-base` | 16px | Body primary |
-| `--text-lg` | 20px | Lead paragraphs |
-| `--text-xl` | 24px | Section headings |
-| `--text-2xl` | 32px+ | Page headings |
+| Token         | Size  | Use              |
+| ------------- | ----- | ---------------- |
+| `--text-xs`   | 12px  | Captions, labels |
+| `--text-sm`   | 14px  | Body secondary   |
+| `--text-base` | 16px  | Body primary     |
+| `--text-lg`   | 20px  | Lead paragraphs  |
+| `--text-xl`   | 24px  | Section headings |
+| `--text-2xl`  | 32px+ | Page headings    |
 
 Use `clamp()` for fluid type that scales between viewport sizes without breakpoints.
 
@@ -103,31 +102,35 @@ Every component in a solid design system has:
 
 ```css
 .button {
-  /* Base */
-  background: var(--color-interactive);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  padding: var(--space-2) var(--space-4);
-  font: 600 var(--text-base) var(--font-sans);
-  cursor: pointer;
-  transition: background 150ms ease, transform 100ms ease;
+    /* Base */
+    background: var(--color-interactive);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--space-2) var(--space-4);
+    font: 600 var(--text-base) var(--font-sans);
+    cursor: pointer;
+    transition:
+        background 150ms ease,
+        transform 100ms ease;
 
-  /* Hover */
-  &:hover { background: var(--color-interactive-hover); }
+    /* Hover */
+    &:hover {
+        background: var(--color-interactive-hover);
+    }
 
-  /* Focus — never remove this */
-  &:focus-visible {
-    outline: 2px solid var(--color-interactive);
-    outline-offset: 3px;
-  }
+    /* Focus — never remove this */
+    &:focus-visible {
+        outline: 2px solid var(--color-interactive);
+        outline-offset: 3px;
+    }
 
-  /* Disabled */
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
+    /* Disabled */
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
 }
 ```
 
@@ -145,6 +148,7 @@ A design system without documentation is a design system nobody uses. Document:
 - **Accessibility** requirements (ARIA roles, keyboard nav)
 
 Popular tools:
+
 - **Storybook** — component sandbox + docs, framework-agnostic
 - **Astro** — excellent for static design system docs sites
 - **Figma** — design-side tokens and component library
@@ -153,7 +157,7 @@ Popular tools:
 
 ## Common Pitfalls
 
-1. **Building too early** — Extract components *after* you see patterns, not speculatively
+1. **Building too early** — Extract components _after_ you see patterns, not speculatively
 2. **Over-abstracting** — Not every UI element needs to be a component
 3. **Ignoring tokens** — Hardcoded values defeat the purpose
 4. **Skipping accessibility** — It's cheaper to bake in than bolt on

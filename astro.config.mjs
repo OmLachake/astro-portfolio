@@ -26,7 +26,14 @@ export default defineConfig({
     integrations: [
         mdx(),
         react(),
-        sitemap(),
+        sitemap({
+            filter: (page) => {
+                const path = new URL(page).pathname; // exclude whatever you want
+                return (
+                    !path.includes('/test') && !path.includes('/blogs/draft-')
+                );
+            },
+        }),
         tunnel(),
         icon({
             iconDir: 'src/icons',

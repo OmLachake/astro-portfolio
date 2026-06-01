@@ -15,6 +15,10 @@ const personSchema = {
     email: site.email,
     sameAs: nav.social.map((s) => s.href),
 };
+
+if (import.meta.env.PROD) {
+    return new Response(null, { status: 404 });
+}
 ---
 
 <BaseLayout pageTitle="Om Lachake" jsonLd={personSchema}>
