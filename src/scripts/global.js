@@ -25,6 +25,19 @@ if ('scrollRestoration' in history) {
 }
 // Setup Complete
 
+// Runs fn after the loader fires site:ready, or immediately at window.load if no loader is present
+function onSiteReady(fn) {
+    if (document.getElementById('site-loader')) {
+        document.addEventListener('site:ready', fn, { once: true });
+    } else {
+        if (document.readyState === 'complete') {
+            fn();
+        } else {
+            window.addEventListener('load', fn, { once: true });
+        }
+    }
+}
+
 //////////////////////////////////////// MENU - NAVITATION ANIMATION
 const ANIMATION_DURATION = 1.2;
 
@@ -47,22 +60,24 @@ const toggleMenuFunction = () => {
 };
 
 // Handle Navigation Bar and Hamburger Menu
-if (NAV) {
-    gsap.fromTo(
-        NAV,
-        {
-            yPercent: -50,
-            opacity: 0,
-        },
-        {
-            yPercent: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: 'power4.out',
-            delay: 0.2,
-        },
-    );
-}
+onSiteReady(() => {
+    if (NAV) {
+        gsap.fromTo(
+            NAV,
+            {
+                yPercent: -50,
+                opacity: 0,
+            },
+            {
+                yPercent: 0,
+                opacity: 1,
+                duration: 0.7,
+                ease: 'power4.out',
+                delay: 0.2,
+            },
+        );
+    }
+});
 
 if (HamburgerMenuButton) {
     gsap.set('.dropdown-container', {

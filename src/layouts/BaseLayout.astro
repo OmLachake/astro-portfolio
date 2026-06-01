@@ -1,5 +1,6 @@
 ---
 import Footer from '../components/Footer.astro';
+import Loader from '../components/Loader.astro';
 import Menu from '../components/Menu.astro';
 import ThemeScript from '../components/Theme/ThemeScript.astro';
 import ThemeToggle from '../components/Theme/ThemeToggle.astro';
@@ -12,6 +13,7 @@ const {
     ogImage = '/om.png',
     type = 'website',
     jsonLd,
+    showLoader = true,
 } = Astro.props;
 
 const canonicalURL = Astro.url.href;
@@ -63,6 +65,7 @@ const fullTitle = pageTitle === site.name ? site.title : `${pageTitle} — ${sit
     </head>
 
     <body>
+        {showLoader && <Loader />}
         <Menu />
         <main class="website-content">
             <slot />

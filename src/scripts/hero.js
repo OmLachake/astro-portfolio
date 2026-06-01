@@ -22,6 +22,8 @@ window.addEventListener('scroll', () => {
     }, 150);
 });
 
+document.addEventListener('site:ready', () => {
+
 mm.add('(min-width: 1200px)', () => {
     gsap.from(wave, {
         duration: 1,
@@ -415,6 +417,8 @@ mm.add('(max-width: 800px)', () => {
         },
     );
 });
+
+}); // site:ready
 
 // Floating Mouse Blobl Effect
 let mouseX = 0;

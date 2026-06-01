@@ -1,0 +1,69 @@
+---
+// Site loader — shown on initial page load, hidden after window.load or 5s max
+---
+
+<div id="site-loader" aria-hidden="true">
+    <span class="loader-text">Loading...</span>
+</div>
+
+<style lang="scss">
+    #site-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: var(--backgroundColor);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            opacity 0.6s ease,
+            visibility 0.6s ease;
+
+        &.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    .loader-text {
+        font-family: var(--urbanistFont);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--foregroundColor);
+        letter-spacing: 0.1em;
+
+        /* animated ellipsis */
+        &::after {
+            content: '';
+            animation: ellipsis 1.2s steps(4, end) infinite;
+        }
+    }
+
+    @keyframes ellipsis {
+        0%   { content: ''; }
+        25%  { content: '.'; }
+        50%  { content: '..'; }
+        75%  { content: '...'; }
+        100% { content: ''; }
+    }
+</style>
+
+<script>
+    const loader = document.getElementById('site-loader');
+
+    function hideLoader() {
+        if (!loader) return;
+        document.dispatchEvent(new CustomEvent('site:ready'));
+        loader.classList.add('hide');
+        setTimeout(() => loader.remove(), 650);
+    }
+
+    // Force off after 5 seconds no matter what
+    const maxWait = setTimeout(hideLoader, 5000);
+
+    window.addEventListener('load', () => {
+        clearTimeout(maxWait);
+        // Small buffer so the page has painted before revealing
+        setTimeout(hideLoader, 300);
+    });
+</script>
