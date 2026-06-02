@@ -566,11 +566,14 @@ document.addEventListener('site:ready', () => {
                 const height = 3 + (5 - 3) * searchBarProgress;
 
                 const translateY = -50 + (200 - -50) * searchBarProgress;
-
+                const borderRadius = 25 + (1 - 25) * searchBarProgress;
+                const borderWidth = 0.35 + (0.15 - 0.35) * searchBarProgress;
                 gsap.set('.search-bar', {
                     width: `${width}rem`,
                     height: `${height}rem`,
                     transform: `translate(-50%, ${translateY}%)`,
+                    borderRadius: `${borderRadius}rem`,
+                    borderWidth: `${borderWidth}rem`,
                 });
                 gsap.set('.search-bar p', {
                     opacity: 0,
@@ -580,6 +583,8 @@ document.addEventListener('site:ready', () => {
                     width: `${searchBarFinalWidth}rem`,
                     height: '5rem',
                     transform: 'translate(-50%, 200%)',
+                    borderRadius: `1rem`,
+                    borderWidth: `0.15rem`,
                 });
             }
 
