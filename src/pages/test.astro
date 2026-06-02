@@ -98,8 +98,8 @@ if (import.meta.env.PROD) {
                 </h2>
 
                 <p class="about-bio">
-                    By trade, I specialize in Backend Infrastructure using C++
-                    focusing on speed, stability, and efficiency.
+                    By trade, I specialize in Backend Infrastructure and
+                    Databases focusing on speed, stability, and efficiency.
                 </p>
 
                 <p class="about-bio">I sometimes make websites. :)</p>
@@ -128,8 +128,208 @@ if (import.meta.env.PROD) {
             <ProjectShowcase projects={projects} />
         </div>
     </section>
+
+    <section class="skills-section" id="skills">
+        <div class="spotlight-content">
+            <h2>Efficiency flows through structured architecture</h2>
+        </div>
+        <div class="header">
+            <div class="header-content">
+                <h1>
+                    Discover a system that adapts the way you think, not the
+                    other way around.
+                </h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                    occaecat cupidatat non proident, sunt in culpa qui officia
+                    deserunt mollit anim id est laborum.
+                </p>
+            </div>
+        </div>
+        <div class="skills">
+            <div class="skill">
+                <div class="skill-bg"></div>
+                <div class="skill-content">
+                    <p>SASS & CSS</p>
+                </div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-bg"></div>
+                <div class="skill-content">
+                    <p>React</p>
+                </div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-bg"></div>
+                <div class="skill-content">
+                    <p>TypeScript</p>
+                </div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-bg"></div>
+                <div class="skill-content">
+                    <p>Database Kernels</p>
+                </div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-bg"></div>
+                <div class="skill-content">
+                    <p>C++ / C</p>
+                </div>
+            </div>
+
+            <div class="skill">
+                <div class="skill-bg"></div>
+                <div class="skill-content">
+                    <p>Systems Engineering</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <p>Find the unseen link</p>
+        </div>
+    </section>
 </BaseLayout>
 <style lang="scss">
+    .skills-section {
+        position: relative;
+        width: 100%;
+        height: 100svh;
+        overflow: hidden;
+
+        .spotlight-content,
+        .header {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            will-change: transform;
+        }
+
+        .spotlight-content .spotlight-bg {
+            position: absolute;
+            transform: scale(0.8);
+            opacity: 0.25;
+        }
+
+        .spotlight-content h2 {
+            width: 40%;
+            text-align: center;
+            font-size: 5rem;
+            font-weight: 500;
+            line-height: 0.9;
+            font-family: var(--yesevaFont);
+        }
+
+        .header-content {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+            will-change: transform, opacity;
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+
+        .skills {
+            .skill {
+                position: absolute;
+                width: max-content;
+                height: max-content;
+                padding: 1rem 1.5rem;
+                transform: translate(-50%, -50%);
+                will-change: top, left;
+
+                .skill-bg {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 100%;
+                    height: 100%;
+                    background-color: var(--accentColor);
+                    border: 0.125rem solid var(--foregroundDarkColor);
+                    border-radius: 0.5rem;
+                    will-change: width, height, border-radius, border-width;
+                }
+
+                .skill-content {
+                    position: relative;
+                    will-change: opacity;
+
+                    p {
+                        text-transform: uppercase;
+                        font-family: var(--urbanistFont);
+                        font-weight: 600;
+                        color: var(--backgroundColor);
+                        font-size: 1rem;
+                        line-height: 1;
+                    }
+                }
+            }
+        }
+
+        .search-bar {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 25rem;
+            border: 0.35rem solid var(--base-300);
+            background-color: var(--base-400);
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            will-change: opacity, width, height, transform;
+        }
+
+        .search-bar p {
+            position: relative;
+            opacity: 0;
+            transform: translateX(2rem);
+            will-change: opacity;
+        }
+
+        @media (max-width: 1000px) {
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            .spotlight-content h2,
+            .header-content {
+                width: 100%;
+                padding: 2rem;
+            }
+
+            .spotlight-bg {
+                transform: scale(2);
+            }
+
+            .skill {
+                padding: 1rem;
+            }
+
+            .skill-content p {
+                font-size: 0.7rem;
+            }
+        }
+    }
     .svg-container {
         width: 100%;
         position: absolute;
@@ -643,9 +843,7 @@ if (import.meta.env.PROD) {
 
 <script>
     import gsap from 'gsap';
-    import ScrollTrigger from 'gsap/ScrollTrigger';
-    gsap.registerPlugin(ScrollTrigger);
-
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
     gsap.timeline({
         scrollTrigger: {
             trigger: '.projects-header',
@@ -653,35 +851,18 @@ if (import.meta.env.PROD) {
             end: 'bottom -5%',
             scrub: 0.8,
         },
-    })
-        .fromTo(
-            '.title-line',
-            { opacity: 0, y: 60 },
-            { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
-            0,
-        )
-        .fromTo(
-            '.title-accent',
-            { opacity: 0, y: 60 },
-            { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
-            0.08,
-        )
-        .to(
-            '.title-line',
-            { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
-            0.65,
-        )
-        .to(
-            '.title-accent',
-            { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
-            0.72,
-        );
+    }).fromTo(
+        ['.title-line', '.title-accent'],
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3, stagger: 0.1 },
+    );
 
     gsap.fromTo(
         '.showcase-container',
-        { opacity: 0 },
+        { opacity: 0, yPercent: 20 },
         {
             opacity: 1,
+            yPercent: 0,
             ease: 'none',
             scrollTrigger: {
                 trigger: '.showcase-container',
@@ -691,4 +872,74 @@ if (import.meta.env.PROD) {
             },
         },
     );
+
+    const skills = document.querySelectorAll('.skill');
+    const skillBgs = document.querySelectorAll('.skill-bg');
+
+    const skillStartPositions = [
+        { top: 25, left: 15 },
+        { top: 12.5, left: 50 },
+        { top: 22.5, left: 75 },
+        { top: 30, left: 82.5 },
+        { top: 50, left: 20 },
+        { top: 80, left: 20 },
+    ];
+
+    skills.forEach((skill, index) => {
+        const skillPosition = skillStartPositions[index];
+        gsap.set(skill, {
+            top: `${skillPosition.top}%`,
+            left: `${skillPosition.left}%`,
+        });
+    });
+
+    const skillStartDimensions = [];
+    skillBgs.forEach((bg, index) => {
+        const rect = bg.getBoundingClientRect();
+        skillStartDimensions.push({
+            width: rect.width,
+            height: rect.height,
+        });
+    });
+
+    const remInPixels = parseFloat(
+        getComputedStyle(document.documentElement).fontSize,
+    );
+
+    const targetWidth = 3 * remInPixels;
+    const targetHeight = 3 * remInPixels;
+
+    const getSearchBarFinalWidth = () => {
+        return window.innerWidth < 1000 ? 20 : 25;
+    };
+
+    let searchBarFinalWidth = getSearchBarFinalWidth();
+
+    window.addEventListener('resize', () => {
+        searchBarFinalWidth = getSearchBarFinalWidth();
+        ScrollTrigger.refresh();
+    });
+
+    ScrollTrigger.create({
+        trigger: '.spotlight',
+        start: 'start',
+        end: `+=${window.innerHeight * 3}px`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 1,
+        onUpdate: (self) => {
+            const progress = self.progress;
+
+            if (progress <= 0.3333) {
+                const spotlightHeaderProgress = progress / 0.3333;
+                gsap.set('.spotlight-content', {
+                    y: `${-100 * spotlightHeaderProgress}%`,
+                });
+            } else {
+                gsap.set('.spotlight-content', {
+                    y: '-100%',
+                });
+            }
+        },
+    });
 </script>

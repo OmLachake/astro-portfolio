@@ -12,6 +12,7 @@ const aboutPhoto = document.querySelector('.photo-frame');
 // }
 
 let mm = gsap.matchMedia();
+gsap.registerPlugin(ScrollTrigger);
 
 let scrollTimeout;
 window.addEventListener('scroll', () => {
@@ -23,401 +24,587 @@ window.addEventListener('scroll', () => {
 });
 
 document.addEventListener('site:ready', () => {
+    mm.add('(min-width: 1200px)', () => {
+        gsap.from(wave, {
+            duration: 1,
+            opacity: 0,
+            y: (i) => 500 + i * 200,
+            stagger: 0.05,
+            ease: 'expo.out',
+        });
 
-mm.add('(min-width: 1200px)', () => {
-    gsap.from(wave, {
-        duration: 1,
-        opacity: 0,
-        y: (i) => 500 + i * 200,
-        stagger: 0.05,
-        ease: 'expo.out',
-    });
+        wave.forEach((w, i) => {
+            gsap.fromTo(
+                w,
+                { y: 0 },
+                {
+                    y: `-=${(1 / (i + 1)) * 200} `,
+                    scrollTrigger: {
+                        trigger: nextSection,
+                        start: 'top bottom',
+                        end: 'bottom bottom',
+                        scrub: (1 + i) * 0.05,
+                    },
+                    immediateRender: false,
+                    ease: 'none',
+                },
+            );
+        });
 
-    wave.forEach((w, i) => {
         gsap.fromTo(
-            w,
-            { y: 0 },
+            '.hero-sub-title',
             {
-                y: `-=${(1 / (i + 1)) * 200} `,
+                y: 50,
+                opacity: 0,
+            },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.25,
+            },
+        );
+
+        gsap.fromTo(
+            bgEffect,
+            {
+                y: 50,
+                scale: 1.15,
+                opacity: 0,
+            },
+            {
+                y: 0,
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.15,
+            },
+        );
+
+        gsap.fromTo(
+            '.title.left',
+            {
+                x: -50,
+                opacity: 0,
+                letterSpacing: '1rem',
+            },
+            {
+                x: 0,
+                opacity: 1,
+                letterSpacing: 0,
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.15,
+            },
+        );
+
+        gsap.fromTo(
+            '.title.right',
+            {
+                x: 50,
+                opacity: 0,
+                letterSpacing: '1rem',
+            },
+            {
+                letterSpacing: 0,
+                x: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.15,
+            },
+        );
+
+        gsap.fromTo(
+            aboutPhoto,
+            {
+                opacity: 0,
+                scale: 0.5,
+            },
+            {
+                opacity: 1,
+                scale: 1,
+                ease: 'power1.in',
                 scrollTrigger: {
                     trigger: nextSection,
                     start: 'top bottom',
-                    end: 'bottom bottom',
-                    scrub: (1 + i) * 0.05,
+                    end: 'top 25%',
+                    scrub: 1,
                 },
-                immediateRender: false,
-                ease: 'none',
+            },
+        );
+
+        gsap.fromTo(
+            ['.about-headline', '.about-bio', '.about-actions'],
+            {
+                opacity: 0,
+                x: 50,
+            },
+            {
+                opacity: 1,
+                x: 0,
+                ease: 'expo.in',
+                scrollTrigger: {
+                    trigger: nextSection,
+                    start: 'top bottom',
+                    end: 'top 25%',
+                    scrub: 1,
+                },
             },
         );
     });
 
-    gsap.fromTo(
-        '.hero-sub-title',
-        {
-            y: 50,
-            opacity: 0,
-        },
-        {
-            y: 0,
-            opacity: 1,
+    mm.add('(min-width: 800px) and (max-width: 1200px)', () => {
+        gsap.from(wave, {
             duration: 1,
-            ease: 'expo.out',
-            delay: 0.25,
-        },
-    );
-
-    gsap.fromTo(
-        bgEffect,
-        {
-            y: 50,
-            scale: 1.15,
             opacity: 0,
-        },
-        {
-            y: 0,
-            scale: 1,
-            opacity: 1,
-            duration: 1,
+            y: (i) => 500 + i * 100,
+            stagger: 0.05,
             ease: 'expo.out',
-            delay: 0.15,
-        },
-    );
+        });
 
-    gsap.fromTo(
-        '.title.left',
-        {
-            x: -50,
-            opacity: 0,
-            letterSpacing: '1rem',
-        },
-        {
-            x: 0,
-            opacity: 1,
-            letterSpacing: 0,
-            duration: 1,
-            ease: 'expo.out',
-            delay: 0.15,
-        },
-    );
+        wave.forEach((w, i) => {
+            console.log('hi');
+            gsap.to(w, {
+                y: `-=${(1 / (i + 1)) * 180}`,
+                scrollTrigger: {
+                    trigger: nextSection,
+                    start: 'top bottom',
+                    end: 'bottom bottom',
+                    scrub: 1.2 + i * 0.2,
+                    invalidateOnRefresh: true,
+                },
+                ease: 'none',
+                immediateRender: false,
+            });
+        });
 
-    gsap.fromTo(
-        '.title.right',
-        {
-            x: 50,
-            opacity: 0,
-            letterSpacing: '1rem',
-        },
-        {
-            letterSpacing: 0,
-            x: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'expo.out',
-            delay: 0.15,
-        },
-    );
-
-    gsap.fromTo(
-        aboutPhoto,
-        {
-            opacity: 0,
-            scale: 0.5,
-        },
-        {
-            opacity: 1,
-            scale: 1,
-            ease: 'power1.in',
-            scrollTrigger: {
-                trigger: nextSection,
-                start: 'top bottom',
-                end: 'top 25%',
-                scrub: 1,
+        gsap.fromTo(
+            '.hero-sub-title',
+            {
+                y: 50,
+                opacity: 0,
             },
-        },
-    );
-
-    gsap.fromTo(
-        ['.about-headline', '.about-bio', '.about-actions'],
-        {
-            opacity: 0,
-            x: 50,
-        },
-        {
-            opacity: 1,
-            x: 0,
-            ease: 'expo.in',
-            scrollTrigger: {
-                trigger: nextSection,
-                start: 'top bottom',
-                end: 'top 25%',
-                scrub: 1,
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.25,
             },
-        },
-    );
-});
+        );
 
-mm.add('(min-width: 800px) and (max-width: 1200px)', () => {
-    gsap.from(wave, {
-        duration: 1,
-        opacity: 0,
-        y: (i) => 500 + i * 100,
-        stagger: 0.05,
-        ease: 'expo.out',
+        gsap.fromTo(
+            bgEffect,
+            {
+                y: 50,
+                scale: 1.15,
+                opacity: 0,
+            },
+            {
+                y: 0,
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.0,
+            },
+        );
+
+        gsap.fromTo(
+            '.title.left',
+            {
+                x: -50,
+                opacity: 0,
+                letterSpacing: '1rem',
+            },
+            {
+                x: 0,
+                opacity: 1,
+                letterSpacing: '0rem',
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.15,
+            },
+        );
+
+        gsap.fromTo(
+            '.title.right',
+            {
+                x: 50,
+                opacity: 0,
+                letterSpacing: '1rem',
+            },
+            {
+                x: 0,
+                letterSpacing: '0rem',
+                opacity: 1,
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.15,
+            },
+        );
+
+        gsap.fromTo(
+            aboutPhoto,
+            {
+                opacity: 0,
+                scale: 0.5,
+            },
+            {
+                opacity: 1,
+                scale: 1,
+                ease: 'power1.in',
+                scrollTrigger: {
+                    trigger: nextSection,
+                    start: 'top bottom',
+                    end: 'top 25%',
+                    scrub: 1,
+                },
+            },
+        );
+
+        gsap.fromTo(
+            ['.about-headline', '.about-bio', '.about-actions'],
+            {
+                opacity: 0,
+                x: 50,
+            },
+            {
+                opacity: 1,
+                x: 0,
+                ease: 'expo.in',
+                scrollTrigger: {
+                    trigger: nextSection,
+                    start: 'top bottom',
+                    end: 'top 25%',
+                    scrub: 1,
+                },
+            },
+        );
     });
 
-    wave.forEach((w, i) => {
-        console.log('hi');
-        gsap.to(w, {
-            y: `-=${(1 / (i + 1)) * 180}`,
-            scrollTrigger: {
-                trigger: nextSection,
-                start: 'top bottom',
-                end: 'bottom bottom',
-                scrub: 1.2 + i * 0.2,
-                invalidateOnRefresh: true,
+    mm.add('(max-width: 800px)', () => {
+        gsap.from(wave, {
+            duration: 1,
+            opacity: 0,
+            y: (i) => 500 + i * 200,
+            stagger: 0.05,
+            ease: 'expo.out',
+        });
+
+        wave.forEach((w, i) => {
+            gsap.fromTo(
+                w,
+                { y: 0 },
+                {
+                    y: `-=${(1 / (i + 1)) * 200} `,
+                    scrollTrigger: {
+                        trigger: nextSection,
+                        start: 'top bottom',
+                        end: 'bottom bottom',
+                        scrub: (1 + i) * 0.5,
+                    },
+                    immediateRender: false,
+                    ease: 'none',
+                },
+            );
+        });
+
+        gsap.fromTo(
+            '.hero-sub-title',
+            {
+                y: 50,
+                opacity: 0,
             },
-            ease: 'none',
-            immediateRender: false,
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.25,
+            },
+        );
+
+        gsap.fromTo(
+            bgEffect,
+            {
+                y: 50,
+                scale: 1.15,
+                opacity: 0,
+            },
+            {
+                y: 0,
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0,
+            },
+        );
+
+        gsap.fromTo(
+            '.title.left',
+            {
+                y: -50,
+                opacity: 0,
+                letterSpacing: '1rem',
+            },
+            {
+                y: 0,
+                opacity: 1,
+                letterSpacing: '0.1rem',
+                duration: 1,
+                delay: 0.15,
+                ease: 'expo.out',
+            },
+        );
+
+        gsap.fromTo(
+            '.title.right',
+            {
+                y: 50,
+                opacity: 0,
+                letterSpacing: '1rem',
+            },
+            {
+                y: 0,
+                opacity: 1,
+                letterSpacing: '0.1rem',
+                duration: 1,
+                ease: 'expo.out',
+                delay: 0.15,
+            },
+        );
+
+        gsap.fromTo(
+            aboutPhoto,
+            {
+                opacity: 0,
+                scale: 0.5,
+            },
+            {
+                opacity: 1,
+                scale: 1,
+                ease: 'power1.in',
+                scrollTrigger: {
+                    trigger: nextSection,
+                    start: 'top 80%',
+                    end: 'top 25%',
+                    scrub: 1,
+                },
+            },
+        );
+
+        gsap.fromTo(
+            ['.about-headline', '.about-bio', '.about-actions'],
+            {
+                opacity: 0,
+                y: 50,
+            },
+            {
+                opacity: 1,
+                y: 0,
+                ease: 'expo.in',
+                scrollTrigger: {
+                    trigger: nextSection,
+                    start: 'top 80%',
+                    end: 'top 25%',
+                    scrub: 1,
+                },
+            },
+        );
+    });
+
+    // Skills Section
+    const features = document.querySelectorAll('.feature');
+    const featureBgs = document.querySelectorAll('.feature-bg');
+
+    const featureStartPositions = [
+        { top: 50, left: 25 },
+        { top: 50, left: 40 },
+        { top: 50, left: 55 },
+        { top: 50, left: 70 },
+        { top: 75, left: 25 },
+        { top: 75, left: 40 },
+        { top: 75, left: 55 },
+        { top: 75, left: 70 },
+    ];
+
+    features.forEach((feature, index) => {
+        const featurePos = featureStartPositions[index];
+        gsap.set(feature, {
+            top: `${featurePos.top}%`,
+            left: `${featurePos.left}%`,
         });
     });
 
-    gsap.fromTo(
-        '.hero-sub-title',
-        {
-            y: 50,
-            opacity: 0,
-        },
-        {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'expo.out',
-            delay: 0.25,
-        },
-    );
-
-    gsap.fromTo(
-        bgEffect,
-        {
-            y: 50,
-            scale: 1.15,
-            opacity: 0,
-        },
-        {
-            y: 0,
-            scale: 1,
-            opacity: 1,
-            duration: 1,
-            ease: 'expo.out',
-            delay: 0.0,
-        },
-    );
-
-    gsap.fromTo(
-        '.title.left',
-        {
-            x: -50,
-            opacity: 0,
-            letterSpacing: '1rem',
-        },
-        {
-            x: 0,
-            opacity: 1,
-            letterSpacing: '0rem',
-            duration: 1,
-            ease: 'expo.out',
-            delay: 0.15,
-        },
-    );
-
-    gsap.fromTo(
-        '.title.right',
-        {
-            x: 50,
-            opacity: 0,
-            letterSpacing: '1rem',
-        },
-        {
-            x: 0,
-            letterSpacing: '0rem',
-            opacity: 1,
-            duration: 1,
-            ease: 'expo.out',
-            delay: 0.15,
-        },
-    );
-
-    gsap.fromTo(
-        aboutPhoto,
-        {
-            opacity: 0,
-            scale: 0.5,
-        },
-        {
-            opacity: 1,
-            scale: 1,
-            ease: 'power1.in',
-            scrollTrigger: {
-                trigger: nextSection,
-                start: 'top bottom',
-                end: 'top 25%',
-                scrub: 1,
-            },
-        },
-    );
-
-    gsap.fromTo(
-        ['.about-headline', '.about-bio', '.about-actions'],
-        {
-            opacity: 0,
-            x: 50,
-        },
-        {
-            opacity: 1,
-            x: 0,
-            ease: 'expo.in',
-            scrollTrigger: {
-                trigger: nextSection,
-                start: 'top bottom',
-                end: 'top 25%',
-                scrub: 1,
-            },
-        },
-    );
-});
-
-mm.add('(max-width: 800px)', () => {
-    gsap.from(wave, {
-        duration: 1,
-        opacity: 0,
-        y: (i) => 500 + i * 200,
-        stagger: 0.05,
-        ease: 'expo.out',
+    const featureStartDimensions = [];
+    featureBgs.forEach((bg) => {
+        const rect = bg.getBoundingClientRect();
+        featureStartDimensions.push({
+            width: rect.width,
+            height: rect.height,
+        });
     });
 
-    wave.forEach((w, i) => {
-        gsap.fromTo(
-            w,
-            { y: 0 },
-            {
-                y: `-=${(1 / (i + 1)) * 200} `,
-                scrollTrigger: {
-                    trigger: nextSection,
-                    start: 'top bottom',
-                    end: 'bottom bottom',
-                    scrub: (1 + i) * 0.5,
-                },
-                immediateRender: false,
-                ease: 'none',
-            },
-        );
+    const remInPixels = parseFloat(
+        getComputedStyle(document.documentElement).fontSize,
+    );
+    const targetWidth = 3 * remInPixels;
+    const targetHeight = 3 * remInPixels;
+
+    const getSearchBarFinalWidth = () => {
+        return window.innerWidth < 1000 ? 20 : 25;
+    };
+
+    let searchBarFinalWidth = getSearchBarFinalWidth();
+
+    window.addEventListener('resize', () => {
+        searchBarFinalWidth = getSearchBarFinalWidth();
+        ScrollTrigger.refresh();
     });
 
-    gsap.fromTo(
-        '.hero-sub-title',
-        {
-            y: 50,
-            opacity: 0,
-        },
-        {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'expo.out',
-            delay: 0.25,
-        },
-    );
+    ScrollTrigger.create({
+        trigger: '.skills-section',
+        start: 'start',
+        end: `+=${window.innerHeight * 3}px`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 1,
+        onUpdate: (self) => {
+            const progress = self.progress;
 
-    gsap.fromTo(
-        bgEffect,
-        {
-            y: 50,
-            scale: 1.15,
-            opacity: 0,
-        },
-        {
-            y: 0,
-            scale: 1,
-            opacity: 1,
-            duration: 1,
-            ease: 'expo.out',
-            delay: 0,
-        },
-    );
+            if (progress <= 0.3333) {
+                const skillsHeaderProgress = progress / 0.3333;
+                gsap.set('.skills-content', {
+                    y: `${-100 * skillsHeaderProgress}%`,
+                });
+            } else {
+                gsap.set('.skills-content', {
+                    y: '-100%',
+                });
+            }
 
-    gsap.fromTo(
-        '.title.left',
-        {
-            y: -50,
-            opacity: 0,
-            letterSpacing: '1rem',
-        },
-        {
-            y: 0,
-            opacity: 1,
-            letterSpacing: '0.1rem',
-            duration: 1,
-            delay: 0.15,
-            ease: 'expo.out',
-        },
-    );
+            if (progress >= 0 && progress <= 0.5) {
+                const featureProgress = progress / 0.5;
 
-    gsap.fromTo(
-        '.title.right',
-        {
-            y: 50,
-            opacity: 0,
-            letterSpacing: '1rem',
-        },
-        {
-            y: 0,
-            opacity: 1,
-            letterSpacing: '0.1rem',
-            duration: 1,
-            ease: 'expo.out',
-            delay: 0.15,
-        },
-    );
+                features.forEach((feature, index) => {
+                    const originalPosition = featureStartPositions[index];
+                    const currentTop =
+                        originalPosition.top +
+                        (50 - originalPosition.top) * featureProgress;
+                    const currentLeft =
+                        originalPosition.left +
+                        (50 - originalPosition.left) * featureProgress;
 
-    gsap.fromTo(
-        aboutPhoto,
-        {
-            opacity: 0,
-            scale: 0.5,
-        },
-        {
-            opacity: 1,
-            scale: 1,
-            ease: 'power1.in',
-            scrollTrigger: {
-                trigger: nextSection,
-                start: 'top 80%',
-                end: 'top 25%',
-                scrub: 1,
-            },
-        },
-    );
+                    gsap.set(feature, {
+                        top: `${currentTop}%`,
+                        left: `${currentLeft}%`,
+                    });
+                });
 
-    gsap.fromTo(
-        ['.about-headline', '.about-bio', '.about-actions'],
-        {
-            opacity: 0,
-            y: 50,
-        },
-        {
-            opacity: 1,
-            y: 0,
-            ease: 'expo.in',
-            scrollTrigger: {
-                trigger: nextSection,
-                start: 'top 80%',
-                end: 'top 25%',
-                scrub: 1,
-            },
-        },
-    );
-});
+                featureBgs.forEach((bg, index) => {
+                    const featureDim = featureStartDimensions[index];
+                    const currentWidth =
+                        featureDim.width +
+                        (targetWidth - featureDim.width) * featureProgress;
+                    const currentHeight =
+                        featureDim.height +
+                        (targetHeight - featureDim.height) * featureProgress;
+                    const currentBorderRadius =
+                        0.5 + (25 - 0.5) * featureProgress;
+                    const currentBorderWidth =
+                        0.125 + (0.35 - 0.125) * featureProgress;
 
+                    gsap.set(bg, {
+                        width: `${currentWidth}px`,
+                        height: `${currentHeight}px`,
+                        borderWidth: `${currentBorderWidth}rem`,
+                        borderRadius: `${currentBorderRadius}rem`,
+                    });
+                });
+
+                if (progress >= 0 && progress <= 0.1) {
+                    const featureTextProgress = progress / 0.1;
+                    gsap.set('.feature-content', {
+                        opacity: 1 - featureTextProgress,
+                    });
+                } else if (progress > 0.1) {
+                    gsap.set('feature-content', {
+                        opacity: 0,
+                    });
+                }
+            }
+
+            if (progress >= 0.5) {
+                gsap.set('.features', {
+                    opacity: 0,
+                });
+            } else {
+                gsap.set('.features', {
+                    opacity: 1,
+                });
+            }
+
+            if (progress >= 0.5) {
+                gsap.set('.search-bar', {
+                    opacity: 1,
+                });
+            } else {
+                gsap.set('.search-bar', {
+                    opacity: 0,
+                });
+            }
+
+            if (progress >= 0.5 && progress <= 0.75) {
+                const searchBarProgress = (progress - 0.5) / 0.25;
+
+                const width = 3 + (searchBarFinalWidth - 3) * searchBarProgress;
+                const height = 3 + (5 - 3) * searchBarProgress;
+
+                const translateY = -50 + (200 - -50) * searchBarProgress;
+
+                gsap.set('.search-bar', {
+                    width: `${width}rem`,
+                    height: `${height}rem`,
+                    transform: `translate(-50%, ${translateY}%)`,
+                });
+                gsap.set('.search-bar p', {
+                    opacity: 0,
+                });
+            } else if (progress > 0.75) {
+                gsap.set('.search-bar', {
+                    width: `${searchBarFinalWidth}rem`,
+                    height: '5rem',
+                    transform: 'translate(-50%, 200%)',
+                });
+            }
+
+            if (progress >= 0.75) {
+                const finalHeaderProgress = (progress - 0.75) / 0.25;
+
+                gsap.set('.search-bar p', {
+                    opacity: finalHeaderProgress,
+                });
+
+                gsap.set('.header-content', {
+                    y: -50 + 50 * finalHeaderProgress,
+                    opacity: finalHeaderProgress,
+                });
+            } else {
+                gsap.set('.search-bar p', {
+                    opacity: 0,
+                });
+                gsap.set('.header-content', {
+                    y: -50,
+                    opacity: 0,
+                });
+            }
+        },
+    });
 }); // site:ready
 
 // Floating Mouse Blobl Effect

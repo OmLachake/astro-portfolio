@@ -94,8 +94,8 @@ const personSchema = {
                 </h2>
 
                 <p class="about-bio">
-                    By trade, I specialize in Backend Infrastructure using C++
-                    focusing on speed, stability, and efficiency.
+                    By trade, I specialize in Backend Infrastructure and
+                    Databases focusing on speed, stability, and efficiency.
                 </p>
 
                 <p class="about-bio">I sometimes make websites. :)</p>
@@ -639,8 +639,6 @@ const personSchema = {
 
 <script>
     import gsap from 'gsap';
-    import ScrollTrigger from 'gsap/ScrollTrigger';
-    gsap.registerPlugin(ScrollTrigger);
 
     gsap.timeline({
         scrollTrigger: {
@@ -649,35 +647,18 @@ const personSchema = {
             end: 'bottom -5%',
             scrub: 0.8,
         },
-    })
-        .fromTo(
-            '.title-line',
-            { opacity: 0, y: 60 },
-            { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
-            0,
-        )
-        .fromTo(
-            '.title-accent',
-            { opacity: 0, y: 60 },
-            { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
-            0.08,
-        )
-        .to(
-            '.title-line',
-            { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
-            0.65,
-        )
-        .to(
-            '.title-accent',
-            { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
-            0.72,
-        );
+    }).fromTo(
+        ['.title-line', '.title-accent'],
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3, stagger: 0.1 },
+    );
 
     gsap.fromTo(
         '.showcase-container',
-        { opacity: 0 },
+        { opacity: 0, yPercent: 20 },
         {
             opacity: 1,
+            yPercent: 0,
             ease: 'none',
             scrollTrigger: {
                 trigger: '.showcase-container',

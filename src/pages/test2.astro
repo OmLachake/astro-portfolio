@@ -8,112 +8,237 @@ if (import.meta.env.PROD) {
 }
 ---
 
-<BaseLayout pageTitle="Test — Project Showcase">
-    <div class="projects-page">
-        <div class="projects-header">
-            <h1 class="projects-title">
-                <span class="title-line">A Few Things</span><br />
-                <span class="title-accent">I've Built</span>
-            </h1>
+<BaseLayout pageTitle="Test — Skills Showcase">
+    <section class="skills-section">
+        <div class="skills-content">
+            <h2>Information flows best through intentional design</h2>
         </div>
-        <div class="showcase-container">
-            <ProjectShowcase projects={projects} />
+
+        <div class="header">
+            <div class="header-content">
+                <h2>Find what matters through intelligent design</h2>
+                <p>
+                    Discover a system that adapts to the way you think, not the
+                    other way around.
+                </p>
+            </div>
         </div>
-    </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-bg"></div>
+                <div class="feature-content">
+                    <p>Flow</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-bg"></div>
+                <div class="feature-content">
+                    <p>Knowledge Grid</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-bg"></div>
+                <div class="feature-content">
+                    <p>Relay</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-bg"></div>
+                <div class="feature-content">
+                    <p>Adaptive Layer</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-bg"></div>
+                <div class="feature-content">
+                    <p>Signal</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-bg"></div>
+                <div class="feature-content">
+                    <p>System Design</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-bg"></div>
+                <div class="feature-content">
+                    <p>Archive</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div class="feature-bg"></div>
+                <div class="feature-content">
+                    <p>Creative Design</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <p>Find the unseen link</p>
+        </div>
+    </section>
 </BaseLayout>
 
 <style lang="scss">
-    .projects-page {
-        padding-bottom: 6rem;
+    h2 {
+        font-family: var(--soriaFont);
+        text-align: center;
+        font-size: 5rem;
+        font-weight: 500;
+        line-height: 0.9;
     }
 
-    .projects-header {
+    p {
+        font-family: var(--urabnistFont);
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1;
+    }
+
+    .skills-section {
+        position: relative;
+        width: 100%;
+        height: 100svh;
+        overflow: hidden;
+    }
+
+    .header {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        will-change: transform;
+    }
+
+    .skills-content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        will-change: transform;
+        padding-top: 5rem;
+    }
+
+    .skills-bg {
+        position: absolute;
+        transform: scale(0.8);
+        opacity: 0.25;
+    }
+
+    .skills-content h2 {
+        width: 70%;
+    }
+
+    .header-content {
+        width: 60%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        padding: 6rem 2.5rem 3rem;
         text-align: center;
+        gap: 2rem;
+        will-change: transform, opacity;
+        transform: translateY(-100px);
+        opacity: 0;
     }
 
-    .projects-title {
-        font-family: var(--yesevaFont);
-        font-size: clamp(2rem, 4vw, 3.5rem);
-        color: var(--foregroundColor);
-        line-height: 1.2;
-        margin: 0;
-
-        .title-accent {
-            color: var(--accentColor);
-        }
+    .feature {
+        position: absolute;
+        width: max-content;
+        height: max-content;
+        padding: 1rem 1.5rem;
+        transform: translate(-50%, -50%);
+        will-change: top, left;
     }
 
-    .showcase-container {
-        margin: 0 1.5rem;
-        border-radius: 1.5rem;
-        overflow: clip;
-
-        @media (max-width: 800px) {
-            margin: 0 0.75rem;
-            border-radius: 1rem;
-        }
-
-        @media (min-width: 1200px) {
-            margin: 0 3rem;
-        }
-
-        @media (min-width: 1600px) {
-            margin: 0 6rem;
-        }
+    .feature-bg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        background-color: var(--accentColor);
+        border: 0.125rem solid var(--foregroundColor);
+        border-radius: 0.5rem;
+        will-change: width, height, border-radius, border-width;
     }
 
+    .feature-content {
+        position: relative;
+        will-change: opacity;
+    }
+
+    .feature-content p {
+        text-transform: uppercase;
+        font-family: var(--urabanistFont);
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    .search-bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 3rem;
+        height: 3rem;
+        border-radius: 25rem;
+        border: 0.35rem solid var(--foregroundColor);
+        background-color: var(--accentColor);
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        will-change: opacity, width, height, transform;
+    }
+
+    .search-bar p {
+        position: relative;
+        opacity: 0;
+        transform: translateX(2rem);
+        will-change: opacity;
+    }
+
+    @media (max-width: 1000px) {
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .intro h1,
+        .outro h1,
+        .spotlight-content h1,
+        .header-content {
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .spotlight-bg {
+            transform: scale(2);
+        }
+
+        .feature {
+            padding: 1rem;
+        }
+
+        .feature-content p {
+            font-size: 0.7rem;
+        }
+    }
 </style>
 
 <script>
-    import gsap from 'gsap';
-    import ScrollTrigger from 'gsap/ScrollTrigger';
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Single timeline: enter (0–30%), hold (30–65%), exit (65–100%)
-    gsap.timeline({
-        scrollTrigger: {
-            trigger: '.projects-header',
-            start: 'top 85%',
-            end: 'bottom -5%',
-            scrub: 0.8,
-        },
-    })
-    .fromTo('.title-line',
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
-        0
-    )
-    .fromTo('.title-accent',
-        { opacity: 0, y: 60 },
-        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.3 },
-        0.08
-    )
-    .to('.title-line',
-        { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
-        0.65
-    )
-    .to('.title-accent',
-        { opacity: 0, y: -50, ease: 'power2.in', duration: 0.28 },
-        0.72
-    );
-
-    // Showcase: scrub fade-in
-    gsap.fromTo('.showcase-container',
-        { opacity: 0 },
-        {
-            opacity: 1,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '.showcase-container',
-                start: 'top 90%',
-                end: 'top 50%',
-                scrub: 0.6,
-            },
-        }
-    );
+    import '../scripts/hero';
 </script>
