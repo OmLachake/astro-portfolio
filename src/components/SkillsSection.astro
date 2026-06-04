@@ -7,9 +7,10 @@ const { skills } = Astro.props;
 ---
 
 <section class="skills-section">
+    <div class="skills-bg-effect"></div>
     <div class="skills-content">
         <div class="skills-bg">
-            <img src="mesh.png" />
+            <!-- <img src="mesh.png" /> -->
         </div>
         <h2>
             <span class="title-line">The vocabulary of my technical craft</span
@@ -125,6 +126,9 @@ const { skills } = Astro.props;
         transform: translateY(-100px);
         opacity: 0;
 
+        h2 {
+            font-size: 5rem;
+        }
         p {
             font-family: var(--urabnistFont);
             font-size: 2rem;
@@ -227,7 +231,7 @@ const { skills } = Astro.props;
         }
 
         .header-content {
-            width: 90%;
+            width: 80%;
             gap: 1.25rem;
 
             p {
@@ -242,6 +246,38 @@ const { skills } = Astro.props;
         .skill-content p {
             font-size: 0.7rem;
         }
+    }
+
+    .skills-bg-effect {
+        --grid-color: color-mix(
+            in srgb,
+            var(--foregroundColor) 5%,
+            transparent
+        );
+
+        --fade-mask: linear-gradient(
+            to bottom,
+            transparent,
+            black 55%,
+            black 55%,
+            transparent
+        );
+
+        position: absolute;
+        inset: 0;
+
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+
+        background-position: center center;
+        background-size: 2.5rem 2.5rem;
+        background-image:
+            linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+
+        -webkit-mask-image: var(--fade-mask);
+        mask-image: var(--fade-mask);
     }
 </style>
 

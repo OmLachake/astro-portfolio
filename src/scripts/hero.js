@@ -168,6 +168,11 @@ function setupSkillsAnimation(
                 gsap.set('.search-bar a', { opacity: 0 });
                 gsap.set('.header-content', { y: -50, opacity: 0 });
             }
+
+            gsap.set('.skills-bg-effect', {
+                backgroundSize: `${2.5 + progress * 0.625}rem ${2.5 + progress * 0.625}rem`,
+                y: progress * 100,
+            });
         },
     });
 }

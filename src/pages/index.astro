@@ -349,25 +349,29 @@ const personSchema = {
     }
 
     .hero-bg-effect {
+        --grid-color: color-mix(
+            in srgb,
+            var(--foregroundColor) 5%,
+            transparent
+        );
+
+        --fade-mask: linear-gradient(to bottom, black 25%, transparent 100%);
+
         position: absolute;
         inset: 0;
+
         z-index: 0;
         pointer-events: none;
         overflow: hidden;
-        background-size: 40px 40px;
-        opacity: 0;
+
+        background-position: center center;
+        background-size: 2.5rem 2.5rem;
         background-image:
-            linear-gradient(
-                to right,
-                color-mix(in srgb, var(--foregroundColor) 5%, transparent) 1px,
-                transparent 1px
-            ),
-            linear-gradient(
-                to bottom,
-                color-mix(in srgb, var(--foregroundColor) 5%, transparent) 1px,
-                transparent 1px
-            );
-        mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+
+        -webkit-mask-image: var(--fade-mask);
+        mask-image: var(--fade-mask);
 
         &::before {
             content: '';
