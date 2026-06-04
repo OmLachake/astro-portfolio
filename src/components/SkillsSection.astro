@@ -1,0 +1,250 @@
+---
+interface Props {
+    skills: string[];
+}
+
+const { skills } = Astro.props;
+---
+
+<section class="skills-section">
+    <div class="skills-content">
+        <div class="skills-bg">
+            <img src="mesh.png" />
+        </div>
+        <h2>
+            <span class="title-line">The vocabulary of my technical craft</span
+            ><br />
+            <span class="title-accent">My Skills</span>
+        </h2>
+    </div>
+
+    <div class="header">
+        <div class="header-content">
+            <h2>The blog that questions every system in the world.</h2>
+            <p>Discover a blog that imagines the way systems think.</p>
+        </div>
+    </div>
+
+    <div class="skills">
+        {
+            skills.map((skill) => (
+                <div class="skill">
+                    <div class="skill-bg" />
+                    <div class="skill-content">
+                        <p>{skill}</p>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+
+    <div class="search-bar">
+        <a href="/blog">Check out my blog</a>
+    </div>
+</section>
+
+<style lang="scss">
+    .skills-section {
+        position: relative;
+        width: 100%;
+        height: 100svh;
+        overflow: hidden;
+
+        h2 {
+            font-family: var(--yesevaFont);
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 500;
+            line-height: 0.9;
+        }
+
+        .title-accent {
+            color: var(--accentColor);
+        }
+    }
+
+    .header {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        will-change: transform;
+    }
+
+    .skills-content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        will-change: transform;
+        padding-top: 5rem;
+
+        .skills-bg {
+            position: absolute;
+            transform: scale(0.8) translateY(-20%);
+            opacity: var(--skills-bg-opacity);
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        h2 {
+            width: 70%;
+            font-family: var(--yesevaFont);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--foregroundColor);
+            line-height: 1.2;
+            margin: 0;
+
+            .title-line {
+                opacity: 0;
+            }
+
+            .title-accent {
+                color: var(--accentColor);
+                opacity: 0;
+            }
+        }
+    }
+
+    .header-content {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+        will-change: transform, opacity;
+        transform: translateY(-100px);
+        opacity: 0;
+
+        p {
+            font-family: var(--urabnistFont);
+            font-size: 2rem;
+            font-weight: 200;
+            line-height: 1;
+        }
+    }
+
+    .skill {
+        position: absolute;
+        width: 12rem;
+        height: max-content;
+        padding: 1rem 1.5rem;
+        transform: translate(-50%, -50%);
+        will-change: top, left;
+    }
+
+    .skill-bg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        background-color: var(--backgroundColor);
+        border: 0.125rem solid var(--accentColor);
+        border-radius: 0.5rem;
+        will-change: width, height, border-radius, border-width;
+    }
+
+    .skill-content {
+        position: relative;
+        will-change: opacity;
+    }
+
+    .skill-content p {
+        text-transform: uppercase;
+        font-family: var(--urabanistFont);
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1;
+        text-align: center;
+    }
+
+    .search-bar {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 3rem;
+        height: 3rem;
+        border-radius: 25rem;
+        border: 0.35rem solid var(--accentColor);
+        background-color: var(--backgroundColor);
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        will-change: opacity, width, height, transform, background-color;
+
+        a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            will-change: opacity;
+            text-decoration: none;
+            color: inherit;
+            font-family: var(--urbanistFont);
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .skills-content h2 {
+            width: 85%;
+        }
+
+        .header-content {
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 800px) {
+        .skills-section h2 {
+            font-size: 2.25rem;
+        }
+
+        .skills-content {
+            padding-top: 3rem;
+            .skills-bg {
+                transform: scale(2.8) translateY(50%);
+            }
+        }
+
+        .skills-content h2 {
+            width: 90%;
+        }
+
+        .header-content {
+            width: 90%;
+            gap: 1.25rem;
+
+            p {
+                font-size: 1.2rem;
+            }
+        }
+
+        .skill {
+            padding: 0.75rem 1rem;
+        }
+
+        .skill-content p {
+            font-size: 0.7rem;
+        }
+    }
+</style>
+
+<script>
+    import '../scripts/hero';
+</script>

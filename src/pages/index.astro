@@ -6,6 +6,7 @@ import ProjectShowcase from '../components/ProjectShowcase.astro';
 import projects from '../data/projects.ts';
 import site from '../data/site';
 import nav from '../data/nav';
+import SkillsSection from '../components/SkillsSection.astro';
 
 const personSchema = {
     '@context': 'https://schema.org',
@@ -124,6 +125,19 @@ const personSchema = {
             <ProjectShowcase projects={projects} />
         </div>
     </section>
+
+    <SkillsSection
+        skills={[
+            'C++ / C',
+            'Database Kernels',
+            'Networking',
+            'Backend Systems',
+            'System Design',
+            'React',
+            'TypeScript',
+            'Website Design',
+        ]}
+    />
 </BaseLayout>
 <style lang="scss">
     .svg-container {

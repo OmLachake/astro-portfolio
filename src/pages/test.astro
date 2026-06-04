@@ -3,6 +3,7 @@ import ActionButton from '../components/ActionButton.astro';
 import LinkButton from '../components/LinkButton.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectShowcase from '../components/ProjectShowcase.astro';
+import SkillsSection from '../components/SkillsSection.astro';
 import projects from '../data/projects.ts';
 import site from '../data/site';
 import nav from '../data/nav';
@@ -120,8 +121,10 @@ if (import.meta.env.PROD) {
     <section class="projects-section" id="projects">
         <div class="projects-header">
             <h2 class="projects-title">
-                <span class="title-line">A Few Things</span><br />
-                <span class="title-accent">I've Built</span>
+                <span class="title-line"
+                    >Engineering performance, designing the experience</span
+                ><br />
+                <span class="title-accent">My Projects</span>
             </h2>
         </div>
         <div class="showcase-container">
@@ -129,207 +132,18 @@ if (import.meta.env.PROD) {
         </div>
     </section>
 
-    <section class="skills-section" id="skills">
-        <div class="spotlight-content">
-            <h2>Efficiency flows through structured architecture</h2>
-        </div>
-        <div class="header">
-            <div class="header-content">
-                <h1>
-                    Discover a system that adapts the way you think, not the
-                    other way around.
-                </h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p>
-            </div>
-        </div>
-        <div class="skills">
-            <div class="skill">
-                <div class="skill-bg"></div>
-                <div class="skill-content">
-                    <p>SASS & CSS</p>
-                </div>
-            </div>
-
-            <div class="skill">
-                <div class="skill-bg"></div>
-                <div class="skill-content">
-                    <p>React</p>
-                </div>
-            </div>
-
-            <div class="skill">
-                <div class="skill-bg"></div>
-                <div class="skill-content">
-                    <p>TypeScript</p>
-                </div>
-            </div>
-
-            <div class="skill">
-                <div class="skill-bg"></div>
-                <div class="skill-content">
-                    <p>Database Kernels</p>
-                </div>
-            </div>
-
-            <div class="skill">
-                <div class="skill-bg"></div>
-                <div class="skill-content">
-                    <p>C++ / C</p>
-                </div>
-            </div>
-
-            <div class="skill">
-                <div class="skill-bg"></div>
-                <div class="skill-content">
-                    <p>Systems Engineering</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="search-bar">
-            <p>Find the unseen link</p>
-        </div>
-    </section>
+    <SkillsSection skills={[
+        'C++ / C',
+        'Database Engines',
+        'Networking',
+        'Backend Infrastructures',
+        'System Design',
+        'React',
+        'TypeScript',
+        'Creative Design',
+    ]} />
 </BaseLayout>
 <style lang="scss">
-    .skills-section {
-        position: relative;
-        width: 100%;
-        height: 100svh;
-        overflow: hidden;
-
-        .spotlight-content,
-        .header {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            will-change: transform;
-        }
-
-        .spotlight-content .spotlight-bg {
-            position: absolute;
-            transform: scale(0.8);
-            opacity: 0.25;
-        }
-
-        .spotlight-content h2 {
-            width: 40%;
-            text-align: center;
-            font-size: 5rem;
-            font-weight: 500;
-            line-height: 0.9;
-            font-family: var(--yesevaFont);
-        }
-
-        .header-content {
-            width: 60%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 2rem;
-            will-change: transform, opacity;
-            transform: translateY(-100px);
-            opacity: 0;
-        }
-
-        .skills {
-            .skill {
-                position: absolute;
-                width: max-content;
-                height: max-content;
-                padding: 1rem 1.5rem;
-                transform: translate(-50%, -50%);
-                will-change: top, left;
-
-                .skill-bg {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 100%;
-                    height: 100%;
-                    background-color: var(--accentColor);
-                    border: 0.125rem solid var(--foregroundDarkColor);
-                    border-radius: 0.5rem;
-                    will-change: width, height, border-radius, border-width;
-                }
-
-                .skill-content {
-                    position: relative;
-                    will-change: opacity;
-
-                    p {
-                        text-transform: uppercase;
-                        font-family: var(--urbanistFont);
-                        font-weight: 600;
-                        color: var(--backgroundColor);
-                        font-size: 1rem;
-                        line-height: 1;
-                    }
-                }
-            }
-        }
-
-        .search-bar {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 3rem;
-            height: 3rem;
-            border-radius: 25rem;
-            border: 0.35rem solid var(--base-300);
-            background-color: var(--base-400);
-            opacity: 0;
-            display: flex;
-            align-items: center;
-            will-change: opacity, width, height, transform;
-        }
-
-        .search-bar p {
-            position: relative;
-            opacity: 0;
-            transform: translateX(2rem);
-            will-change: opacity;
-        }
-
-        @media (max-width: 1000px) {
-            h2 {
-                font-size: 2.5rem;
-            }
-
-            .spotlight-content h2,
-            .header-content {
-                width: 100%;
-                padding: 2rem;
-            }
-
-            .spotlight-bg {
-                transform: scale(2);
-            }
-
-            .skill {
-                padding: 1rem;
-            }
-
-            .skill-content p {
-                font-size: 0.7rem;
-            }
-        }
-    }
     .svg-container {
         width: 100%;
         position: absolute;

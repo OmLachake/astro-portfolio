@@ -34,6 +34,7 @@ html {
     --shadowAccentColor: rgba(177, 177, 177, 0.5);
     /* Helper for overlays */
     --overlayColor: rgba(0, 0, 0, 0.2);
+    --skills-bg-opacity: 1.7;
 
     /* fonts */
     --urbanistFont: 'Urbanist', sans-serif;
@@ -51,7 +52,7 @@ html {
     --accentColor: rgb(255, 100, 100);
     --accentColorAlt: rgb(123, 100, 255);
     --overlayColor: rgba(255, 255, 255, 0.1);
-
+    --skills-bg-opacity: 0.25;
     --shadowColor: rgba(34, 34, 34, 0.5);
     --shadowAccentColor: rgba(177, 177, 177, 0.5);
 }
